@@ -1,98 +1,8 @@
 
 
-<div class="container"><!--//Lista de visitantes-->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <form id="formCadastro">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Cadastro de usuários</h4>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="form-group col-lg-6">
-                            <label for="textNome" class="control-label">Usuário:</label>
-                            <input name="usuario" id="usuario" class="form-control" placeholder="Digite seu Nome" onblur="Verifica();" type="text" >
-                        </div>
-                        
-                        <div class="form-group col-lg-6">
-                            <label for="textUsuario" class="control-label">Tipo</label>
-                            <select name="cmb-tipo" id="cmb-tipo" class="form-control selectpicker" data-container="body" data-width="100%" >
-                                <option></option>
-                                <option>ADMINISTRADOR</option> 
-                                <option>COMUM</option>
-                            </select>     
-                        </div>  
-
-                        <div class="form-group col-lg-6">      
-                            <label for="inputPassword" class="control-label">Senha</label>      
-                            <input type="password" class="form-control" placeholder="Informe sua senha" 
-                                  name="senha" id="senha" data-minlength="6" required>      
-                        </div>
-                        <div class="form-group col-lg-6">      
-                            <label for="inputPassword" class="control-label">Confirmação</label>      
-                            <input type="password" class="form-control" placeholder="Confirme sua senha" 
-                                  name="csenha" id="csenha" data-minlength="6" required>      
-                        </div>      
-                    </div>
-                    <div class="panel-footer clearfix">
-                        <div class="btn-group pull-left">      
-                            <button type="reset" class="btn btn-lg btn-danger" id = "btnlimpar">Limpar</button>
-                        </div> 
-                        <div class="btn-group pull-right">      
-                            <button type="submit" class="btn btn-lg btn-primary">Salvar</button>
-                        </div> 
-                    </div>
-                </div>
-            </form>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h1 class="panel-title">Visitantes Cadastrados</h1>
-                </div>
-                <div class="panel-body margem">
-                    <table id ="tableusu"
-                        data-toggle ="table"
-                        data-height ="205"
-                        data-search ="true"
-                        accesskey=""
-                        data-side-pagination ="client"
-                        data-pagination ="true"
-                        data-page-list="[5,10,15]"
-                        data-pagination-first-text="First"
-                        data-pagination-pre-text="Previous"   
-                        data-pagination-next-text="Next"
-                        data-pagination-last-text="Last"
-                        data-url= 'usuario/listar'>  
-                        <!--Endereço do Controller responsável em buscar os dados da lista -->
-                        <thead>
-                            <tr>
-                                <th data-field = 'usuario' class = "col-md-3 text-left">Visitante</th> 
-                                <!--campo usuario no bd -->
-                                
-                                <th data-field = 'senha' class = "col-md-3">Senha</th>
-                                <!--campo senha no bd -->
-
-                                <th data-field = 'ativo' id="tipoCampo" class = "col-md-2 text-left">Ativo</th> 
-                                <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
-
-                                <th  data-field ='usuario' data-formatter="opcoes" class = "col-md-2">Ação</th>
-                                <!--colocaremos a função data-formatter que chamará a função JavaScript
-                                 opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca 
-                                -->
-                            </tr>
-                        </thead>                        
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script type="text/javascript">
-
-    $(document).ready(()=>{ $("#formCadastro").submit(function(event){
-
+    $(document).ready(function(){
+        //Salva o cadastro do usuário
+        $("#formCadastro").submit(function(event){
             if($("#senha").val() != $("#csenha").val()){
                 swal({
                     title: "Atenção!",
@@ -100,46 +10,37 @@
                     type:"error",
                 });
                 return false;
-
             }else{
                 $.ajax({
                     type: "POST",
                     url: "usuario/cadastrar",
                     data: $("#formCadastro").serialize(),
                     success: function(data){
-                            
                         if($.trim(data) == 1){
+
                             $("#formCadastro").trigger("reset");
-
                             swal({title: "OK!", text: "Dados salvos com sucesso.", type: "success"});
-
                         }else{
-
                             swal({title: "ATENÇÃO!", text: "Erro ao inserir, verifique!", type: "error",});
                         }
 
                     },
-                    beforeSend: ()=>{
-
+                    beforeSend: function(){
                         swal({title: "AGUARDE!", text: "Carregando...", imageUrl: "assets/img/gifs/preloader.gif",});
                     },
-                    error: ()=>{
-
+                    error: function(){
                         alert:("Unexpected error.");
                 
                     }
                 });
-
                 return false;
             }
         });
-
-        setInterval(()=>{ var $table = $('#tableusu');//passando o tabela para uma variavel php
-            $table.bootstrapTable('refresh');//Atualizando a tabela usuarios
-        }, 5000)//em 5 em 5 segundos
+        setInterval(function(){
+            var $table = $('#tableusu');
+            $table.bootstrapTable('refresh');
+        }, 5000)
     });
-
-
         //função que faz aparereces 2 botoes o de busca e o de desativar
     function opcoes(value, row, index){
         if(row.estatus =='DESATIVADO'){
@@ -166,7 +67,7 @@
                 $('#msenha').val(data[0].senha);
                 swal.close();
             },
-            beforeSend: ()=>{
+            beforeSend: function(){
                 swal({
                     title: "Aguarde!",
                     text: "Carregando...",
@@ -174,7 +75,7 @@
                     showConfirmButton: false
                 });
             },
-            error: ()=>{
+            error: function(){
                 alert('Unexpected error.');
                 swal.close();
             }
@@ -231,7 +132,7 @@
                         });
                     }
                 },
-                beforeSend: ()=>{
+                beforeSend: function(){
                     swal({
                         title: "Aguarde!",
                         text: "Carregando...",
@@ -239,7 +140,7 @@
                         showConfirmButton: false
                     });
                 },
-                error: ()=>{
+                error: function(){
                     alert('Unexpected error.')
                 }
             });
@@ -247,7 +148,10 @@
     }
 
 
-  
+    // tipo = document.getElementById('tipoCampo').text;
+    // alert(tipo);
+
+    //Desativar o usuario!
 function desativa_usuario(usuario){
 
             swal({
@@ -314,7 +218,7 @@ function desativa_usuario(usuario){
                                 });
                             }
                         },
-                        beforeSend: ()=>{
+                        beforeSend: function(){
                             swal({
                                 title: "Aguarde!",
                                 text: "Gravando dados...",
@@ -354,7 +258,7 @@ function desativa_usuario(usuario){
                         swal.close();
                     }
                 },
-                beforeSend: ()=>{
+                beforeSend: function(){
                     swal({
                         title: "Aguarde!",
                         text: "Carregando...",
@@ -362,7 +266,7 @@ function desativa_usuario(usuario){
                         showConfirmButton: false
                     });
                 },
-                error: ()=> {
+                error: function() {
                     alert('Error');
                 }
             });
@@ -419,7 +323,7 @@ function reativa_usuario(usuario){
                             });
                         }
                     },
-                    beforeSend: ()=>{
+                    beforeSend: function(){
                         swal({
                             title:"Aguarde!",
                             text:"Gravando dados...",

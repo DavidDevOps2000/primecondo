@@ -51,17 +51,8 @@
     }
 
     function usuarios(){
-        if("<?php echo strtoupper($this->session->userdata('tipo')) ?>" == "ADMINISTRADOR"){
-         
-            window.location.href = base_url + "usuario";
-        }else{
 
-            swal({
-                title: "Atenção!",
-                text: "Vc não tem privilégios suficientes para entrar nesse modulo",
-                type: "error"
-            });
-        }
+        window.location.href = base_url + "usuario";
     }
                    
     //}
