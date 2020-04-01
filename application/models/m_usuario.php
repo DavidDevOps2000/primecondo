@@ -37,14 +37,6 @@
                 return $retorno;
             }
         }
-
-        // public function verifTipoConta(){//Verificando se vc é COMUM
-
-        //     $retorno = $this->db->query("SELECT tipo FROM usuarios WHERE tipo = 'COMUM'");
-        //     if($retorno->num_row() >0){
-
-        //     }
-        // }
         
         
 

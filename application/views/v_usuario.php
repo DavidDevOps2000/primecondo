@@ -1,143 +1,45 @@
+<!--//Lista de visitantes-->
 
-
-<div class="container"><!--//Lista de visitantes-->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <form id="formCadastro">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Cadastro de usuários</h4>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="form-group col-lg-6">
-                            <label for="textNome" class="control-label">Usuário:</label>
-                            <input name="usuario" id="usuario" class="form-control" placeholder="Digite seu Nome" onblur="Verifica();" type="text" >
-                        </div>
+<div class="panel panel-info">
+     <div class="panel-heading"> <h1 class="panel-title">Visitantes Cadastrados</h1></div>
+        <div class="panel-body margem">
+            <table id ="tableusu"
+                 data-toggle ="table"
+                 data-height ="205"
+                 data-search ="true"
+                 accesskey=""
+                 data-side-pagination ="client"
+                 data-pagination ="true"
+                 data-page-list="[5,10,15]"
+                 data-pagination-first-text="First"
+                 data-pagination-pre-text="Previous"   
+                 data-pagination-next-text="Next"
+                 data-pagination-last-text="Last"
+                 data-url= 'usuario/listar'>  
+                 <!--Endereço do Controller responsável em buscar os dados da lista -->
                         
-                        <div class="form-group col-lg-6">
-                            <label for="textUsuario" class="control-label">Tipo</label>
-                            <select name="cmb-tipo" id="cmb-tipo" class="form-control selectpicker" data-container="body" data-width="100%" >
-                                <option></option>
-                                <option>ADMINISTRADOR</option> 
-                                <option>COMUM</option>
-                            </select>     
-                        </div>  
-
-                        <div class="form-group col-lg-6">      
-                            <label for="inputPassword" class="control-label">Senha</label>      
-                            <input type="password" class="form-control" placeholder="Informe sua senha" 
-                                  name="senha" id="senha" data-minlength="6" required>      
-                        </div>
-                        <div class="form-group col-lg-6">      
-                            <label for="inputPassword" class="control-label">Confirmação</label>      
-                            <input type="password" class="form-control" placeholder="Confirme sua senha" 
-                                  name="csenha" id="csenha" data-minlength="6" required>      
-                        </div>      
-                    </div>
-                    <div class="panel-footer clearfix">
-                        <div class="btn-group pull-left">      
-                            <button type="reset" class="btn btn-lg btn-danger" id = "btnlimpar">Limpar</button>
-                        </div> 
-                        <div class="btn-group pull-right">      
-                            <button type="submit" class="btn btn-lg btn-primary">Salvar</button>
-                        </div> 
-                    </div>
-                </div>
-            </form>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h1 class="panel-title">Visitantes Cadastrados</h1>
-                </div>
-                <div class="panel-body margem">
-                    <table id ="tableusu"
-                        data-toggle ="table"
-                        data-height ="205"
-                        data-search ="true"
-                        accesskey=""
-                        data-side-pagination ="client"
-                        data-pagination ="true"
-                        data-page-list="[5,10,15]"
-                        data-pagination-first-text="First"
-                        data-pagination-pre-text="Previous"   
-                        data-pagination-next-text="Next"
-                        data-pagination-last-text="Last"
-                        data-url= 'usuario/listar'>  
-                        <!--Endereço do Controller responsável em buscar os dados da lista -->
-                        <thead>
-                            <tr>
-                                <th data-field = 'usuario' class = "col-md-3 text-left">Visitante</th> 
+                    <thead>
+                        <tr>
+                            <th data-field = 'usuario' class = "col-md-3 text-left">Visitante</th> 
                                 <!--campo usuario no bd -->
-                                
-                                <th data-field = 'senha' class = "col-md-3">Senha</th>
+          
+                            <th data-field = 'senha' class = "col-md-3">Senha</th>
                                 <!--campo senha no bd -->
 
-                                <th data-field = 'ativo' id="tipoCampo" class = "col-md-2 text-left">Ativo</th> 
+                            <th data-field = 'ativo' id="tipoCampo" class = "col-md-2 text-left">Ativo</th> 
                                 <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
 
-                                <th  data-field ='usuario' data-formatter="opcoes" class = "col-md-2">Ação</th>
-                                <!--colocaremos a função data-formatter que chamará a função JavaScript
-                                 opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca 
-                                -->
-                            </tr>
-                        </thead>                        
-                    </table>
-                </div>
-            </div>
+                            <th  data-field ='usuario' data-formatter="opcoes" class = "col-md-2">Ação</th>
+                            <!--colocaremos a função data-formatter que chamará a função JavaScript
+                            opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca -->
+                        </tr>
+                    </thead>  
         </div>
-    </div>
-</div>
-
+ </div>
+  
 
 <script type="text/javascript">
 
-    $(document).ready(()=>{ $("#formCadastro").submit(function(event){
-
-            if($("#senha").val() != $("#csenha").val()){
-                swal({
-                    title: "Atenção!",
-                    text: "Senhas incompatíveis, verifique!",
-                    type:"error",
-                });
-                return false;
-
-            }else{
-                $.ajax({
-                    type: "POST",
-                    url: "usuario/cadastrar",
-                    data: $("#formCadastro").serialize(),
-                    success: function(data){
-                            
-                        if($.trim(data) == 1){
-                            $("#formCadastro").trigger("reset");
-
-                            swal({title: "OK!", text: "Dados salvos com sucesso.", type: "success"});
-
-                        }else{
-
-                            swal({title: "ATENÇÃO!", text: "Erro ao inserir, verifique!", type: "error",});
-                        }
-
-                    },
-                    beforeSend: ()=>{
-
-                        swal({title: "AGUARDE!", text: "Carregando...", imageUrl: "assets/img/gifs/preloader.gif",});
-                    },
-                    error: ()=>{
-
-                        alert:("Unexpected error.");
-                
-                    }
-                });
-
-                return false;
-            }
-        });
-
-        setInterval(()=>{ var $table = $('#tableusu');//passando o tabela para uma variavel php
-            $table.bootstrapTable('refresh');//Atualizando a tabela usuarios
-        }, 5000)//em 5 em 5 segundos
-    });
 
 
         //função que faz aparereces 2 botoes o de busca e o de desativar
@@ -153,219 +55,114 @@
         return opcoes;
     }
 
-    //função de busca de usuario que aparece um modal.
-    function busca_usuario(usuario){
-        $('#alteracao').modal('show');
-        $.ajax({
-            type: "POST",
-            url: 'usuario/consalterar',
-            dataType: 'json',
-            data: {'usuario': usuario},
-            success: function (data){
-                $('#musuario').val(data[0].usuario);
-                $('#msenha').val(data[0].senha);
-                swal.close();
-            },
-            beforeSend: ()=>{
-                swal({
-                    title: "Aguarde!",
-                    text: "Carregando...",
-                    imageUrl: "assets/img/gifs/preloader.gif",
-                    showConfirmButton: false
-                });
-            },
-            error: ()=>{
-                alert('Unexpected error.');
-                swal.close();
-            }
-        });
-    }
-
-    //Botão alterar dentro do modal recebe essa função
-    function alterar(){
-        if($("#msenha").val() != $("#mcsenha").val()){
-            swal({
-                title: "Atenção!",
-                text: "senhas incompatíveis, verifique!",
-                type: "error"
-            });
-            return false;
-        }else{     
-            $.ajax({
-                type: "POST",
-                url: 'usuario/alterar',
-                data: {'senha':$('#msenha').val(),
-                        'usuario':$('#musuario').val(),
-                        'tipo':$('#mcmb-tipo').val()},
-                success: function(data){
-                    if(data == 1){
-                        swal({
-                            title: "OK",
-                            text: "Senha ALTERADA!",
-                            type: "success",
-                            showCancelButton: false,
-                            confirmButtonColor: "#54DD74",
-                            confirmButtonText: "OK!",
-                            closeOnConfirm: true,
-                            closeOnCancel: false
-                        },
-                        function(isConfirm){
-                            if(isConfirm){
-                                $('#tableusu').bootstrapTable('refresh');
-                                
-                            }
-                        });
-                        $('#alteracao').modal('hide');
-                        
-                        
-                    }else{
-                        swal({
-                            title: "OK",
-                            text: "Erro na ALTERAÇÃO, verifique!",
-                            type: "error",
-                            showCancelButton: false,
-                            confirmButtonColor: "#54DD74",
-                            confirmButtonText: "OK!",
-                            closeOnConfirm: false,
-                            closeOnCancel: false
-                        });
-                    }
-                },
-                beforeSend: ()=>{
-                    swal({
-                        title: "Aguarde!",
-                        text: "Carregando...",
-                        imageUrl: "assets/img/gifs/preloader.gif",
-                        showConfirmButton: false
-                    });
-                },
-                error: ()=>{
-                    alert('Unexpected error.')
-                }
-            });
-        }
-    }
-
 
   
 function desativa_usuario(usuario){
+                swal({//Primeiro a pergunta
+                    title:"Atenção",
+                    type: "Gostaria de DESATIVAR esse Usuário?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "DD6B55",
+                    confirmButtonText: "Sim",
+                    cancelButtonText: "Não",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                    },
+                        function(isConfirm){// Se ao clicar em sim
+                                    
+                                if(isConfirm){//Se ao clicar em confirmar e for ...
 
-            swal({
-                  title:"Atenção",
-                  type: "Gostaria de DESATIVAR esse Usuário?",
-                  type: "warning",
-                  showCancelButton: true,
-                  confirmButtonColor: "DD6B55",
-                  confirmButtonText: "Sim",
-                  cancelButtonText: "Não",
-                  closeOnConfirm: false,
-                  closeOnCancel: true
-                  },
-                  function(isConfirm){
-                  if(isConfirm){
-                     $.ajax({
-                        url: base_url + "usuario/desativar",
-                        type: "POST",
-                        data: {'usuario':usuario},
-                        success: function(data){
-                            // nome = data[0].usuario;
-                            // alert(nome);
-                            
-                            if(data == 2){
-                                swal({
-                                    title: "Atenção",
-                                    text: "Vc não pode desativar a si mesmo",
-                                    type: "error",
-                                    showCancelButton: false,
-                                    confirmButtonColor: "54DD74",
-                                    confirmButtonText: "OK!",
-                                    cacelButtonText: "",
-                                    closeOnConfirm:true,
-                                    closeOnCancel: false
+                                            $.ajax({
+                                                    url: base_url + "usuario/desativar",//indo 
+                                                    type: "POST",
+                                                    data: {'usuario':usuario},
+                                                    success: function(data){
+                                                                    
+                                                        if(data == 1){
+                                                    
+                                                                swal({
+                                                                     title: "OK",
+                                                                     text: "Usuário DESATIVADO!",
+                                                                     type: "success",
+                                                                     showCancelButton: false,
+                                                                     confirmButtonColor: "54DD74",
+                                                                     confirmButtonText: "OK!",
+                                                                     cancelButtonText: "",
+                                                                     closeOnConfirm:true,
+                                                                     closeOnCancel: false
+                                                                    },
+                                                                    function(isConfirm){
+                                                                                
+                                                                            if(isConfirm){
+                                                                                
+                                                                                $('#tableusu').bootstrapTable('refresh');
+                                                                            }
+                                                                    });
+                                                        }else{
+                                                            swal({
+                                                                    title: "OK!",
+                                                                    text: "Erro na DESATIVAÇÃO, verifique!",
+                                                                    type: "error",
+                                                                    showCancelButton: false,
+                                                                    confirmButtonColor: "54DD74",
+                                                                    confirmButtonText: "OK!",
+                                                                    cancelButtonText: "",
+                                                                    closeOnConfirm:false,
+                                                                    closeOnCancel: false });
+                                                            }
+                                                                        },  beforeSend: ()=>{
+                                                                                            swal({
+                                                                                                title: "Aguarde!",
+                                                                                                text: "Gravando dados...",
+                                                                                                imageUrl: "assets/img/alertas/loading.gif",
+                                                                                                showConfirmButton: false
+                                                                                                });
+                                                                                            },
+                                                                            error: function(data_error){
+                                                                                sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
+                                                                                                        }
+                                                        });
+                                                }
                                 });
-                            }else if(data == 1){
-                                swal({
-                                    title: "OK",
-                                    text: "Usuário DESATIVADO!",
-                                    type: "success",
-                                    showCancelButton: false,
-                                    confirmButtonColor: "54DD74",
-                                    confirmButtonText: "OK!",
-                                    cacelButtonText: "",
-                                    closeOnConfirm:true,
-                                    closeOnCancel: false
-                                },
-                            function(isConfirm){
-                                if(isConfirm){
-                                    $('#tableusu').bootstrapTable('refresh');
-                                }
-                            });
-                            }else{
-                                swal({
-                                    title: "OK!",
-                                    text: "Erro na DESATIVAÇÃO, verifique!",
-                                    type: "error",
-                                    showCancelButton: false,
-                                    confirmButtonColor: "54DD74",
-                                    confirmButtonText: "OK!",
-                                    cacelButtonText: "",
-                                    closeOnConfirm:false,
-                                    closeOnCancel: false
-                                });
-                            }
-                        },
-                        beforeSend: ()=>{
-                            swal({
-                                title: "Aguarde!",
-                                text: "Gravando dados...",
-                                imageUrl: "assets/img/alertas/loading.gif",
-                                showConfirmButton: false
-                            });
-                        },
-                        error: function(data_error){
-                            sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
-                        }
-                    });
-                }
-            });
-        }
+}
     
 
         function Verifica(){
-            $.ajax({
-                type: "POST",
-                url: 'usuario/verusu',
-                data: {'usuario':$('#usuario').val()},
-                success: function(data){
-                    if (data == 1){
-                        swal({
-                            title: "OK",
-                            text: "Usuário ja cadastrado na base de dados, verifique!",
-                            type: "error",
-                            showCancelButton: false,
-                            confirmButtonColor: "#54DD74",
-                            confirmButtonText: "OK!",
-                            closeOnConfirm: true,
-                            closeOnCancel: false
-                        });
-                        $('#btnlimpar').click();
-                        $('#usuario'.focus());
-                    }else{
-                        swal.close();
-                    }
-                },
-                beforeSend: ()=>{
-                    swal({
-                        title: "Aguarde!",
-                        text: "Carregando...",
-                        imageUrl: "assets/img/gifs/preloader.gif",
-                        showConfirmButton: false
-                    });
-                },
-                error: ()=> {
-                    alert('Error');
-                }
-            });
+ $.ajax({
+     type: "POST",
+     url: 'usuario/verusu',
+     data: {'usuario':$('#usuario').val()},
+     success: function(data){
+         if (data == 1){
+  swal({
+      title: "OK",
+      text: "Usuário ja cadastrado na base de dados, verifique!",
+      type: "error",
+      showCancelButton: false,
+      confirmButtonColor: "#54DD74",
+      confirmButtonText: "OK!",
+      closeOnConfirm: true,
+      closeOnCancel: false
+  });
+  $('#btnlimpar').click();
+  $('#usuario'.focus());
+         }else{
+  swal.close();
+         }
+     },
+     beforeSend: ()=>{
+         swal({
+  title: "Aguarde!",
+  text: "Carregando...",
+  imageUrl: "assets/img/gifs/preloader.gif",
+  showConfirmButton: false
+         });
+     },
+     error: ()=> {
+         alert('Error');
+     }
+ });
         }
 //Função para REATIVAR o usuario
 function reativa_usuario(usuario){
@@ -381,57 +178,57 @@ function reativa_usuario(usuario){
         closeOnCancel:true},
 
         function(isConfirm){
-            if(isConfirm){
-                $.ajax({
-                    url:base_url + "usuario/reativar",
-                    type:"POST",
-                    data:{'usuario':usuario},
+ if(isConfirm){
+     $.ajax({
+         url:base_url + "usuario/reativar",
+         type:"POST",
+         data:{'usuario':usuario},
 
-                    success:function(data){
-                        if(data == 1){
-                            swal({
-                                title:"OK",
-                                text:"Usuário REATIVADO",
-                                type:"success",
-                                showCancelButton:false,
-                                confirmButtonColor:"#54DD74",
-                                confirmButtonText:"OK!",
-                                cancelButtonText:"",
-                                closeOnConfirm:true,
-                                closeOnCancel:false
-                            },
-                            function(isConfirm){
-                                if(isConfirm){
-                                    $('#tableusu').bootstrapTable('refresh');
-                                }
-                            });
-                        }else{
-                            swal({
-                                title:"OK",
-                                text:"Erro na REATIVAÇÃO, Verifique!",
-                                type:"error",
-                                showCancelButton:false,
-                                confirmButtonColor:"#54DD74",
-                                confirmButtonText:"OK!",
-                                cancelButtonText:"",
-                                closeOnCancel:false,
-                                closeOnCancel:false
-                            });
-                        }
-                    },
-                    beforeSend: ()=>{
-                        swal({
-                            title:"Aguarde!",
-                            text:"Gravando dados...",
-                            imageUrl:"assets/img/alertas/loading.gif",
-                            showConfirmButton:false
-                        });
-                    },
-                    error:function(data_error){
-                        sweetAlert("Atenção", "Erro ao gravar os dados!","error");
-                    }
-                });
-            
+         success:function(data){
+  if(data == 1){
+      swal({
+          title:"OK",
+          text:"Usuário REATIVADO",
+          type:"success",
+          showCancelButton:false,
+          confirmButtonColor:"#54DD74",
+          confirmButtonText:"OK!",
+          cancelButtonText:"",
+          closeOnConfirm:true,
+          closeOnCancel:false
+      },
+      function(isConfirm){
+          if(isConfirm){
+   $('#tableusu').bootstrapTable('refresh');
+          }
+      });
+  }else{
+      swal({
+          title:"OK",
+          text:"Erro na REATIVAÇÃO, Verifique!",
+          type:"error",
+          showCancelButton:false,
+          confirmButtonColor:"#54DD74",
+          confirmButtonText:"OK!",
+          cancelButtonText:"",
+          closeOnCancel:false,
+          closeOnCancel:false
+      });
+  }
+         },
+         beforeSend: ()=>{
+  swal({
+      title:"Aguarde!",
+      text:"Gravando dados...",
+      imageUrl:"assets/img/alertas/loading.gif",
+      showConfirmButton:false
+  });
+         },
+         error:function(data_error){
+  sweetAlert("Atenção", "Erro ao gravar os dados!","error");
+         }
+     });
+ 
         }
     });
 }
