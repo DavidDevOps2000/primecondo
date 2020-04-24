@@ -10,7 +10,7 @@
                         <form autocomplete="off" id="formPrincipal">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Usuário" name="txtUsuario" type="text" autofocus required>
+                                    <input class="form-control" placeholder="Usuário" name="txtEmail" type="text" autofocus required>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Senha" name="txtSenha" type="password" required>
@@ -25,5 +25,5 @@
     </div>
 </html>
 
- <script type="text/javascript" src=<?php echo strtoupper($this->session->userdata('usuario'))?>>
+<!--/<script type="text/javascript" src=<?php echo strtoupper($this->session->userdata('usuario'))?>-->
  

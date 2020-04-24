@@ -14,25 +14,25 @@ class Login extends CI_Controller{
 
 	public function Logar_ajax()
 	{
-		$usuario = $this->input->post('txtUsuario');
+		$email = $this->input->post('txtEmail');
 		$senha = $this->input->post('txtSenha');
 
 		//instancio a model
 		$this->load->model('m_acesso');
 
 		//executo o metodo atribuindo pro $retorno
-		$retorno = $this->m_acesso->validalogin($usuario, $senha);
+		$retorno = $this->m_acesso->validalogin($email, $senha);
 		
 		//Verifico se a autentificação foi validada
 		if($retorno == 1){
 
 			//Atribuo a variavel de sessão, usuario
 
-		$_SESSION['usuario'] = $usuario;
+		$_SESSION['email'] = $email;
 		
 		}else{
 			//caso conrario, destruo a sessão
-			unset($_SESSION['usuario']);
+			unset($_SESSION['email']);
 		}
 	
 		//retorno pra view a respota

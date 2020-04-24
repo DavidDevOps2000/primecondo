@@ -3,9 +3,9 @@
 
 class M_acesso extends CI_Model{
 
-    public function validalogin($usuario, $senha){
+    public function validalogin($email, $senha){
         
-        $retorno = $this->db->query("select * from tbl_morador where nome_mor='$usuario' and senha_mor='$senha' and ativo_mor ='Sim';");
+        $retorno = $this->db->query("select * from tbl_pessoa where email='$email' and senha='$senha' and status_pess = true;");
                 //Será verificado a existencias das contas e se está ativa,
                 // caso não, será negada a entrada, por moradores não autorizados    
 
