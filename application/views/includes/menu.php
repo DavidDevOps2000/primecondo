@@ -19,17 +19,17 @@
                 <ul class="nav navbar-nav">
                     <li class=""><a href="<?= base_url('home')?>">HOME</a></li>
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">CADASTRO<b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">LISTAS<b class="caret"></b></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a onclick="produtos();">PRODUTOS</a></li>
-                            <li><a onclick="usuarios();">USUARIOS</a></li>
+                            <li><a onclick="visitantes();">Visitantes</a></li>
+                            <li><a onclick="prest_serv();">Prestador de Serviços</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">CONSULTAS<b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">CADASTRAR<b class="caret"></b></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a onclick="realizar();">REALIZAR PEDIDOS</a></li>
-                            <li><a onclick="administrar();">ADMINISTRAR PEDIDO</a></li>
+                            <li><a onclick="cadastrar_v();">Visitantes</a></li>
+                            <li><a onclick="cadastrar_p();">Prestadores</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -45,31 +45,27 @@
 <script type="text/javascript">
     var base_url = "<?= base_url()?>";
 
-    //manter produtos
+    
     function produtos(){
         swal("Atenção!", "Modulo ainda não construido", "Info");
     }
 
-    function usuarios(){
+    function prest_serv(){
 
-        window.location.href = base_url + "usuario";
+        window.location.href = base_url + "prest_serv";
     }
                    
-    //}
-    //?>
-    //manter pedidos
-    function pedidos(){
-        swal("Atenção!", "Modulo ainda não construido", "Info");
+    function visitantes(){
+        window.location.href = base_url + "visitantes";
     }
 
-    //manter realização de pedidos
-    function realizar(){
-        swal("Atenção!", "Modulo ainda não construido", "Info");
+    
+    function cadastrar_v(){
+        window.location.href = base_url + "singIn_visitantes";
     }
 
-    //manter administrar pedidos
-    function administrar(){
-        swal("Atenção!", "Modulo ainda não construido", "Info");
+    function cadastrar_p(){
+        window.location.href = base_url + "singIn_prestadores";
     }
 
 

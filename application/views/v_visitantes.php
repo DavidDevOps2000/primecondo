@@ -1,5 +1,4 @@
-<!--//Lista de Prestadores de Serviço-->
-
+<!--//Lista de Visitantes-->
 <div class="panel panel-info">
      <div class="panel-heading text-center"> <h1 class="panel-title">Lista de Visitantes</h1></div>
         <div class="panel-body margem">
@@ -46,7 +45,7 @@
         //função que faz aparereces 2 botoes o de busca e o de desativar
     function opcoes(value, row, index){
         if(row.estatus =='DESATIVADO'){
-        var opcoes = '<button class="btn btn-xs btn-warning text-center" type="button"  onClick="reativa_usuario('+"'"+ value +"'"+');"><span class="glyphicon glyphicon-open"></span></button>';
+        var opcoes = '<button class="btn btn-xs btn-warning text-center" type="button" onClick="reativa_usuario('+"'"+ value +"'"+');"><span class="glyphicon glyphicon-open"></span></button>';
 
         }else{
 

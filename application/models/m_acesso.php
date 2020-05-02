@@ -20,6 +20,23 @@ class M_acesso extends CI_Model{
             }
         }
 
+
+        public function validacadastro($usuario, $senha){
+            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario' and senha = '$senha' and estatus = ''");
+            
+            if($retorno->num_rows() > 0){       
+                
+                return 0;
+
+            }else if($retorno->num_rows() == 0){
+                $retorno = $this->db->query("Insert into usuarios(usuario, senha) values ('$usuario','$senha')");
+                 
+                return 1;
+            }else{
+                return 2;
+            }
+        }
+
     }
 
 

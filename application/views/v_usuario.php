@@ -1,7 +1,7 @@
-<!--//Lista de visitantes-->
+<!--//Lista de Prestadores de Serviço-->
 
 <div class="panel panel-info">
-     <div class="panel-heading"> <h1 class="panel-title">Visitantes Cadastrados</h1></div>
+     <div class="panel-heading"> <h1 class="panel-title">Prestadores de Serviço Cadastrados</h1></div>
         <div class="panel-body margem">
             <table id ="tableusu"
                  data-toggle ="table"
@@ -20,7 +20,7 @@
                         
                     <thead>
                         <tr>
-                            <th data-field = 'usuario' class = "col-md-3 text-left">Visitante</th> 
+                            <th data-field = 'usuario' class = "col-md-3 text-left">Prestador de Serviço</th> 
                                 <!--campo usuario no bd -->
           
                             <th data-field = 'senha' class = "col-md-3">Senha</th>
