@@ -45,11 +45,6 @@
 <script type="text/javascript">
     var base_url = "<?= base_url()?>";
 
-    
-    function produtos(){
-        swal("Atenção!", "Modulo ainda não construido", "Info");
-    }
-
     function prest_serv(){
 
         window.location.href = base_url + "prest_serv";
@@ -61,11 +56,11 @@
 
     
     function cadastrar_v(){
-        window.location.href = base_url + "singIn_visitantes";
+        window.location.href = base_url + "cadast_visi";
     }
 
     function cadastrar_p(){
-        window.location.href = base_url + "singIn_prestadores";
+        window.location.href = base_url + "cadast_prest";
     }
 
 
