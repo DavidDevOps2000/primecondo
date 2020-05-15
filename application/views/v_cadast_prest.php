@@ -1,5 +1,5 @@
 <div>
-        <form id="formCadastroPrestPrest">
+        <form id="formCadastroPrest">
             <div class="panel panel-primary">
                     <div class="panel-heading text-center"><h4>Cadastro de Prestadores de Serviços</h4></div>
                         
@@ -23,7 +23,7 @@
                                 
                         <div class="form-group col-lg-3">
                                 <label for="textNome" class="control-label">Explique com poucas palavras como será esse serviço ?</label>
-                                <textarea class="form-control" style="resize: none" placeholder="Digite o nome do Serviço"></textarea>
+                                <textarea class="form-control" style="resize: none" placeholder="Digite o nome do Serviço" maxlength="100" ></textarea>
                         </div>
                           
                         <div class="form-group col-lg-3" style="padding-top:1.5%">
@@ -102,11 +102,11 @@ $(document).ready(()=>{
                 $.ajax({
                     type: "POST",
                     url: "usuario/cadastrar",
-                    data: $("#formCadastro").serialize(),
+                    data: $("#formConf").serialize(),
                     success: function(data){
                         if($.trim(data) == 1){
 
-                            $("#formCadastro").trigger("reset");
+                            $("#formConf").trigger("reset");
                             swal({title: "OK!", text: "Dados salvos com sucesso.", type: "success"});
                         }else{
                             swal({title: "ATENÇÃO!", text: "Erro ao inserir, verifique!", type: "error",});
@@ -124,9 +124,5 @@ $(document).ready(()=>{
                 return false;
             }
         });
-        setInterval(function(){
-            var $table = $('#tableusu');
-            $table.bootstrapTable('refresh');
-        }, 5000)
     });
 </script>

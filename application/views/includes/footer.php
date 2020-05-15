@@ -17,3 +17,7 @@
 <script type="text/javascript" src="<?= base_url('assets/JS/validator.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/JS/authenticator.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/JS/func_usuarios.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/JS/bootstrap.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/JS/bootstrap.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/JS/jquery.slim.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/JS/popper.min.js')?>"></script>
