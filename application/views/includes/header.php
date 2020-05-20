@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <meta name="description" content = "">
     <meta name = "author" content = "">
+=======
+    <meta name = "GrupoPrime" content = "">
+>>>>>>> novo layout
     <title>PrimeCondo</title>
 
-    <script type="text/javascript" src="<?= base_url('/assets/JS/jquery.min.js')?>"></script>
-    <script type="text/javascript" src="<?= base_url('/assets/JS/sweetalert.min.js')?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/JS/jquery.min.js')?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/JS/sweetalert.min.js')?>"></script>
 
     
     <link href="<?= base_url('assets/CSS/bootstrap.min.css')?>" rel="stylesheet" 
@@ -28,7 +31,17 @@
     <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><!---//Home-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 
+<<<<<<< HEAD
     <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
     
 
+=======
+    <link href="<?= base_url('assets/css/bootstrap-datepicker.css')?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/bootstrap-imageupload.min.css')?>" rel="stylesheet">
+
+    <link href="<?= base_url('assets/CSS/home.css')?>" rel="stylesheet"><!---//Login-->
+    <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><!---//Home-->
+
+    <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
+>>>>>>> novo layout
 </head>

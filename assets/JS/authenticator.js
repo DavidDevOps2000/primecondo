@@ -11,29 +11,36 @@ $.ajax({
 
             if ($.trim(data) == '1') { //Valido o retorno da controller
          
-                        window.location.href = "home";
+               
+                window.location.href = 'home';
 
             }else{
-                    swal({ //Caso retorne algo exibe uma mensagem ao usuario
-                         title: "Atenção!",
-                         text:"Acesso negado, Usuário ou senha inválido!",
-                         type:"error",
-                        });
-                           // $("#formPrincipal").trigger('reset');//Limpa os objetos de tela
+
+                swal({ //Caso retorne algo exibe uma mensagem ao usuario
+                    title: "Atenção!",
+                    text:"Acesso negado, Usuário ou senha inválido!",
+                    type:"error",
+                    });
+                        $("#formPrincipal").trigger('reset');//Limpa os objetos de tela
                 }
 
         },beforeSend: function(){ //Tela de carregamento
 
-            swal({
-                title:"Aguarde!",
-                text:"Carregando...",
-                imageUrl: "assets/img/gifs/preloader.gif",
-                showConfirmButton: false
-                });
+                swal({
+                    title:"Aguarde!",
+                    text:"Carregando...",
+                    imageUrl: "assets/img/gifs/loading.gif",
+                    showConfirmButton: false
+                    });
         },
             
-        error:function(){ //Caso aconteça algum erro inesperado no Ajax
-        alert('Deu Erro.');
+        error: function(){
+                
+                swal({ //Caso retorne algo exibe uma mensagem ao usuario
+                    title: "Falha no Login",
+                    text:"Falha na Conexão, tente mais tarde",
+                    type:"error",
+                    });
         }
 
         });
