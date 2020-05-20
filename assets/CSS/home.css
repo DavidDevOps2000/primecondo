@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 .home-fundo {                                   /*Usando*/
+=======
+.home-fundo {
+    width: 100%;
+    height: 100%;
+>>>>>>> 6faae2c16c9743e939bbc7590e57a2ec675156fe
     background-image: url("../img/fun2.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+<<<<<<< HEAD
     font-family: 'Arial';
  
     align-items: center;
     text-align: center;}
+=======
+    top: 0;
+    left: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+>>>>>>> 6faae2c16c9743e939bbc7590e57a2ec675156fe
 
 .bg_ca {
     position: absolute;
@@ -15,6 +28,7 @@
     height: 100%;
 }
 
+<<<<<<< HEAD
 .menuPrinc {/*Antigo navBar*/
     background-color: black;
     margin: 0 auto;
@@ -28,12 +42,32 @@
 
 
 .menuSanduiche {/* antigo navbar-toggler*/
+=======
+.img-logo-centro {
+    background-image: url("../img/logo3.png");
+    width: 500;
+    height: 500;
+}
+
+.navbar {
+    border-bottom: 1px solid white;
+    position: absolute;
+    width: 850px;
+    height: 70px;
+    left: 50%;
+    top: 5%;
+    margin-left: -425px;
+}
+
+.navbar-toggler {
+>>>>>>> 6faae2c16c9743e939bbc7590e57a2ec675156fe
     position: absolute;
     top: 23px;
     border: 2px solid white;
     border-radius: 40px;
 }
 
+<<<<<<< HEAD
 .linksMenu {/*Link imagem centro*/
     background-color: tomato;}
 
@@ -52,6 +86,25 @@
 .subMenuInterno{/*dropright*/ /*Usando*/
     background-color:#CCC;
     font-size: 18px;
+=======
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    margin-top: -80px;
+    margin-left: -100px;
+}
+
+.dropright {
+    background-image: url("../img/test2.png");
+    position: absolute;
+    width: 40%;
+    font-size: 22px;
+    border-radius: 8px;
+    top: 72px;
+    text-align: center;
+    border: 3px solid rgba(134, 134, 134, 0.199);
+>>>>>>> 6faae2c16c9743e939bbc7590e57a2ec675156fe
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
@@ -63,6 +116,7 @@
     background-color: rgba(0, 0, 0, 0.411);
 }
 
+<<<<<<< HEAD
 .divMsgCentro{/*Usando*/
 position: relative;
 margin-top: 150px;
@@ -81,4 +135,24 @@ margin-top: 150px;
     height: 40px;
     font-size: 18px;
    
+=======
+.container-fluid {
+    position: absolute;
+    color: white;
+    width: 500px;
+    text-align: center;
+    left: 50%;
+    top: 40%;
+    margin-left: -250px;
+}
+
+.btn_que {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    left: 0;
+    margin-left: 170px;
+    border-radius: 20px;
+    font-size: 18px;
+>>>>>>> 6faae2c16c9743e939bbc7590e57a2ec675156fe
 }
