@@ -1,0 +1,84 @@
+.home-fundo {                                   /*Usando*/
+    background-image: url("../img/fun2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Arial';
+ 
+    align-items: center;
+    text-align: center;}
+
+.bg_ca {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.menuPrinc {/*Antigo navBar*/
+    background-color: black;
+    margin: 0 auto;
+    border-radius:13px; 
+    display: inline-block; 
+    float: none !important;
+    padding-left: 25px;
+    padding-right: 25px;
+    width:100%
+    }
+
+
+.menuSanduiche {/* antigo navbar-toggler*/
+    position: absolute;
+    top: 23px;
+    border: 2px solid white;
+    border-radius: 40px;
+}
+
+.linksMenu {/*Link imagem centro*/
+    background-color: tomato;}
+
+.fundoMenuSanduiche{/*dropright*/ /*Usando*/
+    background-image: url("../img/fundo_menu_sand.png");
+    font-size: 22px;
+    text-align: center;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(13px);
+    filter: blur(0px);
+}
+
+
+.subMenuInterno{/*dropright*/ /*Usando*/
+    background-color:#CCC;
+    font-size: 18px;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(13px);
+    filter: blur(0px);
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.411);
+}
+
+.divMsgCentro{/*Usando*/
+position: relative;
+margin-top: 150px;
+}
+
+.msgCentro {/*container-fluid*/    /*Usando*/
+    color:white;
+    font-size: 25px;
+
+}
+
+.btn_queSomos{/*btn_que*/        /* Usando*/
+    border-radius:13px;
+    margin: 0 auto;
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+   
+}

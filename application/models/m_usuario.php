@@ -4,7 +4,8 @@
     class M_usuario extends CI_Model{
         
         public function cadastrar($usuario, $senha, $tipo){
-            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario' and estatus = 'D'");
+            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario' and estatus = 'D'");/* Verificando se o usuario está desativado */ 
+
             if ($retorno->num_rows() == 0){
                 $this->db->query("insert into usuarios (usuario, senha, tipo) values ('$usuario','$senha', '$tipo')");
                 //verifica a inserção

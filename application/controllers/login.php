@@ -18,10 +18,10 @@ class Login extends CI_Controller{
 		$senha = $this->input->post('txtSenha');
 
 		//instancio a model
-		$this->load->model('m_acesso');
+		$this->load->model('M_login');
 
 		//executo o metodo atribuindo pro $retorno
-		$retorno = $this->m_acesso->validalogin($email, $senha);
+		$retorno = $this->M_login->validalogin($email, $senha);
 		
 		//Verifico se a autentificação foi validada
 		if($retorno == 1){

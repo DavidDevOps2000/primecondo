@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content = "">
-    <meta name = "author" content = "">
-    <title>Sistema de Compras - Aula Etec - PW II</title>
+    <meta name = "GrupoPrime" content = "">
+    <title>PrimeCondo</title>
 
-    <script type="text/javascript" src="<?= base_url('/assets/JS/jquery.min.js')?>"></script>
-    <script type="text/javascript" src="<?= base_url('/assets/JS/sweetalert.min.js')?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/JS/jquery.min.js')?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/JS/sweetalert.min.js')?>"></script>
 
     
     <link href="<?= base_url('assets/CSS/bootstrap.min.css')?>" rel="stylesheet">
@@ -23,7 +21,11 @@
     <link href="<?= base_url('assets/CSS/bootstrap-select.min.css')?>" rel="stylesheet">
     <link href="<?= base_url('assets/CSS/bootstrap-datetimepicker.min.css')?>" rel="stylesheet">
 
-  
+    <link href="<?= base_url('assets/css/bootstrap-datepicker.css')?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/bootstrap-imageupload.min.css')?>" rel="stylesheet">
 
-    <link rel = "shortcut icon" href="<?= base_url('assets/img/etec.png')?>">
+    <link href="<?= base_url('assets/CSS/home.css')?>" rel="stylesheet"><!---//Login-->
+    <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><!---//Home-->
+
+    <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
 </head>

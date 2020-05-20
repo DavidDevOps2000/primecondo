@@ -1,13 +1,72 @@
-<html class="body">
-    <h2 class="text-center" style="margin-bottom: 30px;"><img src="assets/img/etec.png" width="200"></h3>
-    <div class="row" style="margin-top 50px; margin-bottom: 400px;">
-        <div class="col-lg-12 col-md-offset-3">
-            <label style="margin-left: 5px; margin-right: 5px;">"Sistema de compras desenvolvido para a disciplina PW II - 2ºDSN."</label>
-            <br>
-            <label style="margin-left: 5px; margin-right: 5px;">Professor Marcos Costa de Sousa</label>
-        </div>
+<body class="home-fundo">
+
+<div><<?php //Painel Superio ?>
+     <div class="text-center">
+         <a href="<?= base_url('home')?>">
+            <img src="<?= base_url('assets/img/img_center.png')?>" width="200" height="150">
+        </a>
     </div>
-    
-   
-    
-</html>
+
+    <?php //inicio menu ?>
+<div class="container-fluid" >
+                <nav class="navbar navbar-default menuPrinc">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche"><?php //Btn Menu sanduihce ?>
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                            </div>
+
+                    <div class="collapse navbar-collapse fundoMenuSanduiche" id="menuSanduiche">
+                    <ul class="nav navbar-nav">                       
+                        
+                    <ul role="menu" class="dropdown-menu" ></ul>
+
+                        <li class=""><a href="#" onclick="aviso()">Avisos</a></li>
+                        <li class=""><a href="#" onclick="regra()">Regras</a></li>
+                       
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sua Casa<b class="caret"></b></a>
+                            <ul role="menu" class="dropdown-menu" style="text-align: center">
+                                <li class="subMenuInterno"><a href="#" onclick="multa();">Multas</a></li>
+                                <li class="subMenuInterno"><a href="#" onclick="visitante();">Visitantes</a></li>
+                                <li class="subMenuInterno"><a href="#" onclick="prest_serv();">Prestador de Serviços</a></li>
+                            </ul>
+                        </li>
+
+                        <li class=""><a href="#" onclick="reclamacao()" > Reclamação</a></li>
+                        <li class=""><a href="#" onclick="ajuda()" > Ajuda</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+<div class="divMsgCentro">
+            <label class="msgCentro">Tecnologia e Segurança juntos por único objetivo.</label><br>
+            <input type="button" class="btn_queSomos" value="Quem Somos">
+        </div>
+
+
+
+<script>
+
+var base_url = "<?= base_url()?>";
+function visitante(){
+    window.location.href = base_url + "cadast_visi";
+}
+
+function prest_serv(){
+    window.location.href = base_url + "cadast_prest";
+}
+</script>
+
+
+</body>
