@@ -1,11 +1,11 @@
-$(document).ready(function(){$('#formPrincipal').submit(function(event){
+$(document).ready(function(){$('#formLogin').submit(function(event){
     //Evento do formulario, ao pressionar o botao submit
     // vai ativar o ajax e json.
    
 $.ajax({
         type:"POST",
         url: 'Login/Logar_ajax',//Controller login no metodo logar_ajax
-        data: $('#formPrincipal').serialize(),//Os IDs dos Form vão para a validação na controller
+        data: $('#formLogin').serialize(),//Os IDs dos Form vão para a validação na controller
         
         success:function(data){//Caso toda a controller funcione corretamente
 
@@ -21,7 +21,7 @@ $.ajax({
                     text:"Acesso negado, Usuário ou senha inválido!",
                     type:"error",
                     });
-                        $("#formPrincipal").trigger('reset');//Limpa os objetos de tela
+                        $("#formLogin").trigger('reset');//Limpa os objetos de tela
                 }
 
         },beforeSend: function(){ //Tela de carregamento

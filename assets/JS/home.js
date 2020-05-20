@@ -46,10 +46,4 @@ function aviso(){
 }
 
 
-function visitante(){
-    window.location.href = base_url + "cadast_visi";
-}
 
-function prest_serv(){
-    window.location.href = base_url + "cadast_prest";
-}

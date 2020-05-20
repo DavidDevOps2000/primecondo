@@ -1,13 +1,13 @@
 <body class="home-fundo">
 
-<div><<?php //Painel Superio ?>
+<div>                               <?php //Painel Superio ?>
      <div class="text-center">
          <a href="<?= base_url('home')?>">
             <img src="<?= base_url('assets/img/img_center.png')?>" width="200" height="150">
         </a>
     </div>
 
-    <?php //inicio menu ?>
+                                    <?php //inicio menu ?>
 <div class="container-fluid" >
                 <nav class="navbar navbar-default menuPrinc">
                         <div class="container-fluid">
@@ -60,7 +60,7 @@
 
 var base_url = "<?= base_url()?>";
 function visitante(){
-    window.location.href = base_url + "cadast_visi";
+    window.location.href = base_url + "visitantes";
 }
 
 function prest_serv(){

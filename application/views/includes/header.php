@@ -24,8 +24,8 @@
     <link href="<?= base_url('assets/css/bootstrap-datepicker.css')?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/bootstrap-imageupload.min.css')?>" rel="stylesheet">
 
-    <link href="<?= base_url('assets/CSS/home.css')?>" rel="stylesheet"><!---//Login-->
-    <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><!---//Home-->
+    <link href="<?= base_url('assets/CSS/home.css')?>" rel="stylesheet"><?php //Login ?>
+    <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><?php //Home ?>
 
     <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
 </head>

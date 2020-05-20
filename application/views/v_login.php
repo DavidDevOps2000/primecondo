@@ -11,7 +11,7 @@
 				</div>
 				<div class="modal-body">
 
-					<form id="formPrincipal">
+					<form id="formLogin">
 						<div class="form-group">
 							<input class="form-control inputLoginGeral" placeholder="Email" name="txtEmail" id="txtEmail" type="text" autofocus >
 						</div>
