@@ -4,7 +4,7 @@ $(document).ready(function(){$('#formLogin').submit(function(event){
    
 $.ajax({
         type:"POST",
-        url: 'Login/Logar_ajax',//Controller login no metodo logar_ajax
+        url: 'Login/Logar',//Controller login no metodo logar_ajax
         data: $('#formLogin').serialize(),//Os IDs dos Form vão para a validação na controller
         
         success:function(data){//Caso toda a controller funcione corretamente

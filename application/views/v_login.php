@@ -1,6 +1,6 @@
 <html>
    
-<!--//Modal Login-->
+
 <div id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 		<div class="modal-dialog modal-dialig-centered" role="document">
 			<div class="modal-content formPrincLogin">

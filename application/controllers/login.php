@@ -12,7 +12,7 @@ class Login extends CI_Controller{
 
 	}
 
-	public function Logar_ajax()
+	public function Logar()
 	{
 		$email = $this->input->post('txtEmail');
 		$senha = $this->input->post('txtSenha');
