@@ -40,5 +40,6 @@
 <script type="text/javascript" src="<?= base_url('assets/js/pmd-select2.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/select2.full.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/home.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/visitantes.js.js')?>"></script>
 
 </html>
