@@ -7,9 +7,9 @@ class M_visitantes extends CI_Model {
     public function cadastrarVisitantes($nomeVisitante, $duracaoDias){
 
      $retorno = $this->db->query("select * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
+        
 
-
-        if ($retorno->num_rows() == 0){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
+        if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
                 
             $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim) values('$nomeVisitante', now(), now() + interval $duracaoDias day);");
 

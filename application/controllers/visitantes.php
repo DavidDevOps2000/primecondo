@@ -12,7 +12,7 @@ class Visitantes extends CI_Controller {
 
     public function cadastrarVisitantes(){
         //carregando as variáveis do que foi mandado via post
-        $nomeVisitante = $this->input->post('Digite seu Nome');
+        $nomeVisitante = $this->input->post('valorNomeVisitante');
         $duracaoDias = $this->input->post('valorDuracaoDias');
 
 
