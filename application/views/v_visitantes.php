@@ -1,13 +1,14 @@
 
 
 <div>
-        <form id="formCadastro">
+        <form id="formCadasVisi">
             <div class="panel panel-primary">
                     <div class="panel-heading"><h4>Cadastro de Visitantes</h4></div>
                         <div class="panel-body">
                             <div class="form-group col-lg-6">
                                 <label for="textNome" class="control-label">Nome Visitante:</label>
-                                <input name="usuario" id="usuario" class="form-control" placeholder="Digite seu Nome" onblur="Verifica();" type="text" required>
+                                <input name="usuario" id="usuario" class="form-control" 
+                                placeholder="Digite seu Nome" onblur="Verifica();" type="text">
                             </div>
 
                             <div class="form-group col-lg-3" >
@@ -47,7 +48,7 @@
 <div class="panel panel-info">
      <div class="panel-heading text-center"> <h1 class="panel-title text-light">Lista de Visitantes</h1></div>
         <div class="panel-body margem">
-            <table id ="tableusu"
+            <table id ="listaVisi"
                  data-toggle ="table"
                  data-height ="205"
                  data-search ="true"
@@ -65,14 +66,17 @@
                         
                     <thead>
                         <tr>
-                            <th data-field='usuario' class="col-md-3 text-center text-light bg-primary">Nome</th> 
+                            <th data-field='nome_visi' class="col-md-2 text-center text-light bg-primary">Nome</th> 
                                 <!--campo usuario no bd -->
 
-                            <th data-field = 'ativo' id="tipoCampo" class = "col-md-2 text-center text-light bg-primary">Ativo</th> 
+                            <th data-field='status_visi' class="col-md-2 text-center text-light bg-primary">Ativo</th> 
                                 <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
 
-                            <th  data-field ='usuario' data-formatter="opcoes" 
-                                 class = "col-md-2 text-center text-light bg-primary">Ação</th>
+                            <th data-field='diaFim' class="col-md-2 text-center text-light bg-primary">Valido até</th> 
+                                <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
+
+                            <th  data-field ='nome_visi' data-formatter="opcoes" 
+                                 class = "col-md-2 text-center text-light bg-primary">Desativar | Ativar</th>
                             <!--colocaremos a função data-formatter que chamará a função JavaScript
                             opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca -->
                         </tr>

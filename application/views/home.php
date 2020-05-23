@@ -33,7 +33,7 @@
                             <ul role="menu" class="dropdown-menu" style="text-align: center">
                                 <li class="subMenuInterno"><a href="#" onclick="multa();">Multas</a></li>
                                 <li class="subMenuInterno"><a href="#" onclick="visitante();">Visitantes</a></li>
-                                <li class="subMenuInterno"><a href="#" onclick="prest_serv();">Prestador de Serviços</a></li>
+                                <li class="subMenuInterno"><a href="#" onclick="prestador_Serv();">Prestador de Serviços</a></li>
                             </ul>
                         </li>
 
