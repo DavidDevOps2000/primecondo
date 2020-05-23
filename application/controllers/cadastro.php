@@ -6,9 +6,11 @@ class Cadastro extends CI_Controller {
    //Visitantes 
     public function cadastrarVisitante($nomeVisitante, $duracaoDias){
 
-            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario' and estatus = 'D'");
+            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario' and estatus = 'D'");//Aqui vai retornar 1 se for verdadeira
+
+            $retorno = $this->db->query("select * from tbl_pessoa where email='$email' and status_pess = false");
             
-            if ($retorno->num_rows() == 0){
+            if ($retorno->num_rows() == 0){ // Se for igual ha zero é pq deu false
                 $this->db->query("insert into usuarios (usuario, senha, tipo) values ('$usuario','$senha', '$tipo')");
                 //verifica a inserção
                 if($this->db->affected_rows() > 0){

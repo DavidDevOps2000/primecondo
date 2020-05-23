@@ -11,7 +11,7 @@
                             </div>
 
                             <div class="form-group col-lg-3" >
-                            <label for="textUsuario" class="control-label">Quantos dias vai durar esse serviço ?</label>
+                            <label for="textUsuario" class="control-label">Quantos dias convidado(a) terá acesso ?</label>
                             <select name="cmb-tipo" id="cmb-tipo" class="form-control" data-container="body" data-width="100%">
                                 <option>1 Dia</option> 
                                 <option>2 Dias</option>
@@ -45,13 +45,13 @@
 
 <!--//Lista de Visitantes-->
 <div class="panel panel-info">
-     <div class="panel-heading text-center"> <h1 class="panel-title">Lista de Visitantes</h1></div>
+     <div class="panel-heading text-center"> <h1 class="panel-title text-light">Lista de Visitantes</h1></div>
         <div class="panel-body margem">
             <table id ="tableusu"
                  data-toggle ="table"
                  data-height ="205"
                  data-search ="true"
-                 data-search-align="center"
+                 data-search-align = "center"
                  accesskey=""
                  data-side-pagination ="client"
                  data-pagination ="true"
@@ -65,23 +65,20 @@
                         
                     <thead>
                         <tr>
-                            <th data-field = 'usuario' class = "col-md-3 text-center text-light bg-primary">Nome</th> 
+                            <th data-field='usuario' class="col-md-3 text-center text-light bg-primary">Nome</th> 
                                 <!--campo usuario no bd -->
-          
-                            <th data-field = 'senha' class = "col-md-3 text-center text-light bg-primary">Senha</th>
-                                <!--campo senha no bd -->
 
-                            <th data-field = 'ativo' id="tipoCampo" class = "col-md-3 text-center text-light bg-primary">Ativo</th> 
+                            <th data-field = 'ativo' id="tipoCampo" class = "col-md-2 text-center text-light bg-primary">Ativo</th> 
                                 <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
 
-                            <th  data-field ='usuario' data-formatter="opcoes" class = "col-md-3 text-center text-light bg-primary">Ação</th>
+                            <th  data-field ='usuario' data-formatter="opcoes" 
+                                 class = "col-md-2 text-center text-light bg-primary">Ação</th>
                             <!--colocaremos a função data-formatter que chamará a função JavaScript
                             opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca -->
                         </tr>
                     </thead>  
         </div>
  </div>
-  
 
 <script type="text/javascript">
 
