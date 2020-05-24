@@ -13,7 +13,7 @@ class M_visitantes extends CI_Model {
                 
             $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim) values('$nomeVisitante', now(), now() + interval $duracaoDias day);");
 
-                if($this->db->affected_rows() > 0){//verifica a inserção
+                if($this->db->affected_rows() == true){//verifica a inserção
 
                     //Inserção com sucesso
                     return 1;
@@ -23,12 +23,12 @@ class M_visitantes extends CI_Model {
                     return 0;
                 }
 
-            }else{
-
-                return 2;
+        }else{
+              return 2;
             }
-
     }
+
+    
     
 
         public function consultar(){
@@ -104,9 +104,6 @@ class M_visitantes extends CI_Model {
             }
         }
 
-        
-
 
     }
 ?>
-}

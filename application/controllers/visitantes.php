@@ -26,6 +26,10 @@ class Visitantes extends CI_Controller {
         $retorno = $this->m_visitantes->cadastrarVisitantes($nomeVisitante, $duracaoDias);
 
         echo $retorno;
+
+        global $resultado;
+        $resultado = $retorno;
+       
     }
 
 

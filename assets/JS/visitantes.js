@@ -1,11 +1,9 @@
 $(document).ready(function(){ $("#formCadasVisi").submit(function(event){
-
-
-
-    $.ajax({
-            type: "POST",
-            url: "visitantes/cadastrarVisitantes",
-            data: $("#formCadasVisi").serialize(),
+    
+$.ajax({
+        type: "POST",
+        url: "visitantes/cadastrarVisitantes",
+        data: $("#formCadasVisi").serialize(),
             success: function(data){
 
                         if($.trim(data) == 1){
@@ -15,7 +13,8 @@ $(document).ready(function(){ $("#formCadasVisi").submit(function(event){
                             swal({title: "OK!", text: "Dados salvos com sucesso.", type: "success"});
 
                         }else{
-
+                            //var msg = data;
+                            //alert(msg);
                             swal({title: "ATENÇÃO!", text: "Erro ao inserir, verifique!", type: "error",});
                         }
 

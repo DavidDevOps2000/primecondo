@@ -32,16 +32,13 @@
 
                                 <div class="btn-group pull-right">      
                                     <button type="submit" class="btn btn-lg btn-primary">Salvar</button>
-                                </div> 
+                                </div>
                         </div>
                     </div>
                 </form>
+                
+                
 </div>
-
-
-
-
-
 
 <!--//Lista de Visitantes-->
 <div class="panel panel-info">
@@ -100,6 +97,10 @@
         return opcoes;
 
     }
+
+    function mostrar(){;
+}
+
 
 </script>
 
