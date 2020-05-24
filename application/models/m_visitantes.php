@@ -6,7 +6,7 @@ class M_visitantes extends CI_Model {
    //Visitantes 
     public function cadastrarVisitantes($nomeVisitante, $duracaoDias){
 
-     $retorno = $this->db->query("select * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
+     $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
         
 
         if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
@@ -33,11 +33,10 @@ class M_visitantes extends CI_Model {
 
         public function consultar(){
             //instrução que executa a query no banco de dados
-            $retorno = $this->db->query("select nome_visi, status_visi, diaFim, case status_visi when false then 'DESATIVADO' else 'ATIVO' end status_visi from visi_apt;
-            ");
+        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
             
 
-            //Retorno o resultado do select
+            //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){
 
                 return $retorno;
@@ -46,16 +45,17 @@ class M_visitantes extends CI_Model {
         
         
 
-        public function consalterar($usuario){
-            $retorno = $this->db->query("SELECT usuario, senha FROM usuarios WHERE usuario = '$usuario'");
+        public function consulAlterVisi($nomeVisitante){
+            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim FROM visi_apt WHERE nome_visi = '$nomeVisitante';");
     
             if($retorno->num_rows() > 0){
                 return $retorno;
             }
         }
 
-        public function alterar($usuario, $senha, $tipo){
-            $retorno = $this->db->query("update usuarios set senha = '$senha', tipo = '$tipo' where usuario = '$usuario'");
+        public function alterar($nomeVisitante, $senha, $tipo){
+
+            $retorno = $this->db->query("UPDATE visi_apt set nome_visi '$nomeVisitante', status_visi= '$novoStatus', diaFim='$novaData' where nome_visi='$nomeVisitante';");
 
             if($this->db->affected_rows() > 0){
                 return 1;
@@ -67,7 +67,7 @@ class M_visitantes extends CI_Model {
         }
         public function desativar($nomeVisitante){            
                         
-        $retorno = $this->db->query("update visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
+        $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
 
         if($this->db->affected_rows()>0){
 
@@ -80,8 +80,8 @@ class M_visitantes extends CI_Model {
         
         }
 
-        public function verusu($usuario){
-            $retorno = $this->db->query("select * from usuarios where usuario = '$usuario'");
+        public function verusu($nomeVisitante){
+            $retorno = $this->db->query("SELECT * from usuarios where usuario = '$nomeVisitante'");
 
             if($this->db->affected_rows() > 0){
                 //Atualizado com sucesso
@@ -92,9 +92,9 @@ class M_visitantes extends CI_Model {
             }
         }
 
-        public function reativar($usuario){
+        public function reativar($nomeVisitante){
             //Instrução que a Query no banco
-            $retorno = $this->db->query("UPDATE usuarios set estatus='' WHERE usuario = '$usuario'");
+            $retorno = $this->db->query("UPDATE usuarios set estatus='' WHERE usuario = '$nomeVisitante'");
 
             if($this->db->affected_rows() > 0){
                 //Atualizando com sucesso

@@ -45,39 +45,39 @@ class Visitantes extends CI_Controller {
     }
 
 
-    public function consalterar(){
-        $usuario = $this->input->post('usuario');
+    public function consulAlterVisi(){
+        $nomeVisitante = $this->input->post('usuario');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->consalterar($usuario);
+        $retorno = $this->m_visitantes->consulAlterVisi($nomeVisitante);
 
         echo json_encode($retorno->result());
     }
 
     public function alterar(){
-        $usuario = $this->input->post('usuario');
+        $nomeVisitante = $this->input->post('usuario');
         $senha = $this->input->post('senha');
         $tipo = $this->input->post('tipo');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->alterar($usuario, $senha, $tipo);
+        $retorno = $this->m_visitantes->alterar($nomeVisitante, $senha, $tipo);
         echo $retorno;
     }
 
     public function desativar(){
-        $usuario = $this->input->post('usuario');
+        $nomeVisitante = $this->input->post('usuario');
 
         $sessao = $this->session->userdata('usuario');
 
-        if($usuario == $sessao){
+        if($nomeVisitante == $sessao){
 
          echo 2;
 
         }else{
             $this->load->model('m_visitantes');
-            $retorno = $this->m_visitantes->desativar($usuario,$sessao);
+            $retorno = $this->m_visitantes->desativar($nomeVisitante,$sessao);
 
             echo $retorno;
          }
@@ -85,11 +85,11 @@ class Visitantes extends CI_Controller {
     }
 
     public function verusu(){
-        $usuario = $this->input->post('usuario');
+        $nomeVisitante = $this->input->post('usuario');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->verusu($usuario);
+        $retorno = $this->m_visitantes->verusu($nomeVisitante);
         
         echo $retorno;
     }
@@ -98,16 +98,16 @@ class Visitantes extends CI_Controller {
 
     public function reativar(){
         //Carregando a variavél que foi mandada via POST
-        $usuario = $this->input->post('usuario');
+        $nomeVisitante = $this->input->post('usuario');
 
 
         //Instancio a Model - m_visitantes
         $this->load->model('m_visitantes');
 
-        //Solicito a execuçao do método consalterar passando o
+        //Solicito a execuçao do método consulAlterVisi passando o
         //atributo necessário, e atribuindo a $retorno
 
-        $retorno = $this->m_visitantes->reativar($usuario);
+        $retorno = $this->m_visitantes->reativar($nomeVisitante);
 
         echo $retorno;
 
