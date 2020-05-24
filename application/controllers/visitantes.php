@@ -27,9 +27,6 @@ class Visitantes extends CI_Controller {
 
         echo $retorno;
 
-        global $resultado;
-        $resultado = $retorno;
-       
     }
 
 
@@ -46,6 +43,7 @@ class Visitantes extends CI_Controller {
 
         echo json_encode($retorno->result());
     }
+
 
     public function consalterar(){
         $usuario = $this->input->post('usuario');

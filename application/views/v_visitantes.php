@@ -7,8 +7,7 @@
                         <div class="panel-body">
                             <div class="form-group col-lg-6">
                                 <label for="textNome" class="control-label">Nome Visitante:</label>
-                                <input name="valorNomeVisitante" id="valorNomeVisitante" class="form-control" 
-                                placeholder="Digite seu Nome" type="text">
+                                <input name="valorNomeVisitante" id="valorNomeVisitante" class="form-control" placeholder="Digite seu Nome" type="text" required>
                             </div>
 
                             <div class="form-group col-lg-3" >
@@ -71,8 +70,8 @@
                             <th data-field='diaFim' class="col-md-2 text-center text-light bg-primary">Valido até</th> 
                                 <!--campo ativo no bd --> <!--//aJUSTAR no banco-->
 
-                            <th  data-field ='nome_visi' data-formatter="opcoes" 
-                                 class = "col-md-2 text-center text-light bg-primary">Desativar | Ativar</th>
+                            <th  class = "col-md-2 text-center text-light bg-primary" data-formatter="opcoes" data-field='nome_visi'
+                                >Ativar | Desativar</th>
                             <!--colocaremos a função data-formatter que chamará a função JavaScript
                             opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca -->
                         </tr>
@@ -80,29 +79,6 @@
         </div>
  </div>
 
-<script type="text/javascript">
-
-
-
-        //função que faz aparereces 2 botoes o de busca e o de desativar
-    function opcoes(value, row, index){
-        if(row.estatus =='DESATIVADO'){
-        var opcoes = '<button class="btn btn-xs btn-warning text-center" type="button" onClick="reativa_usuario('+"'"+ value +"'"+');"><span class="glyphicon glyphicon-open"></span></button>';
-
-        }else{
-
-        var opcoes = '<button class = "btn btn-xs btn-primary text-center" type="button" onclick="busca_usuario('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-pencil"></span></button>\n\
-        <button class = "btn btn-xs btn-danger text-center" type="button" onclick="desativa_usuario('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-trash"></span></button>';
-        }
-        return opcoes;
-
-    }
-
-    function mostrar(){;
-}
-
-
-</script>
 
 <script type="text/javascript">
 
@@ -114,39 +90,14 @@
 
         }else{
 
-        var opcoes = '<button class = "btn btn-xs btn-primary text-center" type="button" onclick="busca_usuario('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-pencil"></span></button>\n\
+        var opcoes = '<button class = "btn btn-xs btn-primary text-center" type="button" onclick="listarVisitantes('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-pencil"></span></button>\n\
         <button class = "btn btn-xs btn-danger text-center" type="button" onclick="desativa_usuario('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-trash"></span></button>';
         }
         return opcoes;
     }
 
     //função de busca de usuario que aparece um modal.
-    function busca_usuario(usuario){
-        $('#alteracao').modal('show');
-        $.ajax({
-            type: "POST",
-            url: 'usuario/consalterar',
-            dataType: 'json',
-            data: {'usuario': usuario},
-            success: function (data){
-                $('#musuario').val(data[0].usuario);
-                $('#msenha').val(data[0].senha);
-                swal.close();
-            },
-            beforeSend: function(){
-                swal({
-                    title: "Aguarde!",
-                    text: "Carregando...",
-                    imageUrl: "assets/img/gifs/preloader.gif",
-                    showConfirmButton: false
-                });
-            },
-            error: function(){
-                alert('Unexpected error.');
-                swal.close();
-            }
-        });
-    }
+    
 
     //Botão alterar dentro do modal recebe essa função
     function alterar(){

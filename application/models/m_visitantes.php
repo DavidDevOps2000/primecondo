@@ -24,7 +24,7 @@ class M_visitantes extends CI_Model {
                 }
 
         }else{
-              return 2;
+              return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
 
@@ -33,7 +33,8 @@ class M_visitantes extends CI_Model {
 
         public function consultar(){
             //instrução que executa a query no banco de dados
-            $retorno = $this->db->query("SELECT usuario, senha, tipo, case estatus when 'D' then 'DESATIVADO' else 'ATIVO' end estatus from usuarios");
+            $retorno = $this->db->query("select nome_visi, status_visi, diaFim, case status_visi when false then 'DESATIVADO' else 'ATIVO' end status_visi from visi_apt;
+            ");
             
 
             //Retorno o resultado do select
