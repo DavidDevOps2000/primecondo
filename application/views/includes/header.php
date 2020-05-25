@@ -6,10 +6,8 @@
     <meta name = "GrupoPrime" content = "">
     <title>PrimeCondo</title>
 
-    <script type="text/javascript" src="<?= base_url('assets/JS/jquery.min.js')?>"></script>
-    <script type="text/javascript" src="<?= base_url('assets/JS/sweetalert.min.js')?>"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    
     <link href="<?= base_url('assets/CSS/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?= base_url('assets/CSS/style.css')?>" rel="stylesheet">
     <link href="<?= base_url('assets/CSS/colors.css')?>" rel="stylesheet">
@@ -28,5 +26,4 @@
     <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><?php //Home ?>
 
     <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>

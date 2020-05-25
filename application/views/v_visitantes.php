@@ -62,7 +62,7 @@
                         
                     <thead>
                         <tr>
-                            <th data-field='nome_visi' class="col-md-2 text-center text-light bg-primary">Nome Visitante</th> 
+                            <th data-field='nome_visi' class="col-md-2 text-center text-light bg-primary">Visitante</th> 
                                 <?php  //campo usuario no bd ?>
 
                             <th data-field='status_visi' class="col-md-2 text-center text-light bg-primary">Ativo ?</th> 

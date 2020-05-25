@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_visitantes extends CI_Model {
 
    //Visitantes 
-    public function cadastrarVisitantes($nomeVisitante, $duracaoDias){
+    public function cadastrarVisitantes($nomeVisitante, $duracaoDias){                  //Cadastro Visitantes
 
      $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
         
@@ -28,11 +28,11 @@ class M_visitantes extends CI_Model {
             }
     }
 
-    
+
     
 
-        public function consultar(){
-            //instrução que executa a query no banco de dados
+        public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
+            
         $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
             
 
@@ -45,28 +45,8 @@ class M_visitantes extends CI_Model {
         
         
 
-        public function consulAlterVisi($nomeVisitante){
-            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim FROM visi_apt WHERE nome_visi = '$nomeVisitante';");
+     
     
-            if($retorno->num_rows() > 0){
-                return $retorno;
-            }
-        }
-
-        public function alterar($nomeVisitante, $senha, $tipo){
-
-            $retorno = $this->db->query("UPDATE visi_apt set nome_visi '$nomeVisitante', status_visi= '$novoStatus', diaFim='$novaData' where nome_visi='$nomeVisitante';");
-
-            if($this->db->affected_rows() > 0){
-                return 1;
-
-            }
-            else{
-                return 0;
-            }
-        }
-
-
         public function desativarVisi($nomeVisitante){            
                         
         $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
@@ -82,6 +62,7 @@ class M_visitantes extends CI_Model {
         
         }
 
+        
         public function ativarVisi($nomeVisitante){            
                         
             $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
@@ -95,32 +76,17 @@ class M_visitantes extends CI_Model {
                 return 0;//Problema ao alterar
             }
             
-            }
+        }
 
-        public function verusu($nomeVisitante){
-            $retorno = $this->db->query("SELECT * from usuarios where usuario = '$nomeVisitante'");
 
-            if($this->db->affected_rows() > 0){
-                //Atualizado com sucesso
-                return 1;
-            }
-            else{
-                return 0;
+        public function consulAlterVisi($nomeVisitante){
+            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim FROM visi_apt WHERE nome_visi = '$nomeVisitante';");
+    
+            if($retorno->num_rows() > 0){
+                return $retorno;
             }
         }
 
-        public function reativar($nomeVisitante){
-            //Instrução que a Query no banco
-            $retorno = $this->db->query("UPDATE usuarios set estatus='' WHERE usuario = '$nomeVisitante'");
-
-            if($this->db->affected_rows() > 0){
-                //Atualizando com sucesso
-                return 1;
-            }else{
-                //Problema ao alterar
-                return 0;
-            }
-        }
 
 
     }

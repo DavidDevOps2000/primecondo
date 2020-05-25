@@ -34,63 +34,40 @@ class Visitantes extends CI_Controller {
 
 
 
-    public function listar(){
-        //Instancio a Model - m_visitantes
+    public function listar(){               // Listo todos os meus Visitantes e jogo na lista do V_Visitantes
         $this->load->model('m_visitantes');
 
-        //Solicito a execução do método consultar
         $retorno = $this->m_visitantes->consultar();
 
         echo json_encode($retorno->result());
     }
 
 
-    public function consulAlterVisi(){
-        $nomeVisitante = $this->input->post('usuario');
-
-        $this->load->model('m_visitantes');
-
-        $retorno = $this->m_visitantes->consulAlterVisi($nomeVisitante);
-
-        echo json_encode($retorno->result());
-    }
-
 
 
     public function desativarVisi(){
-        $nomeVisitante = $this->input->post('usuario');
 
-        $sessao = $this->session->userdata('usuario');
+        $nomeVisitante = $this->input->post('nomeVisitante');
 
-        if($nomeVisitante == $sessao){
+        $this->load->model('m_visitantes');
 
-         echo 2;
-
-        }else{
-            $this->load->model('m_visitantes');
-            $retorno = $this->m_visitantes->desativar($nomeVisitante,$sessao);
+            $retorno = $this->m_visitantes->desativarVisi($nomeVisitante);
 
             echo $retorno;
-         }
-
+       
     }
+
 
     
     public function ativarVisi(){
-        $nomeVisitante = $this->input->post('usuario');
 
-        $sessao = $this->session->userdata('usuario');
+        $nomeVisitante = $this->input->post('nomeVisitante');
 
-        if($nomeVisitante == $sessao){
+        $this->load->model('m_visitantes');
 
-         echo 2;
-
-        }else{
-            $this->load->model('m_visitantes');
-            $retorno = $this->m_visitantes->desativar($nomeVisitante,$sessao);
+        $retorno = $this->m_visitantes->ativarVisi($nomeVisitante);
 
             echo $retorno;
-         }
 
     }
 

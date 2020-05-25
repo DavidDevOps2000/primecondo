@@ -46,304 +46,129 @@ $.ajax({
 
 
 
-
-
-    function listarVisitantes(usuario){// Nome antigo Buscar_usuario
-        $('#alteracao').modal('show');
-        $.ajax({
-            type: "POST",
-            url: 'visitantes/consulAlterVisi',
-            dataType: 'json',
-            data: {'usuario': usuario},
-            success: function (data){
-                $('#musuario').val(data[0].usuario);
-                $('#msenha').val(data[0].senha);
-                swal.close();
-            },
-            beforeSend: function(){
-                swal({
-                    title: "Aguarde!",
-                    text: "Carregando...",
-                    imageUrl: "assets/img/gifs/preloader.gif",
-                    showConfirmButton: false
-                });
-            },
-            error: function(){
-                alert('Unexpected error.');
-                swal.close();
-            }
-        });
-    }
-
-
     
 
 
-        //função que faz aparereces 2 botoes o de busca e o de desativar
-        function opcoes(value, row, index){
-           
-        var opcoes="<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ value +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:105%'>Ativar</span></button>\
-        <button class='btn btn-xs btn-success' type='button' onClick='desativarVisi("+'"'+ value +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:105%'>Desativar</span></button>"
-
-            
+        //função que faz aparereces 2 botoes o de busca e o de desativa
+function opcoes(nomeVisitante){
+var opcoes=
+        "<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:58px'>Ativar</span></button>\
+        <button class='btn btn-xs btn-warning' type='button' onClick='desativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-remove-sign'>Desativar</span></button>"   
             return opcoes;
         }
-    
-        //função de busca de usuario que aparece um modal.
-        
-    
-        //Botão alterar dentro do modal recebe essa função
-        function alterar(){
-            if($("#msenha").val() != $("#mcsenha").val()){
-                swal({
-                    title: "Atenção!",
-                    text: "senhas incompatíveis, verifique!",
-                    type: "error"
-                });
-                return false;
-            }else{      
-                $.ajax({
-                    type: "POST",
-                    url: 'usuario/alterar',
-                    data: {'senha':$('#msenha').val(),
-                            'usuario':$('#musuario').val(),
-                            'tipo':$('#mcmb-tipo').val()},
-                    success: function(data){
-                        if(data == 1){
-                            swal({
-                                title: "OK",
-                                text: "Senha ALTERADA!",
-                                type: "success",
-                                showCancelButton: false,
-                                confirmButtonColor: "#54DD74",
-                                confirmButtonText: "OK!",
-                                closeOnConfirm: true,
-                                closeOnCancel: false
-                            },
-                            function(isConfirm){
-                                if(isConfirm){
-                                    $('#tableusu').bootstrapTable('refresh');
-                                    
-                                }
-                            });
-                            $('#alteracao').modal('hide');
-                            
-                            
-                        }else{
-                            swal({
-                                title: "OK",
-                                text: "Erro na ALTERAÇÃO, verifique!",
-                                type: "error",
-                                showCancelButton: false,
-                                confirmButtonColor: "#54DD74",
-                                confirmButtonText: "OK!",
-                                closeOnConfirm: false,
-                                closeOnCancel: false
-                            });
-                        }
-                    },
-                    beforeSend: function(){
-                        swal({
-                            title: "Aguarde!",
-                            text: "Carregando...",
-                            imageUrl: "assets/img/gifs/preloader.gif",
-                            showConfirmButton: false
-                        });
-                    },
-                    error: function(){
-                        alert('Unexpected error.')
-                    }
-                });
-            }
-        }
-    
-    
-        // tipo = document.getElementById('tipoCampo').text;
-        // alert(tipo);
-    
-        //Desativar o usuario!
-    function desativa_usuario(usuario){
-    
-                swal({
-                      title:"Atenção",
-                      type: "Gostaria de DESATIVAR esse Usuário?",
-                      type: "warning",
-                      showCancelButton: true,
-                      confirmButtonColor: "DD6B55",
-                      confirmButtonText: "Sim",
-                      cancelButtonText: "Não",
-                      closeOnConfirm: false,
-                      closeOnCancel: true
-                      },
-                      function(isConfirm){
-                      if(isConfirm){
-                         $.ajax({
-                            url: base_url + "usuario/desativar",
-                            type: "POST",
-                            data: {'usuario':usuario},
-                            success: function(data){
-                                
-                                if(data == 2){
-                                    swal({
-                                        title: "Atenção",
-                                        text: "Vc não pode desativar a si mesmo",
-                                        type: "error",
-                                        showCancelButton: false,
-                                        confirmButtonColor: "54DD74",
-                                        confirmButtonText: "OK!",
-                                        cacelButtonText: "",
-                                        closeOnConfirm:true,
-                                        closeOnCancel: false
-                                    });
-                                }else if(data == 1){
-                                    swal({
-                                        title: "OK",
-                                        text: "Usuário DESATIVADO!",
-                                        type: "success",
-                                        showCancelButton: false,
-                                        confirmButtonColor: "54DD74",
-                                        confirmButtonText: "OK!",
-                                        cacelButtonText: "",
-                                        closeOnConfirm:true,
-                                        closeOnCancel: false
-                                    },
-                                function(isConfirm){
-                                    if(isConfirm){
-                                        $('#tableusu').bootstrapTable('refresh');
-                                    }
-                                });
-                                }else{
-                                    swal({
-                                        title: "OK!",
-                                        text: "Erro na DESATIVAÇÃO, verifique!",
-                                        type: "error",
-                                        showCancelButton: false,
-                                        confirmButtonColor: "54DD74",
-                                        confirmButtonText: "OK!",
-                                        cacelButtonText: "",
-                                        closeOnConfirm:false,
-                                        closeOnCancel: false
-                                    });
-                                }
-                            },
-                            beforeSend: function(){
+
+
+    //Função para REATIVAR o $nomeVisitante
+function desativarVisi(nomeVisiDesativar){ 
+                    swal({
+                        title:"Atenção",
+                        text: "Quer Desativar a entrada desse visitante ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "DD6B55",
+                        confirmButtonText: "Sim",
+                        cancelButtonText: "Não",
+                        closeOnConfirm: false,
+                        closeOnCancel: true
+                      },    
+                        function(isConfirm){
+                            if(isConfirm){
+                                $.ajax({
+                                        url: "visitantes/desativarVisi",
+                                        type: "POST",
+                                        data: {'nomeVisitante':nomeVisiDesativar}
+                                            ,success: function(data){
+                                                if(data == 1){
+                                                    swal({ 
+                                                        title: "OK",
+                                                        text: "Visitante DESATIVADO!",
+                                                        type: "success",
+                                                        showCancelButton: false,
+                                                        confirmButtonColor: "54DD74",
+                                                        confirmButtonText: "OK!",
+                                                        cancelButtonText: "",
+                                                        closeOnConfirm:true,
+                                                        closeOnCancel: false });
+                                                }else{
+                                                    swal({
+                                                    title: "OK!",
+                                                    text: "Erro na DESATIVAÇÃO, verifique!",
+                                                    type: "error",
+                                                    showCancelButton: false,
+                                                    confirmButtonColor: "54DD74",
+                                                    confirmButtonText: "OK!",
+                                                    cancelButtonText: "",
+                                                    closeOnConfirm:false,
+                                                    closeOnCancel: false });
+                                                    }
+                            },beforeSend: function(){
                                 swal({
                                     title: "Aguarde!",
                                     text: "Gravando dados...",
-                                    imageUrl: "assets/img/alertas/loading.gif",
-                                    showConfirmButton: false
-                                });
+                                    imageUrl: "assets/img/gifs/loading.gif",
+                                    showConfirmButton: false });
                             },
                             error: function(data_error){
                                 sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
                             }
                         });
                     }
-                });
-            }
-        
-    
-            function Verifica(){
+    });
+}
+
+function ativarVisi(nomeVisiAtivar){ 
+    swal({
+        title:"Atenção",
+        text: "Quer Autorizar a entrada desse visitante ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "DD6B55",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não",
+        closeOnConfirm: false,
+        closeOnCancel: true
+      },    
+        function(isConfirm){
+            if(isConfirm){
                 $.ajax({
-                    type: "POST",
-                    url: 'usuario/verusu',
-                    data: {'usuario':$('#usuario').val()},
-                    success: function(data){
-                        if (data == 1){
-                            swal({
-                                title: "OK",
-                                text: "Usuário ja cadastrado na base de dados, verifique!",
-                                type: "error",
-                                showCancelButton: false,
-                                confirmButtonColor: "#54DD74",
-                                confirmButtonText: "OK!",
-                                closeOnConfirm: true,
-                                closeOnCancel: false
-                            });
-                            $('#btnlimpar').click();
-                            $('#usuario'.focus());
-                        }else{
-                            swal.close();
-                        }
-                    },
-                    beforeSend: function(){
-                        swal({
-                            title: "Aguarde!",
-                            text: "Carregando...",
-                            imageUrl: "assets/img/gifs/preloader.gif",
-                            showConfirmButton: false
-                        });
-                    },
-                    error: function() {
-                        alert('Error');
-                    }
-                });
-            }
-    //Função para REATIVAR o usuario
-    function reativa_usuario(usuario){
-        swal({
-            title:"Atenção",
-            type:"Gostaria de REATIVAR esse Usuário?",
-            type:"warning",
-            showCancelButton:true,
-            confirmButtonColor:"#DD6B55",
-            confirmButtonText:"Sim",
-            cancelButtonText:"Não",
-            closeOnConfirm:false,
-            closeOnCancel:true},
-    
-            function(isConfirm){
-                if(isConfirm){
-                    $.ajax({
-                        url:base_url + "usuario/reativar",
-                        type:"POST",
-                        data:{'usuario':usuario},
-    
-                        success:function(data){
-                            if(data == 1){
-                                swal({
-                                    title:"OK",
-                                    text:"Usuário REATIVADO",
-                                    type:"success",
-                                    showCancelButton:false,
-                                    confirmButtonColor:"#54DD74",
-                                    confirmButtonText:"OK!",
-                                    cancelButtonText:"",
-                                    closeOnConfirm:true,
-                                    closeOnCancel:false
-                                },
-                                function(isConfirm){
-                                    if(isConfirm){
-                                        $('#tableusu').bootstrapTable('refresh');
+                        url: "visitantes/ativarVisi",
+                        type: "POST",
+                        data: {'nomeVisitante':nomeVisiAtivar}
+                            ,success: function(data){
+                                if(data == 1){
+                                    swal({ 
+                                        title: "OK",
+                                        text: "Visitante ATIVO!",
+                                        type: "success",
+                                        showCancelButton: false,
+                                        confirmButtonColor: "54DD74",
+                                        confirmButtonText: "OK!",
+                                        cancelButtonText: "",
+                                        closeOnConfirm:true,
+                                        closeOnCancel: false });
+                                }else{
+                                    swal({
+                                    title: "OK!",
+                                    text: "Erro na DESATIVAÇÃO, verifique!",
+                                    type: "error",
+                                    showCancelButton: false,
+                                    confirmButtonColor: "54DD74",
+                                    confirmButtonText: "OK!",
+                                    cancelButtonText: "",
+                                    closeOnConfirm:false,
+                                    closeOnCancel: false });
                                     }
-                                });
-                            }else{
-                                swal({
-                                    title:"OK",
-                                    text:"Erro na REATIVAÇÃO, Verifique!",
-                                    type:"error",
-                                    showCancelButton:false,
-                                    confirmButtonColor:"#54DD74",
-                                    confirmButtonText:"OK!",
-                                    cancelButtonText:"",
-                                    closeOnCancel:false,
-                                    closeOnCancel:false
-                                });
-                            }
-                        },
-                        beforeSend: function(){
-                            swal({
-                                title:"Aguarde!",
-                                text:"Gravando dados...",
-                                imageUrl:"assets/img/alertas/loading.gif",
-                                showConfirmButton:false
-                            });
-                        },
-                        error:function(data_error){
-                            sweetAlert("Atenção", "Erro ao gravar os dados!","error");
-                        }
-                    });
-                
+            },beforeSend: function(){
+                swal({
+                    title: "Aguarde!",
+                    text: "Gravando dados...",
+                    imageUrl: "assets/img/gifs/loading.gif",
+                    showConfirmButton: false });
+            },
+            error: function(data_error){
+                sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
             }
         });
     }
+});
+}
