@@ -37,8 +37,10 @@
         </form>
 </div>
 
-<?php //Lista de Visitantes ?>
 
+
+
+<?php //Lista de Visitantes ?>
 <div class="panel panel-info">
      <div class="panel-heading text-center"> <h1 class="panel-title text-light">Lista de Visitantes</h1></div>
         <div class="panel-body margem">
@@ -69,7 +71,7 @@
                             <th data-field='diaFim' class="col-md-2 text-center text-light bg-primary">Valido até</th> 
                                 <?php  //campo ativo no bd ?> <?php  ////aJUSTAR no banco?>
 
-                            <th  class = "col-md-2 text-center text-light bg-primary" data-formatter="opcoes" data-field='nome_visi'>Ativar | Desativar</th>
+                            <th  class = "col-md-2 text-center text-light bg-primary" data-formatter="opcoes" data-field='nome_visi'>Ações</th>
                             <?php  //colocaremos a função data-formatter que chamará a função JavaScript ?>
                             <?php//opcoes e não podemos esquecer de amarrar no data-field o campo que será o parâmetro de busca ?>
                         </tr>

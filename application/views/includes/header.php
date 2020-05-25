@@ -28,4 +28,5 @@
     <link href="<?= base_url('assets/CSS/login.css')?>" rel="stylesheet"><?php //Home ?>
 
     <link rel = "shortcut icon" href="<?= base_url('assets/img/logo.png')?>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>

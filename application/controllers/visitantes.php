@@ -55,18 +55,9 @@ class Visitantes extends CI_Controller {
         echo json_encode($retorno->result());
     }
 
-    public function alterar(){
-        $nomeVisitante = $this->input->post('usuario');
-        $senha = $this->input->post('senha');
-        $tipo = $this->input->post('tipo');
 
-        $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->alterar($nomeVisitante, $senha, $tipo);
-        echo $retorno;
-    }
-
-    public function desativar(){
+    public function desativarVisi(){
         $nomeVisitante = $this->input->post('usuario');
 
         $sessao = $this->session->userdata('usuario');
@@ -82,6 +73,40 @@ class Visitantes extends CI_Controller {
             echo $retorno;
          }
 
+    }
+
+    
+    public function ativarVisi(){
+        $nomeVisitante = $this->input->post('usuario');
+
+        $sessao = $this->session->userdata('usuario');
+
+        if($nomeVisitante == $sessao){
+
+         echo 2;
+
+        }else{
+            $this->load->model('m_visitantes');
+            $retorno = $this->m_visitantes->desativar($nomeVisitante,$sessao);
+
+            echo $retorno;
+         }
+
+    }
+
+
+
+
+
+    public function alterar(){
+        $nomeVisitante = $this->input->post('usuario');
+        $senha = $this->input->post('senha');
+        $tipo = $this->input->post('tipo');
+
+        $this->load->model('m_visitantes');
+
+        $retorno = $this->m_visitantes->alterar($nomeVisitante, $senha, $tipo);
+        echo $retorno;
     }
 
     public function verusu(){

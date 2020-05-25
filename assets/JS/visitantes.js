@@ -81,14 +81,11 @@ $.ajax({
 
         //função que faz aparereces 2 botoes o de busca e o de desativar
         function opcoes(value, row, index){
-            if(row.estatus =='DESATIVADO'){
-            var opcoes = '<button class="btn btn-xs btn-warning text-center" type="button"  onClick="reativa_usuario('+"'"+ value +"'"+');"><span class="glyphicon glyphicon-open"></span></button>';
-    
-            }else{ 
-    
-            var opcoes = '<button class = "btn btn-xs btn-primary text-center" type="button" onclick="listarVisitantes('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-pencil"></span></button>\n\
-            <button class = "btn btn-xs btn-danger text-center" type="button" onclick="desativa_usuario('+ "'" + value + "'" +');"><span class = "glyphicon glyphicon-trash"></span></button>';
-            }
+           
+        var opcoes="<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ value +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:105%'>Ativar</span></button>\
+        <button class='btn btn-xs btn-success' type='button' onClick='desativarVisi("+'"'+ value +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:105%'>Desativar</span></button>"
+
+            
             return opcoes;
         }
     

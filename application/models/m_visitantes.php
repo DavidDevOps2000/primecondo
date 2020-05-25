@@ -65,7 +65,9 @@ class M_visitantes extends CI_Model {
                 return 0;
             }
         }
-        public function desativar($nomeVisitante){            
+
+
+        public function desativarVisi($nomeVisitante){            
                         
         $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
 
@@ -79,6 +81,21 @@ class M_visitantes extends CI_Model {
         }
         
         }
+
+        public function ativarVisi($nomeVisitante){            
+                        
+            $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
+    
+            if($this->db->affected_rows()>0){
+    
+                return 1;//Alterado com sucesso
+            
+            }else{
+    
+                return 0;//Problema ao alterar
+            }
+            
+            }
 
         public function verusu($nomeVisitante){
             $retorno = $this->db->query("SELECT * from usuarios where usuario = '$nomeVisitante'");
