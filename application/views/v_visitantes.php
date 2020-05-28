@@ -63,11 +63,8 @@
                             <th data-field='nome_visi' class="col-md-2 text-center">Visitante</th>
                                 <?php  //campo usuario no bd ?>
                            
-                            <th data-field='diaFim' class="col-md-1 text-center">Visitante</th>
-                                <?php  //campo usuario no bd ?>
-
                             <th data-field='diaFim'  data-formatter='diasRestantes' 
-                            class="col-md-1 text-center">Valido até o dia</th> 
+                                                class="col-md-1 text-center">Valido até o dia</th> 
                                 <?php  //campo ativo no bd ?>   <?php  ////aJUSTAR no banco?>
 
                             <th data-field='status_visi' class="col-md-1 text-center">ATIVO ?</th> 
