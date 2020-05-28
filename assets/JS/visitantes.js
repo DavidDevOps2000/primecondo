@@ -1,77 +1,83 @@
 $(document).ready(function(){ $("#formCadasVisi").submit(function(event){
-$.ajax({
-        type: "POST",
-        url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
-        data: $("#formCadasVisi").serialize(),
-            success: function(data){
+swal({
+    title:"Atenção",
+    text: "Tem certeza que quer cadastrar esse Visitante ?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "DD6B55",
+    confirmButtonText: "Sim",
+    cancelButtonText: "Não",
+    closeOnConfirm: false,
+    closeOnCancel: true
+    },function(isConfirm){
+            if(isConfirm){ 
+                    $.ajax({
+                            type: "POST",
+                            url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
+                            data: $("#formCadasVisi").serialize(),
+                                            success: function(data){
+                                                    if($.trim(data) == 1){
+                                                            $("#formCadasVisi").trigger("reset");
 
-                        if($.trim(data) == 1){
-
-                            $("#formCadasVisi").trigger("reset");
-
-                            swal({title: "OK!", text: "Visitante Salvo com Sucesso",confirmButtonText: "Ok", type: "success"},
-                                    function(isConfirm){
-                                                    if(isConfirm){
-                                                            document.location.reload(true);//Atualizar documento caso pressionem Ok
-                                                        }
-                            });        
-
-                        }else if($.trim(data) == 2){
-                            /*var msg = data;
-                            alert(msg);*/
-
-                            swal({title: "Visitante já existe", text: "Por Favor... Digite outro nome", type: "error",});
+                                                            swal({ title: "OK!", text: "Visitante Salvo com Sucesso", confirmButtonText: "Ok", type: "success"}
+                                                                            ,function(isConfirm){
+                                                                                                if(isConfirm){
+                                                                                                    document.location.reload(true);//Atualizar documento caso pressionem Ok
+                                                                                                            }
+                                                                            });        
+                                                    }else if($.trim(data) == 2){ /*var msg = data;  alert(msg);*/
+                                                                                                        
+                                                            swal({title: "Visitante já existe", text: "Por Favor... Digite outro nome", type: "error"});
                         
-                        }else{
-                            swal({title: "ATENÇÃO!", text: "Erro ao inserir visitante, verifique!", type: "error",});
+                                                    }else{
+                                                            swal({title: "ATENÇÃO!", text: "Erro ao inserir visitante, verifique!", type: "error"});
+                                                            }
 
-                        }
-
+                                                    },beforeSend: function(){
+                        swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
                     },
-                    beforeSend: function(){
-                        swal({
-                            title: "Só um momento...",
-                            text: "Loading...", 
-                            imageUrl: "assets/img/gifs/loading.gif",
-                            showConfirmButton:false
-                        });
-                    },
-                    error: function(){
-                       alert('Erro Desconhecido');
-                
-                    }
+                    error: function(){ alert('Erro Desconhecido'); }
                     
                 });
                 return false;
-        });
-        
-  });
+        }
+    });
+
+    return false;
+});
+})
 
 
 
-
-function opcoesNome(nomeVisitante){
+function opcoesTudo(nomeVisitante){
     var opcoesNome="<button class='btn btn-xs btn-info' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'>\
                                         \<span class='glyphicon glyphicon-ok-sign' style='width:58px'>Editar</span></button>"
              return opcoesNome;
 }
 
-function opcoes(nomeVisitante){
-var opcoes=
-        "<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:58px'>Ativar</span></button>\
-        <button class='btn btn-xs btn-warning' type='button' onClick='desativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-remove-sign'>Desativar</span></button>"   
-            return opcoes;
+
+
+function opcoes(nomeVisitante, row){ 
+    if(row.status_visi == 'NÃO')
+    {
+    var opcoes= "<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:58px'>Ativar</span></button>";
+        return opcoes;
+    }else{
+    var opcoes= "<button class='btn btn-xs btn-warning' type='button' onClick='desativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-remove-sign'>Desativar</span></button>";
+        return opcoes;
         }
+}
 
 
     //Função para REATIVAR o $nomeVisitante
 function desativarVisi(nomeVisiDesativar){ 
                     swal({
                         title:"Atenção",
-                        text: "Quer Desativar a entrada desse visitante ?",
-                        type: "warning",
+                        text: "Desativar a entrada desse visitante ?",
+                        type: "info",
+                        cancelButtonColor: '#d33',
                         showCancelButton: true,
-                        confirmButtonColor: "DD6B55",
+                        confirmButtonColor: "info",
                         confirmButtonText: "Sim",
                         cancelButtonText: "Não",
                         closeOnConfirm: false,

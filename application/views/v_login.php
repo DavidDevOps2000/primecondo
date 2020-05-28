@@ -13,13 +13,13 @@
 
 					<form id="formLogin">
 						<div class="form-group">
-							<input class="form-control inputLoginGeral" placeholder="Email" name="txtEmail" id="txtEmail" type="text" autofocus >
+							<input class="form-control inputLoginGeral" placeholder="Email" name="txtEmail" id="txtEmail" type="text" autofocus  maxlength="110">
 						</div>
 							<div class="form-group">
-							<input class="form-control inputLoginGeral" placeholder="Senha" name="txtSenha" id="txtSenha" type="password" >
+							<input class="form-control inputLoginGeral" placeholder="Senha" name="txtSenha" id="txtSenha" type="password"  maxlength="25">
                         </div>
                         <div class="modal-footer">
-					            <button type="button" class="btn btn-primary btn-entrar" data-dismiss="modal">Fechar</button>
+					            <button type="button" class="btn btn-primary btn-entrar" >Fechar</button>
 				            	<button  type="submit" class="btn btn-primary btn-entrar" id="btnEntrar">Entrar</button>
 				        </div>
 					</form>					
