@@ -49,10 +49,10 @@ swal({
 
 
 
-function opcoesTudo(nomeVisitante){
-    var opcoesNome="<button class='btn btn-xs btn-info' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'>\
-                                        \<span class='glyphicon glyphicon-ok-sign' style='width:58px'>Editar</span></button>"
-             return opcoesNome;
+
+function btnEditOpcoes(nomeVisitante){
+    var opcoesEdit="<input class='btn btn-xs col-md-6 btn-info' type='button' data-toggle='modal' data-target='#ModalEditar' value='Editar Visitante'>";
+    return opcoesEdit;
 }
 
 
@@ -67,6 +67,7 @@ function opcoes(nomeVisitante, row){
         return opcoes;
         }
 }
+
 
 
     //Função para REATIVAR o $nomeVisitante
@@ -132,6 +133,7 @@ function desativarVisi(nomeVisiDesativar){
                     }
     });
 }
+
 
 function ativarVisi(nomeVisiAtivar){ 
     swal({

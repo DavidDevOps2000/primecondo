@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?= base_url('assets/JS/jquery.min.js')?>"></script>
+
 <script type="text/javascript" src="<?= base_url('assets/JS/sweetalert.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/JS/bootstrap-table.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/JS/bootstrap-table-pt-BR.min.js')?>"></script>
@@ -36,8 +37,14 @@
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap-imageupload.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap-table-pt-BR.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/fileinput.min.js')?>"></script>
+
 <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.3.1.min.js')?>"></script>
+
+
+
+
 <script type="text/javascript" src="<?= base_url('assets/js/pmd-select2.js')?>"></script>
+
 <script type="text/javascript" src="<?= base_url('assets/js/select2.full.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/home.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/visitantes.js')?>"></script>
