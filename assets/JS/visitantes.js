@@ -1,7 +1,7 @@
 $(document).ready(function(){ $("#formCadasVisi").submit(function(event){
 $.ajax({
         type: "POST",
-        url: "visitantes/cadastrarVisitantes",
+        url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
         data: $("#formCadasVisi").serialize(),
             success: function(data){
 
@@ -9,7 +9,12 @@ $.ajax({
 
                             $("#formCadasVisi").trigger("reset");
 
-                            swal({title: "OK!", text: "Visitante Salvo com Sucesso", type: "success"});         //Cadastrar Visitantes
+                            swal({title: "OK!", text: "Visitante Salvo com Sucesso",confirmButtonText: "Ok", type: "success"},
+                                    function(isConfirm){
+                                                    if(isConfirm){
+                                                            document.location.reload(true);//Atualizar documento caso pressionem Ok
+                                                        }
+                            });        
 
                         }else if($.trim(data) == 2){
                             /*var msg = data;
@@ -35,21 +40,22 @@ $.ajax({
                        alert('Erro Desconhecido');
                 
                     }
+                    
                 });
                 return false;
         });
-        setInterval(function(){
-            var $table = $('#tableusu');
-            $table.bootstrapTable('refresh');
-        }, 5000);
-    });
+        
+  });
 
 
 
-    
 
+function opcoesNome(nomeVisitante){
+    var opcoesNome="<button class='btn btn-xs btn-info' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'>\
+                                        \<span class='glyphicon glyphicon-ok-sign' style='width:58px'>Editar</span></button>"
+             return opcoesNome;
+}
 
-        //função que faz aparereces 2 botoes o de busca e o de desativa
 function opcoes(nomeVisitante){
 var opcoes=
         "<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:58px'>Ativar</span></button>\
@@ -88,7 +94,12 @@ function desativarVisi(nomeVisiDesativar){
                                                         confirmButtonText: "OK!",
                                                         cancelButtonText: "",
                                                         closeOnConfirm:true,
-                                                        closeOnCancel: false });
+                                                        closeOnCancel: false
+                                                        },
+                                                            function(isConfirm){
+                                                                if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
+                                                                }
+                                                            );
                                                 }else{
                                                     swal({
                                                     title: "OK!",
@@ -145,7 +156,12 @@ function ativarVisi(nomeVisiAtivar){
                                         confirmButtonText: "OK!",
                                         cancelButtonText: "",
                                         closeOnConfirm:true,
-                                        closeOnCancel: false });
+                                        closeOnCancel: false }
+                                        ,
+                                        function(isConfirm){
+                                            if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
+                                            }
+                                        );
                                 }else{
                                     swal({
                                     title: "OK!",
@@ -172,3 +188,14 @@ function ativarVisi(nomeVisiAtivar){
     }
 });
 }
+
+function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table onde vc pega o valor da linha e a utiliza
+
+    ano = row.diaFim[0]+ '' + row.diaFim[1];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
+    mes = row.diaFim[5]+ '' + row.diaFim[6];//Peguei os 2 primeiros digitos do Mes dentro da linha do campo 'diaFim'
+    dia = row.diaFim[8]+ '' + row.diaFim[9];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
+    diaConvert = dia +'/'+ mes +'/'+ ano;
+
+   return diaConvert;
+}
+

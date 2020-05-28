@@ -29,12 +29,8 @@ class Visitantes extends CI_Controller {
 
     }
 
-
-
-
-
-
-    public function listar(){               // Listo todos os meus Visitantes e jogo na lista do V_Visitantes
+    public function listar(){   
+                    // Listo todos os meus Visitantes e jogo na lista do V_Visitantes
         $this->load->model('m_visitantes');
 
         $retorno = $this->m_visitantes->consultar();
@@ -42,23 +38,17 @@ class Visitantes extends CI_Controller {
         echo json_encode($retorno->result());
     }
 
-
-
-
     public function desativarVisi(){
 
         $nomeVisitante = $this->input->post('nomeVisitante');
 
         $this->load->model('m_visitantes');
 
-            $retorno = $this->m_visitantes->desativarVisi($nomeVisitante);
+        $retorno = $this->m_visitantes->desativarVisi($nomeVisitante);
 
-            echo $retorno;
-       
+        echo $retorno;
     }
 
-
-    
     public function ativarVisi(){
 
         $nomeVisitante = $this->input->post('nomeVisitante');
@@ -67,13 +57,21 @@ class Visitantes extends CI_Controller {
 
         $retorno = $this->m_visitantes->ativarVisi($nomeVisitante);
 
-            echo $retorno;
+        echo $retorno;
 
     }
 
+    public function diasFaltam(){//Não Usado
 
+        $nomeVisitante = $this->input->post('nomeVisitante');
 
+        $this->load->model('m_visitantes');
 
+        $retorno = $this->m_visitantes->diasFaltam($nomeVisitante);
+
+        $_SESSION['diasFaltam'] = $retorno;
+
+    }
 
     public function alterar(){
         $nomeVisitante = $this->input->post('usuario');
@@ -83,6 +81,7 @@ class Visitantes extends CI_Controller {
         $this->load->model('m_visitantes');
 
         $retorno = $this->m_visitantes->alterar($nomeVisitante, $senha, $tipo);
+
         echo $retorno;
     }
 
@@ -97,24 +96,6 @@ class Visitantes extends CI_Controller {
     }
 
 
-
-    public function reativar(){
-        //Carregando a variavél que foi mandada via POST
-        $nomeVisitante = $this->input->post('usuario');
-
-
-        //Instancio a Model - m_visitantes
-        $this->load->model('m_visitantes');
-
-        //Solicito a execuçao do método consulAlterVisi passando o
-        //atributo necessário, e atribuindo a $retorno
-
-        $retorno = $this->m_visitantes->reativar($nomeVisitante);
-
-        echo $retorno;
-
-
-    }
 
     public function logout(){
         $this->session->sess_destroy();

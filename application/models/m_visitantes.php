@@ -11,7 +11,7 @@ class M_visitantes extends CI_Model {
 
         if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
                 
-            $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim) values('$nomeVisitante', now(), now() + interval $duracaoDias day);");
+            $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim, dt_hr_solicitacao) values('$nomeVisitante', now(), now() + interval $duracaoDias day, now());");
 
                 if($this->db->affected_rows() == true){//verifica a inserção
 
@@ -29,7 +29,6 @@ class M_visitantes extends CI_Model {
     }
 
 
-    
 
         public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
@@ -44,7 +43,6 @@ class M_visitantes extends CI_Model {
         }
         
         
-
      
     
         public function desativarVisi($nomeVisitante){            
@@ -86,6 +84,25 @@ class M_visitantes extends CI_Model {
                 return $retorno;
             }
         }
+
+
+
+        public function diasFaltam($nomeVisitante){// Não usado
+            $retorno = $this->db->query("SELECT diaFim - date(now())  from visi_apt where nome_visi = '$nomeVisitante';");
+            if($nomeVisitante > 0){
+
+                return $returno;
+
+            }else{
+                    
+                $returno="Data Expirada";
+                
+                return $returno;
+            
+            }
+        }
+
+
 
 
 
