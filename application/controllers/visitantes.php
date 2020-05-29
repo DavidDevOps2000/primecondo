@@ -76,16 +76,17 @@ class Visitantes extends CI_Controller {
     }
 
 
-    public function alterar(){
-        $nomeVisitante = $this->input->post('usuario');
-        $senha = $this->input->post('senha');
-        $tipo = $this->input->post('tipo');
+    public function alterVisi(){
+        $nomeVisitante = $this->input->post('nomeVisi');
+        $duracaoDias = $this->input->post('maisDias');
+        $novoNomeVisitante = $this->input->post('nomeNovoVisi');
+        $novoStatus = $this->input->post('novoStatus');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->alterar($nomeVisitante, $senha, $tipo);
+        $retorno = $this->m_visitantes->alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus);
 
-        echo $retorno;
+     
     }
 
 

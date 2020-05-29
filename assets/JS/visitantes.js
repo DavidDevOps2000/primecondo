@@ -36,7 +36,7 @@ swal({
                                                     },beforeSend: ()=>{
                         swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
                     },
-                    error:()=>{ alert('Erro Desconhecido'); }
+                    error:()=>{ alert('Erro Desconhecido'); }//Só dá erro aqui, quando há um problema no banco de dados ou no model
                     
                 });
                 return false;//Esse Returna deve ficar após os swal, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
@@ -76,8 +76,9 @@ $.ajax({
         dataType:'json',
         data:{'nomeVisitante':nomeVisiConsultar},
             success:(data)=>{
+                            document.getElementById("nomeVisiAtual").innerText = data[0].nome_visi;//Colocando o valor json em uma label
                             $('#vlrNomeVisi').val(data[0].nome_visi);//Insertando os valores do JSN result da controller 
-                             $('#vlrAtivo').val(data[0].status_visi);//Nas inputs
+                             $('#vlrAutoriza').val(data[0].status_visi);//Nas inputs
                              $('#vlrDiaFim').val(data[0].diaFim);// do formulário, ALIAS isso só funcionará se tiver o data[0].NomeCampoDB
             swal.close();;//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
@@ -90,8 +91,6 @@ $.ajax({
             }
     });
 }
-
-
 
 
     //Função para REATIVAR o $nomeVisitante
@@ -108,13 +107,13 @@ function desativarVisi(nomeVisiDesativar){
                         closeOnConfirm: false,
                         closeOnCancel: true
                       },    
-                        function(isConfirm){
+                        (isConfirm)=>{
                             if(isConfirm){
                                 $.ajax({
                                         url: "visitantes/desativarVisi",
                                         type: "POST",
                                         data: {'nomeVisitante':nomeVisiDesativar}
-                                            ,success: function(data){
+                                            ,success: (data)=>{
                                                 if(data == 1){
                                                     swal({ 
                                                         title: "OK",
@@ -127,8 +126,8 @@ function desativarVisi(nomeVisiDesativar){
                                                         closeOnConfirm:true,
                                                         closeOnCancel: false
                                                         },
-                                                            function(isConfirm){
-                                                                if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
+                                                            (isConfirm)=>{
+                                                                  if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
                                                                 }
                                                             );
                                                 }else{
@@ -150,11 +149,11 @@ function desativarVisi(nomeVisiDesativar){
                                     imageUrl: "assets/img/gifs/loading.gif",
                                     showConfirmButton: false });
                             },
-                            error: function(data_error){
+                            error: (data_error)=>{
                                 sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
                             }
                         });
-                    }
+            }
     });
 }
 
@@ -231,3 +230,47 @@ function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table 
    return diaConvert;
 }
 
+function alterVisi(){
+$.ajax({
+            type: "POST",
+            url: 'visitantes/alterVisi',
+            data:{
+                'nomeVisi':$('#nomeVisiAtual').val(),
+                'nomeNovoVisi':$('#vlrNomeVisi').val(),
+                'maisDias':$('#vlrDiaFim').val(),
+                'novoStatus':$('#vlrAutoriza').val()
+                        },success:(data)=>{
+                                    if(data == 1){
+                                            swal({  title: "OK", 
+                                                    text: "Dados alterados",
+                                                    type: "success", 
+                                                    showCancelButton: false, 
+                                                    confirmButtonColor: "#54DD74",
+                                                    confirmButtonText: "OK!",
+                                                    closeOnConfirm: true,
+                                                    closeOnCancel: false
+                                                    }
+                                                    ,(isConfirm)=>{
+                                                             if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
+                                                        }
+                                                );
+                                    }else{
+                                            swal({
+                                                title: "OK",
+                                                text: "Erro na ALTERAÇÃO, verifique!",
+                                                type: "error",
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#54DD74",
+                                                confirmButtonText: "OK!",
+                                                closeOnConfirm: false,
+                                                closeOnCancel: false
+                                                });
+                                    }
+                            }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
+                                    
+                            }, error: ()=>{  alert('Unexpected error.'); }
+                });
+}
+        
+    
+    

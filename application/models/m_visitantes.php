@@ -30,11 +30,10 @@ class M_visitantes extends CI_Model {
 
 
 
-        public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
+    public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
-            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
+        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
             
-
             //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){
 
@@ -45,7 +44,7 @@ class M_visitantes extends CI_Model {
         
      
     
-        public function desativarVisi($nomeVisitante){            
+    public function desativarVisi($nomeVisitante){            
                         
          $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
 
@@ -61,9 +60,9 @@ class M_visitantes extends CI_Model {
         }
 
         
-        public function ativarVisi($nomeVisitante){            
+    public function ativarVisi($nomeVisitante){            
                         
-            $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
+        $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
     
             if($this->db->affected_rows()>0){
     
@@ -77,9 +76,10 @@ class M_visitantes extends CI_Model {
         }
 
 
-        public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
+    public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
 
-            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim FROM visi_apt WHERE nome_visi = '$nomeVisitante';");
+        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 
+                                                        'NÃO' else 'SIM' end status_visi from visi_apt where nome_visi = '$nomeVisitante'");
     
             if($retorno->num_rows() > 0){
 
@@ -88,10 +88,20 @@ class M_visitantes extends CI_Model {
         }
 
 
+    public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus){
+        $retorno = $this->db->query("UPDATE visi_apt set 
+                                                        diaFim = ADDDATE(diaFim, interval $duracaoDias day),
+                                                        status_visi =  $novoStatus,
+                                                        nome_visi = '$novoNomeVisitante'
+                    where nome_visi = '$nomeVisitante'");
+    }
 
-        public function diasFaltam($nomeVisitante){// Não usado
-            $retorno = $this->db->query("SELECT diaFim - date(now())  from visi_apt where nome_visi = '$nomeVisitante';");
-            if($nomeVisitante > 0){
+
+    public function diasFaltam($nomeVisitante){// Não usado
+        
+        $retorno = $this->db->query("SELECT diaFim - date(now())  from visi_apt where nome_visi = '$nomeVisitante';");
+        
+        if($nomeVisitante > 0){
 
                 return $returno;
 
@@ -105,8 +115,5 @@ class M_visitantes extends CI_Model {
         }
 
 
-
-
-
-    }
+   }
 ?>
