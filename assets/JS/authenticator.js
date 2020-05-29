@@ -1,4 +1,4 @@
-$(document).ready(function(){$('#formLogin').submit(function(event){
+$(document).ready( ()=>{ $('#formLogin').submit((event)=>{
     //Evento do formulario, ao pressionar o botao submit
     // vai ativar o ajax e json.
    
@@ -7,7 +7,7 @@ $.ajax({
         url: 'Login/Logar',//Controller login no metodo logar_ajax
         data: $('#formLogin').serialize(),//Os IDs dos Form vão para a validação na controller
         
-        success:function(data){//Caso toda a controller funcione corretamente
+        success:(data)=>{//Caso toda a controller funcione corretamente
 
             if ($.trim(data) == '1') { //Valido o retorno da controller
          
@@ -24,7 +24,7 @@ $.ajax({
                         $("#formLogin").trigger('reset');//Limpa os objetos de tela
                 }
 
-        },beforeSend: function(){ //Tela de carregamento
+        },beforeSend:()=>{ //Tela de carregamento
 
                 swal({
                     title:"Aguarde!",
@@ -34,7 +34,7 @@ $.ajax({
                     });
         },
             
-        error: function(){
+        error: ()=>{
                 
                 swal({ //Caso retorne algo exibe uma mensagem ao usuario
                     title: "Falha no Login",
