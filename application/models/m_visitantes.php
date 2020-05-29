@@ -32,7 +32,7 @@ class M_visitantes extends CI_Model {
 
         public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
-        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
+            $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
             
 
             //Retorno o resultado do SELECT
@@ -47,16 +47,16 @@ class M_visitantes extends CI_Model {
     
         public function desativarVisi($nomeVisitante){            
                         
-        $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
+         $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
 
-        if($this->db->affected_rows()>0){
+            if($this->db->affected_rows()>0){
 
-            return 1;//Alterado com sucesso
+                return 1;//Alterado com sucesso
         
-        }else{
+            }else{
 
-            return 0;//Problema ao alterar
-        }
+                return 0;//Problema ao alterar
+                 }
         
         }
 
@@ -77,10 +77,12 @@ class M_visitantes extends CI_Model {
         }
 
 
-        public function consulAlterVisi($nomeVisitante){
+        public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
+
             $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim FROM visi_apt WHERE nome_visi = '$nomeVisitante';");
     
             if($retorno->num_rows() > 0){
+
                 return $retorno;
             }
         }

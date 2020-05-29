@@ -61,17 +61,20 @@ class Visitantes extends CI_Controller {
 
     }
 
-    public function diasFaltam(){//Não Usado
+    
+
+
+    public function consultVisiToModel(){
 
         $nomeVisitante = $this->input->post('nomeVisitante');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->diasFaltam($nomeVisitante);
+        $retorno = $this->m_visitantes->consultVisiToModel($nomeVisitante);
 
-        $_SESSION['diasFaltam'] = $retorno;
-
+        echo json_encode($retorno->result());
     }
+
 
     public function alterar(){
         $nomeVisitante = $this->input->post('usuario');
@@ -85,15 +88,7 @@ class Visitantes extends CI_Controller {
         echo $retorno;
     }
 
-    public function verusu(){
-        $nomeVisitante = $this->input->post('usuario');
 
-        $this->load->model('m_visitantes');
-
-        $retorno = $this->m_visitantes->verusu($nomeVisitante);
-        
-        echo $retorno;
-    }
 
 
 

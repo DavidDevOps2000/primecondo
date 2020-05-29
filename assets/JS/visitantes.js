@@ -9,21 +9,21 @@ swal({
     cancelButtonText: "Não",
     closeOnConfirm: false,
     closeOnCancel: true
-    },function(isConfirm){
+    },(isConfirm)=>{
             if(isConfirm){ 
                     $.ajax({
                             type: "POST",
                             url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
                             data: $("#formCadasVisi").serialize(),
-                                            success: function(data){
+                                            success:(data)=>{
                                                     if($.trim(data) == 1){
                                                             $("#formCadasVisi").trigger("reset");
 
                                                             swal({ title: "OK!", text: "Visitante Salvo com Sucesso", confirmButtonText: "Ok", type: "success"}
-                                                                            ,function(isConfirm){
-                                                                                                if(isConfirm){
-                                                                                                    document.location.reload(true);//Atualizar documento caso pressionem Ok
-                                                                                                            }
+                                                                            ,(isConfirm)=>{
+                                                                                        if(isConfirm){
+                                                                                                document.location.reload(true);//Atualizar documento caso pressionem Ok
+                                                                                                    }
                                                                             });        
                                                     }else if($.trim(data) == 2){ /*var msg = data;  alert(msg);*/
                                                                                                         
@@ -33,13 +33,13 @@ swal({
                                                             swal({title: "ATENÇÃO!", text: "Erro ao inserir visitante, verifique!", type: "error"});
                                                             }
 
-                                                    },beforeSend: function(){
+                                                    },beforeSend: ()=>{
                         swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
                     },
-                    error: function(){ alert('Erro Desconhecido'); }
+                    error:()=>{ alert('Erro Desconhecido'); }
                     
                 });
-                return false;
+                return false;//Esse Returna deve ficar após os swal, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
         }
     });
 
@@ -50,8 +50,8 @@ swal({
 
 
 
-function btnEditOpcoes(nomeVisitante){
-    var opcoesEdit="<input class='btn btn-xs col-md-6 btn-info' type='button' data-toggle='modal' data-target='#ModalEditar' value='Editar Visitante'>";
+function btnEditOpcoes(nomeVisiConsultar){
+    var opcoesEdit="<input class='btn btn-sm btn-info' type='button' data-toggle='modal' onClick='consulAlterVisi("+'"'+ nomeVisiConsultar +'"'+");' data-target='#ModalEditar' value='Editar Visitante'>";
     return opcoesEdit;
 }
 
@@ -67,6 +67,30 @@ function opcoes(nomeVisitante, row){
         return opcoes;
         }
 }
+
+
+function consulAlterVisi(nomeVisiConsultar){
+$.ajax({
+        type:"POST",
+        url:'visitantes/consultVisiToModel',
+        dataType:'json',
+        data:{'nomeVisitante':nomeVisiConsultar},
+            success:(data)=>{
+                            $('#vlrNomeVisi').val(data[0].nome_visi);//Insertando os valores do JSN result da controller 
+                             $('#vlrAtivo').val(data[0].status_visi);//Nas inputs
+                             $('#vlrDiaFim').val(data[0].diaFim);// do formulário, ALIAS isso só funcionará se tiver o data[0].NomeCampoDB
+            swal.close();;//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
+            },
+            beforeSend:()=>{
+                swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
+            },
+            error:()=>{
+                alert('Unexpected error.');
+                swal.close();
+            }
+    });
+}
+
 
 
 
@@ -119,7 +143,7 @@ function desativarVisi(nomeVisiDesativar){
                                                     closeOnConfirm:false,
                                                     closeOnCancel: false });
                                                     }
-                            },beforeSend: function(){
+                            },beforeSend:()=>{
                                 swal({
                                     title: "Aguarde!",
                                     text: "Gravando dados...",
@@ -147,13 +171,13 @@ function ativarVisi(nomeVisiAtivar){
         closeOnConfirm: false,
         closeOnCancel: true
       },    
-        function(isConfirm){
+        (isConfirm)=>{
             if(isConfirm){
                 $.ajax({
                         url: "visitantes/ativarVisi",
                         type: "POST",
                         data: {'nomeVisitante':nomeVisiAtivar}
-                            ,success: function(data){
+                            ,success:(data)=>{
                                 if(data == 1){
                                     swal({ 
                                         title: "OK",
@@ -166,7 +190,7 @@ function ativarVisi(nomeVisiAtivar){
                                         closeOnConfirm:true,
                                         closeOnCancel: false }
                                         ,
-                                        function(isConfirm){
+                                        (isConfirm)=>{
                                             if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
                                             }
                                         );
@@ -182,14 +206,14 @@ function ativarVisi(nomeVisiAtivar){
                                     closeOnConfirm:false,
                                     closeOnCancel: false });
                                     }
-            },beforeSend: function(){
+            },beforeSend:()=>{
                 swal({
                     title: "Aguarde!",
                     text: "Gravando dados...",
                     imageUrl: "assets/img/gifs/loading.gif",
                     showConfirmButton: false });
             },
-            error: function(data_error){
+            error:(data_error)=>{
                 sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
             }
         });

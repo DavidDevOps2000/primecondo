@@ -23,23 +23,19 @@
 
 <?php //Nova adição ?>
 <script type="text/javascript" src="<?= base_url('assets/js/pt-br.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/jquery.slim.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.5.1.slim.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/popper.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.bundle.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.bundle.js.map')?>"></script>
+
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.bundle.min.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.bundle.min.js.map')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.js.map')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js.map')?>"></script>
+
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap-datepicker.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap-datetimepicker.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/bootstrap-imageupload.min.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/bootstrap-table-pt-BR.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/fileinput.min.js')?>"></script>
 
 <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.3.1.min.js')?>"></script>
-
 
 
 
