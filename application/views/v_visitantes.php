@@ -1,45 +1,59 @@
 <body>
 
 <?php //-- atualização de Convidado ?>
-		<div class="modal-dialog modal-dialig-centered" role="document">
-			<div   div class="modal-content">
-				<div class="modal-header">
-                <input type="button" class="close" data-dismiss="modal" aria-label="Fechar" aria-hidden="true" name="btnClose" value="&times;">
-                    <h5 class="modal-title" id="ModCenter">Editar Visitante</h5>						
+<div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
+	<div class="modal-dialog modal-dialig-centered" role="document">
+			    <div class="modal-content">
+				    <div class="modal-header"> <input type="button" class="close" data-dismiss="modal" aria-label="Fechar" aria-hidden="true" name="btnClose" value="&times;">
+                    <h4 class="modal-title" id="ModCenter">Editar Visitante</h4>						
 				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-                            <label class="control-label" name="nomeVisiAtual" id="nomeVisiAtual">Novo nome do Visitante</label>
-							<input class="form-control"  type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva o nome do visitante">
-						</div>
-						<div class="form-group col-lg-2">
+		    <div class="modal-header">
+				<form id="formaAlter">
+					<div class="form-group">
+							<input class="form-control" type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva novo nome do visitante">
+					</div>  
+                    <div class="row-md-1">
+                        
+                            <label class="control-label">Entrada Autorizado(a) ?</label><br>
+                            <label class="control-label" style="padding-right:80%" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
+                            <button type="button" class="btn btn-primary"data-dismiss="modal">Alterar</button>
+                    </div>
+                    <br>
+                    
+                    <div class="row-md-1">
+                        <span>
+                            <label class="control-label">Validade:</label>
+                            <label class="control-label" name="vlrDiaFim" id="vlrDiaFim">99/99/99</label>
+                            <label class="control-label"  style="padding-left:45%">Adicionar quantos dias?</label>
+                        </span>
+                        <br>
+                    </div>
+                    <div>
+                        <span class="col-md-5" style="margin-left:60%">
 
-                        <label for="textUsuario" data-field='nome_visi' data-formatter='opcoes' class="control-label">Autoriza?</label>
-                        <input type="text" class="form-control" name="vlrAutoriza" id="vlrAutoriza" readonly>
-                        </div>
-                        <div class="form-group col-lg-2" >
-                        <input type="text" class="form-control" data-field='diaFim' data-formatter='diasRestantes' name="vlrDiaFim" id="vlrDiaFim" class="col-md-1" readonly>
-                            <label for="textUsuario" class="control-label">Quantos dias de acesso ?</label>
-                            <select name="valorDuracaoDias" id="valorDuracaoDias" class="form-control" data-container="body" data-width="100%">
+                            <select class="form-control" name="vlrMaisDias" id="vlrMaisDias">
+                                
+                                <option>Nenhum</option> 
                                 <option>1</option> 
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
                                 <option>6</option>
-                            </select>    
-                        </div>
-					</form>					
-				</div>
+                                <option>Indeterminado</option> 
+                        </select>
+                        </span>
+                    </div> 
+                </div>
+			</form>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 					<button type="button" onClick=" alterVisi()" class="btn btn-primary">Confirmar</button>
-				</div>					
-			</div>			
+				</div>
+			</div>
+            </div>			
         </div>
-
-	
+</div>	
 
 
 

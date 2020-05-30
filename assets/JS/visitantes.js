@@ -69,17 +69,32 @@ function opcoes(nomeVisitante, row){
 }
 
 
+
+var nomeSeu;
+
 function consulAlterVisi(nomeVisiConsultar){
+
 $.ajax({
         type:"POST",
         url:'visitantes/consultVisiToModel',
         dataType:'json',
         data:{'nomeVisitante':nomeVisiConsultar},
             success:(data)=>{
-                            document.getElementById("nomeVisiAtual").innerText = data[0].nome_visi;//Colocando o valor json em uma label
+                            nomeSeu = data[0].nome_visi;//Salvando nome antigo aqui, para ser usado no insert na conficional Where
+
                             $('#vlrNomeVisi').val(data[0].nome_visi);//Insertando os valores do JSN result da controller 
-                             $('#vlrAutoriza').val(data[0].status_visi);//Nas inputs
-                             $('#vlrDiaFim').val(data[0].diaFim);// do formulário, ALIAS isso só funcionará se tiver o data[0].NomeCampoDB
+
+                            document.getElementById("vlrAutoriza").innerHTML = data[0].status_visi;
+
+                            ano = data[0].diaFim[0] + '' + data[0].diaFim[1];//Convertendo DATA para o Front
+                            mes = data[0].diaFim[5] + '' + data[0].diaFim[6];
+                            dia = data[0].diaFim[8] + '' + data[0].diaFim[9];
+                            diaConvert = dia +'/'+ mes +'/'+ ano;
+
+                            document.getElementById("vlrDiaFim").innerHTML = diaConvert;//Jogando data convertida na tela
+
+                             //$('#vlrAutoriza').val(data[0].status_visi);//Nas inputs
+                             //$('#vlrDiaFim').val(data[0].diaFim);// do formulário, ALIAS isso só funcionará se tiver o data[0].NomeCampoDB
             swal.close();;//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
             beforeSend:()=>{
@@ -220,6 +235,7 @@ function ativarVisi(nomeVisiAtivar){
 });
 }
 
+var mostrarData;
 function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table onde vc pega o valor da linha e a utiliza
 
     ano = row.diaFim[0]+ '' + row.diaFim[1];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
@@ -227,50 +243,50 @@ function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table 
     dia = row.diaFim[8]+ '' + row.diaFim[9];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
     diaConvert = dia +'/'+ mes +'/'+ ano;
 
+    mostrarData = diaConvert;
    return diaConvert;
+  
 }
 
 function alterVisi(){
-$.ajax({
-            type: "POST",
-            url: 'visitantes/alterVisi',
-            data:{
-                'nomeVisi':$('#nomeVisiAtual').val(),
-                'nomeNovoVisi':$('#vlrNomeVisi').val(),
-                'maisDias':$('#vlrDiaFim').val(),
-                'novoStatus':$('#vlrAutoriza').val()
-                        },success:(data)=>{
-                                    if(data == 1){
-                                            swal({  title: "OK", 
-                                                    text: "Dados alterados",
-                                                    type: "success", 
-                                                    showCancelButton: false, 
+
+    $.ajax({
+                type: "POST",
+                url: 'visitantes/alterVisi',////////////////////Trabalhe aqui hoje
+                data:{
+                    'nomeVisi':nomeSeu,
+                    'nomeNovoVisi':$('#vlrNomeVisi').val(),
+                    'maisDias':$('#vlrMaisDias').val(),
+                    'novoStatus':$('#vlrAutoriza').val(),
+                            },success:(data)=>{
+                                        if(data == 1){
+                                                swal({  title: "OK", 
+                                                        text: "Dados alterados",
+                                                        type: "success", 
+                                                        showCancelButton: false, 
+                                                        confirmButtonColor: "#54DD74",
+                                                        confirmButtonText: "OK!",
+                                                        closeOnConfirm: true,
+                                                        closeOnCancel: false
+                                                        }
+                                                        ,(isConfirm)=>{
+                                                                 if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
+                                                            }
+                                                    );
+                                        }else{
+                                                swal({
+                                                    title: "OK",
+                                                    text: "Erro na ALTERAÇÃO, verifique!",
+                                                    type: "error",
+                                                    showCancelButton: false,
                                                     confirmButtonColor: "#54DD74",
                                                     confirmButtonText: "OK!",
-                                                    closeOnConfirm: true,
+                                                    closeOnConfirm: false,
                                                     closeOnCancel: false
-                                                    }
-                                                    ,(isConfirm)=>{
-                                                             if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
-                                                        }
-                                                );
-                                    }else{
-                                            swal({
-                                                title: "OK",
-                                                text: "Erro na ALTERAÇÃO, verifique!",
-                                                type: "error",
-                                                showCancelButton: false,
-                                                confirmButtonColor: "#54DD74",
-                                                confirmButtonText: "OK!",
-                                                closeOnConfirm: false,
-                                                closeOnCancel: false
-                                                });
-                                    }
-                            }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
-                                    
-                            }, error: ()=>{  alert('Unexpected error.'); }
-                });
-}
-        
-    
-    
+                                                    });
+                                        }
+                                }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
+                                        
+                                }, error: ()=>{  alert('Unexpected error.'); }
+                    });
+    }

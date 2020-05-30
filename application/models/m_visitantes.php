@@ -28,8 +28,6 @@ class M_visitantes extends CI_Model {
             }
     }
 
-
-
     public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
         $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
@@ -88,14 +86,44 @@ class M_visitantes extends CI_Model {
         }
 
 
+    
     public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus){
-        $retorno = $this->db->query("UPDATE visi_apt set 
-                                                        diaFim = ADDDATE(diaFim, interval $duracaoDias day),
-                                                        status_visi =  $novoStatus,
-                                                        nome_visi = '$novoNomeVisitante'
-                    where nome_visi = '$nomeVisitante'");
-    }
 
+    if($duracaoDias =='Nenhum'){
+
+        $retorno = $this->db->query("UPDATE visi_apt set status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
+
+            if($this->db->affected_rows() == true){//verifica a inserção
+
+                //Inserção com sucesso
+                return 1;
+
+            }else{
+                //problema ao inserir
+                return 0;
+            }
+            
+    }else{
+            $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
+
+            if($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
+                
+                    $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day),
+                        status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
+
+                if($this->db->affected_rows() == true){//verifica a inserção
+
+                    //Inserção com sucesso
+                    return 1;
+
+                }else{
+                    //problema ao inserir
+                    return 0;
+                } 
+            }    
+        }
+}   
+ 
 
     public function diasFaltam($nomeVisitante){// Não usado
         
