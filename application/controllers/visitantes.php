@@ -86,7 +86,7 @@ class Visitantes extends CI_Controller {
 
         $retorno = $this->m_visitantes->alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus);
 
-     
+        echo $retorno;
     }
 
 

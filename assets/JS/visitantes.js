@@ -70,6 +70,19 @@ function opcoes(nomeVisitante, row){
 
 
 
+
+function mudarStatus(){
+    vlrAutoriza = document.getElementById('vlrAutoriza').innerHTML;
+    
+    if(vlrAutoriza == 'NÃO'){
+        
+        document.getElementById("vlrAutoriza").innerHTML = 'SIM';
+    }else{
+
+        document.getElementById("vlrAutoriza").innerHTML = 'NÃO';
+    }
+
+}
 var nomeSeu;
 
 function consulAlterVisi(nomeVisiConsultar){
@@ -93,9 +106,7 @@ $.ajax({
 
                             document.getElementById("vlrDiaFim").innerHTML = diaConvert;//Jogando data convertida na tela
 
-                             //$('#vlrAutoriza').val(data[0].status_visi);//Nas inputs
-                             //$('#vlrDiaFim').val(data[0].diaFim);// do formulário, ALIAS isso só funcionará se tiver o data[0].NomeCampoDB
-            swal.close();;//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
+                           swal.close();//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
             beforeSend:()=>{
                 swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
@@ -248,45 +259,58 @@ function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table 
   
 }
 
-function alterVisi(){
+function alterVisita(){
+
+    var vlrStatus = document.getElementById('vlrAutoriza').innerHTML;
+
+    if(vlrStatus == 'NÃO'){//Convertendo em true ou false para bd
+        
+        vlrStatus = false;
+
+    }else{
+
+        vlrStatus = true;
+    }
 
     $.ajax({
-                type: "POST",
-                url: 'visitantes/alterVisi',////////////////////Trabalhe aqui hoje
-                data:{
-                    'nomeVisi':nomeSeu,
-                    'nomeNovoVisi':$('#vlrNomeVisi').val(),
-                    'maisDias':$('#vlrMaisDias').val(),
-                    'novoStatus':$('#vlrAutoriza').val(),
-                            },success:(data)=>{
-                                        if(data == 1){
-                                                swal({  title: "OK", 
-                                                        text: "Dados alterados",
-                                                        type: "success", 
-                                                        showCancelButton: false, 
-                                                        confirmButtonColor: "#54DD74",
-                                                        confirmButtonText: "OK!",
-                                                        closeOnConfirm: true,
-                                                        closeOnCancel: false
-                                                        }
-                                                        ,(isConfirm)=>{
-                                                                 if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
-                                                            }
-                                                    );
-                                        }else{
-                                                swal({
-                                                    title: "OK",
-                                                    text: "Erro na ALTERAÇÃO, verifique!",
-                                                    type: "error",
-                                                    showCancelButton: false,
-                                                    confirmButtonColor: "#54DD74",
-                                                    confirmButtonText: "OK!",
-                                                    closeOnConfirm: false,
-                                                    closeOnCancel: false
-                                                    });
-                                        }
-                                }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
-                                        
-                                }, error: ()=>{  alert('Unexpected error.'); }
-                    });
-    }
+        type: "POST",
+        url: 'visitantes/alterVisi',
+        data:{
+            'nomeVisi':nomeSeu,
+            'nomeNovoVisi':$('#vlrNomeVisi').val(),
+            'maisDias':$('#vlrMaisDias').val(),
+            'novoStatus':vlrStatus,
+                    },success:(data)=>{
+                                if(data == 1){
+                                        swal({  title: "OK", 
+                                                text: "Dados alterados",
+                                                type: "success", 
+                                                showCancelButton: false, 
+                                                confirmButtonColor: "#54DD74",
+                                                confirmButtonText: "OK!",
+                                                closeOnConfirm: true,
+                                                closeOnCancel: false
+                                                }
+                                                ,(isConfirm)=>{
+                                                         if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
+                                                    }
+                                            );
+                                }else{
+                                        swal({
+                                            title: "OK",
+                                            text: "Erro na ALTERAÇÃO, verifique!",
+                                            type: "error",
+                                            showCancelButton: false,
+                                            confirmButtonColor: "#54DD74",
+                                            confirmButtonText: "OK!",
+                                            closeOnConfirm: false,
+                                            closeOnCancel: false
+                                            });
+                                }
+                        }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
+                                
+                        }, error: ()=>{  alert('Unexpected error.'); }
+            });
+
+
+  }

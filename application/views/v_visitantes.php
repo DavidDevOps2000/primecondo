@@ -16,7 +16,7 @@
                         
                             <label class="control-label">Entrada Autorizado(a) ?</label><br>
                             <label class="control-label" style="padding-right:80%" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
-                            <button type="button" class="btn btn-primary"data-dismiss="modal">Alterar</button>
+                            <input type="button" class="btn btn-primary" onClick="mudarStatus()" value="Alterar">
                     </div>
                     <br>
                     
@@ -48,7 +48,7 @@
 			</form>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-					<button type="button" onClick=" alterVisi()" class="btn btn-primary">Confirmar</button>
+					<button type="button" onClick="alterVisita()" class="btn btn-primary">Confirmar</button>
 				</div>
 			</div>
             </div>			

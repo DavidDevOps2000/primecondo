@@ -86,44 +86,8 @@ class M_visitantes extends CI_Model {
         }
 
 
-    
-    public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus){
+        
 
-    if($duracaoDias =='Nenhum'){
-
-        $retorno = $this->db->query("UPDATE visi_apt set status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
-
-            if($this->db->affected_rows() == true){//verifica a inserção
-
-                //Inserção com sucesso
-                return 1;
-
-            }else{
-                //problema ao inserir
-                return 0;
-            }
-            
-    }else{
-            $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
-
-            if($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
-                
-                    $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day),
-                        status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
-
-                if($this->db->affected_rows() == true){//verifica a inserção
-
-                    //Inserção com sucesso
-                    return 1;
-
-                }else{
-                    //problema ao inserir
-                    return 0;
-                } 
-            }    
-        }
-}   
- 
 
     public function diasFaltam($nomeVisitante){// Não usado
         
@@ -143,5 +107,36 @@ class M_visitantes extends CI_Model {
         }
 
 
-   }
+        public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus) {
+
+            if($duracaoDias != 'Nenhum' || $duracaoDias != 'Indeterminado'){//Se data for diferente de NENHUM e INDERTERMINADO
+    
+     
+                $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day), 
+                                            status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
+    
+                        if($this->db->affected_rows() == TRUE){//verifica a inserção
+                                
+                                return 1;//Inserção com sucesso
+    
+                            }else{
+                                 return 0; 
+                                } //problema ao inserir
+
+            }else{
+                   $retorno = $this->db->query("UPDATE visi_apt set status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
+    
+                        if($this->db->affected_rows() == TRUE){//verifica a inserção
+                                
+                            return 1;//Inserção com sucesso
+    
+                        }else{ 
+                            return 0;//problema ao inserir
+                            }
+                    }
+                
+        }
+
+}
+
 ?>
