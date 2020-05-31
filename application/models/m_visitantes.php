@@ -109,31 +109,16 @@ class M_visitantes extends CI_Model {
 
         public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus) {
 
-            if($duracaoDias != 'Nenhum' || $duracaoDias != 'Indeterminado'){//Se data for diferente de NENHUM e INDERTERMINADO
-    
-     
-                $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day), 
+            $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day), 
                                             status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
     
-                        if($this->db->affected_rows() == TRUE){//verifica a inserção
+                if($this->db->affected_rows() == TRUE){//verifica a inserção
                                 
                                 return 1;//Inserção com sucesso
     
                             }else{
                                  return 0; 
                                 } //problema ao inserir
-
-            }else{
-                   $retorno = $this->db->query("UPDATE visi_apt set status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
-    
-                        if($this->db->affected_rows() == TRUE){//verifica a inserção
-                                
-                            return 1;//Inserção com sucesso
-    
-                        }else{ 
-                            return 0;//problema ao inserir
-                            }
-                    }
                 
         }
 

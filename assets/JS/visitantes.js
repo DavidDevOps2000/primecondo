@@ -36,7 +36,16 @@ swal({
                                                     },beforeSend: ()=>{
                         swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
                     },
-                    error:()=>{ alert('Erro Desconhecido'); }//Só dá erro aqui, quando há um problema no banco de dados ou no model
+                    error:()=>{ swal({
+                        title: "OK",
+                        text: "Error no Banco de dados, Por Favor entre mais tarde",
+                        type: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#54DD74",
+                        confirmButtonText: "OK!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                        });}//Só dá erro aqui, quando há um problema no banco de dados ou no model
                     
                 });
                 return false;//Esse Returna deve ficar após os swal, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
@@ -57,16 +66,6 @@ function btnEditOpcoes(nomeVisiConsultar){
 
 
 
-function opcoes(nomeVisitante, row){ 
-    if(row.status_visi == 'NÃO')
-    {
-    var opcoes= "<button class='btn btn-xs btn-success' type='button' onClick='ativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-ok-sign' style='width:58px'>Ativar</span></button>";
-        return opcoes;
-    }else{
-    var opcoes= "<button class='btn btn-xs btn-warning' type='button' onClick='desativarVisi("+'"'+ nomeVisitante +'"'+");'><span class='glyphicon glyphicon-remove-sign'>Desativar</span></button>";
-        return opcoes;
-        }
-}
 
 
 
@@ -83,7 +82,9 @@ function mudarStatus(){
     }
 
 }
-var nomeSeu;
+
+
+var nomeSeu;//deixe essa var aqui para ser usada
 
 function consulAlterVisi(nomeVisiConsultar){
 
@@ -112,139 +113,22 @@ $.ajax({
                 swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
             },
             error:()=>{
-                alert('Unexpected error.');
+                swal({
+                    title: "OK",
+                    text: "Error no Banco de dados, Por Favor entre mais tarde",
+                    type: "error",
+                    showCancelButton: false,
+                    confirmButtonColor: "#54DD74",
+                    confirmButtonText: "OK!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                    });
                 swal.close();
             }
     });
 }
 
 
-    //Função para REATIVAR o $nomeVisitante
-function desativarVisi(nomeVisiDesativar){ 
-                    swal({
-                        title:"Atenção",
-                        text: "Desativar a entrada desse visitante ?",
-                        type: "info",
-                        cancelButtonColor: '#d33',
-                        showCancelButton: true,
-                        confirmButtonColor: "info",
-                        confirmButtonText: "Sim",
-                        cancelButtonText: "Não",
-                        closeOnConfirm: false,
-                        closeOnCancel: true
-                      },    
-                        (isConfirm)=>{
-                            if(isConfirm){
-                                $.ajax({
-                                        url: "visitantes/desativarVisi",
-                                        type: "POST",
-                                        data: {'nomeVisitante':nomeVisiDesativar}
-                                            ,success: (data)=>{
-                                                if(data == 1){
-                                                    swal({ 
-                                                        title: "OK",
-                                                        text: "Visitante DESATIVADO!",
-                                                        type: "success",
-                                                        showCancelButton: false,
-                                                        confirmButtonColor: "54DD74",
-                                                        confirmButtonText: "OK!",
-                                                        cancelButtonText: "",
-                                                        closeOnConfirm:true,
-                                                        closeOnCancel: false
-                                                        },
-                                                            (isConfirm)=>{
-                                                                  if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
-                                                                }
-                                                            );
-                                                }else{
-                                                    swal({
-                                                    title: "OK!",
-                                                    text: "Erro na DESATIVAÇÃO, verifique!",
-                                                    type: "error",
-                                                    showCancelButton: false,
-                                                    confirmButtonColor: "54DD74",
-                                                    confirmButtonText: "OK!",
-                                                    cancelButtonText: "",
-                                                    closeOnConfirm:false,
-                                                    closeOnCancel: false });
-                                                    }
-                            },beforeSend:()=>{
-                                swal({
-                                    title: "Aguarde!",
-                                    text: "Gravando dados...",
-                                    imageUrl: "assets/img/gifs/loading.gif",
-                                    showConfirmButton: false });
-                            },
-                            error: (data_error)=>{
-                                sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
-                            }
-                        });
-            }
-    });
-}
-
-
-function ativarVisi(nomeVisiAtivar){ 
-    swal({
-        title:"Atenção",
-        text: "Quer Autorizar a entrada desse visitante ?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "DD6B55",
-        confirmButtonText: "Sim",
-        cancelButtonText: "Não",
-        closeOnConfirm: false,
-        closeOnCancel: true
-      },    
-        (isConfirm)=>{
-            if(isConfirm){
-                $.ajax({
-                        url: "visitantes/ativarVisi",
-                        type: "POST",
-                        data: {'nomeVisitante':nomeVisiAtivar}
-                            ,success:(data)=>{
-                                if(data == 1){
-                                    swal({ 
-                                        title: "OK",
-                                        text: "Visitante ATIVO!",
-                                        type: "success",
-                                        showCancelButton: false,
-                                        confirmButtonColor: "54DD74",
-                                        confirmButtonText: "OK!",
-                                        cancelButtonText: "",
-                                        closeOnConfirm:true,
-                                        closeOnCancel: false }
-                                        ,
-                                        (isConfirm)=>{
-                                            if(isConfirm){ document.location.reload(true);}//Atualizar documento caso pressionem Ok
-                                            }
-                                        );
-                                }else{
-                                    swal({
-                                    title: "OK!",
-                                    text: "Erro na DESATIVAÇÃO, verifique!",
-                                    type: "error",
-                                    showCancelButton: false,
-                                    confirmButtonColor: "54DD74",
-                                    confirmButtonText: "OK!",
-                                    cancelButtonText: "",
-                                    closeOnConfirm:false,
-                                    closeOnCancel: false });
-                                    }
-            },beforeSend:()=>{
-                swal({
-                    title: "Aguarde!",
-                    text: "Gravando dados...",
-                    imageUrl: "assets/img/gifs/loading.gif",
-                    showConfirmButton: false });
-            },
-            error:(data_error)=>{
-                sweetAlert("Atenção", "Erro ao gravar os dados!", "error");
-            }
-        });
-    }
-});
-}
 
 var mostrarData;
 function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table onde vc pega o valor da linha e a utiliza
@@ -261,6 +145,7 @@ function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table 
 
 function alterVisita(){
 
+    var vlrMaisDias = $('#vlrMaisDias').val();
     var vlrStatus = document.getElementById('vlrAutoriza').innerHTML;
 
     if(vlrStatus == 'NÃO'){//Convertendo em true ou false para bd
@@ -272,13 +157,14 @@ function alterVisita(){
         vlrStatus = true;
     }
 
+
     $.ajax({
         type: "POST",
         url: 'visitantes/alterVisi',
         data:{
             'nomeVisi':nomeSeu,
             'nomeNovoVisi':$('#vlrNomeVisi').val(),
-            'maisDias':$('#vlrMaisDias').val(),
+            'maisDias':vlrMaisDias,
             'novoStatus':vlrStatus,
                     },success:(data)=>{
                                 if(data == 1){
@@ -298,7 +184,7 @@ function alterVisita(){
                                 }else{
                                         swal({
                                             title: "OK",
-                                            text: "Erro na ALTERAÇÃO, verifique!",
+                                            text: "Não houve alteração no visitante, verifique os dados",
                                             type: "error",
                                             showCancelButton: false,
                                             confirmButtonColor: "#54DD74",
@@ -309,7 +195,17 @@ function alterVisita(){
                                 }
                         }, beforeSend:()=>{ swal({ title: "Aguarde!", text: "Carregando...", imageUrl: "assets/img/gifs/loading.gif", showConfirmButton: false});
                                 
-                        }, error: ()=>{  alert('Unexpected error.'); }
+                        }, error: ()=>{ 
+                            swal({
+                            title: "OK",
+                            text: "Error no Banco de dados, Por Favor entre mais tarde",
+                            type: "error",
+                            showCancelButton: false,
+                            confirmButtonColor: "#54DD74",
+                            confirmButtonText: "OK!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                            }); }
             });
 
 
