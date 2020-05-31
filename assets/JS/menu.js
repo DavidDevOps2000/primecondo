@@ -50,4 +50,7 @@ function aviso(){
 }
 
 
+function home(){ 
+   window.location.href="home";
+}
 

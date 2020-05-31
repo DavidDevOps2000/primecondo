@@ -67,9 +67,6 @@ function btnEditOpcoes(nomeVisiConsultar){
 
 
 
-
-
-
 function mudarStatus(){
     vlrAutoriza = document.getElementById('vlrAutoriza').innerHTML;
     
