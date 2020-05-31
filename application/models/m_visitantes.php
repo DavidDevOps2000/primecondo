@@ -42,7 +42,7 @@ class M_visitantes extends CI_Model {
         
      
     
-    public function desativarVisi($nomeVisitante){            
+    public function desativarVisi($nomeVisitante){    //Não usada        
                         
          $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
 
@@ -58,7 +58,7 @@ class M_visitantes extends CI_Model {
         }
 
         
-    public function ativarVisi($nomeVisitante){            
+    public function ativarVisi($nomeVisitante){  //Não usada          
                         
         $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
     
