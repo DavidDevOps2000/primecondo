@@ -21,9 +21,8 @@
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sua Casa<b class="caret"></b></a>
                             <ul role="menu" class="dropdown-menu" style="text-align: center">
-                                <li class="subMenuInterno"><a href="#" onclick="multa();">Multas</a></li>
-                                <li class="subMenuInterno"><a href="#" onclick="visitante();">Visitantes</a></li>
-                                <li class="subMenuInterno"><a href="#" onclick="prestador_Serv();">Prestador de Serviços</a></li>
+                                <li class="subMenuInterno"><a href="#" onclick="visitantes();">Visitantes</a></li>
+                                <li class="subMenuInterno"><a href="#" onclick="prestador();">Prestador de Serviços</a></li>
                             </ul>
                         </li>
 
@@ -37,15 +36,3 @@
 </div>
 
 
-
-<script>
-
-var base_url = "<?= base_url()?>";
-function visitante(){
-    window.location.href = base_url + "visitantes";
-}
-
-function prest_serv(){
-    window.location.href = base_url + "cadast_prest";
-}
-</script>
