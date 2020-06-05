@@ -105,7 +105,7 @@
                         data-pagination-pre-text="Voltar"   
                         data-pagination-next-text="Próximo"
                         data-pagination-last-text="Last"
-                        data-url= 'visitantes/listar'>  
+                        data-url= 'prestador_serv/listar'>  
                  <?php //Endereço do Controller responsável em buscar os dados da lista ?>
                     <thead>
                        <tr class="table-primary"> 
@@ -123,7 +123,7 @@
                                 <?php  //campo ativo no bd ?>  <?php  ////aJUSTAR no banco?>
 
 
-                            <th  data-formatter="btnEditOpcoes" data-field='nome_visi' 
+                            <th  data-formatter="btnEditOpcoesPrest" data-field='nome_visi' 
                                             class="col-sm-1 text-center text-light">Opções</th>
                             <?php  //colocaremos a função data-formatter que chamará a função JavaScript ?>
                            

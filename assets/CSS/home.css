@@ -16,7 +16,7 @@
 }
 
 .menuPrinc {/*Antigo navBar*/
-    background-color: black;
+    background-color:#e3e5e8;
     margin: 0 auto;
     border-radius:13px; 
     display: inline-block; 
@@ -38,7 +38,7 @@
     background-color: tomato;}
 
 .fundoMenuSanduiche{/*dropright*/ /*Usando*/
-    background-image: url("../img/fundo_menu_sand.png");
+    background-color:#e3e5e8;
     font-size: 22px;
     text-align: center;
     -webkit-filter: blur(0px);
@@ -50,7 +50,7 @@
 
 
 .subMenuInterno{/*dropright*/ /*Usando*/
-    background-color:#CCC;
+    background-color:#e3e5e8;
     font-size: 18px;
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);

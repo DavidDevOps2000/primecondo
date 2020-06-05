@@ -59,7 +59,7 @@ swal({
 
 
 
-function btnEditOpcoes(nomeVisiConsultar){
+function btnEditOpcoesPrest(nomeVisiConsultar){
     var opcoesEdit="<input class='btn btn-sm btn-info' type='button' data-toggle='modal' onClick='consulAlterVisi("+'"'+ nomeVisiConsultar +'"'+");' data-target='#ModalEditar' value='Editar Prestadores'>";
     return opcoesEdit;
 }

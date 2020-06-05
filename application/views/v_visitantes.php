@@ -60,7 +60,7 @@
 <?php //Cadastro convidado ?>
 <div>
     <form id="formCadasVisi">
-        <div class="panel panel-info">
+        <div class="panel panel-success">
             <div class="panel-heading text-center"><h4>Cadastro de Visitantes</h4></div>
                 <div class="">
                     <div class="form-group col-lg-4">
