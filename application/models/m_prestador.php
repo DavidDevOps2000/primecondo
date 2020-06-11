@@ -5,26 +5,20 @@ class M_Prestador extends CI_Model {
 
    //
     public function cadastrarPrestadores($nomeVisitante, $duracaoDias){                  //Cadastro Visitantes
-
      $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
         
-
         if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
                 
             $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim, dt_hr_solicitacao) values('$nomeVisitante', now(), now() + interval $duracaoDias day, now());");
-
                 if($this->db->affected_rows() == true){//verifica a inserção
-
                     //Inserção com sucesso
                     return 1;
-
                 }else{
                     //problema ao inserir
                     return 0;
                 }
-
         }else{
-              return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
+            return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
 
@@ -40,7 +34,6 @@ class M_Prestador extends CI_Model {
         }
         
         
-     
     public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
 
         $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 

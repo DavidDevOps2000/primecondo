@@ -12,19 +12,15 @@ class M_visitantes extends CI_Model {
         if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
                 
             $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim, dt_hr_solicitacao) values('$nomeVisitante', now(), now() + interval $duracaoDias day, now());");
-
                 if($this->db->affected_rows() == true){//verifica a inserção
-
                     //Inserção com sucesso
                     return 1;
-
                 }else{
                     //problema ao inserir
                     return 0;
                 }
-
         }else{
-              return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
+            return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
 
@@ -34,48 +30,34 @@ class M_visitantes extends CI_Model {
             
             //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){
-
                 return $retorno;
             }
         }
         
         
-     
-    
     public function desativarVisi($nomeVisitante){    //Não usada        
                         
-         $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
-
+        $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
             if($this->db->affected_rows()>0){
-
                 return 1;//Alterado com sucesso
-        
             }else{
-
                 return 0;//Problema ao alterar
-                 }
-        
+                }
         }
-
         
     public function ativarVisi($nomeVisitante){  //Não usada          
                         
         $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
-    
             if($this->db->affected_rows()>0){
-    
                 return 1;//Alterado com sucesso
             
             }else{
-    
                 return 0;//Problema ao alterar
             }
             
         }
 
-
     public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
-
         $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 
                                                         'NÃO' else 'SIM' end status_visi from visi_apt where nome_visi = '$nomeVisitante'");
     
