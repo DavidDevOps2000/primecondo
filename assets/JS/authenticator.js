@@ -42,8 +42,7 @@ $.ajax({
                     type:"error",
                     });
         }
-
         });
         return false;//Aqui vai desativar a função após execução
-      });
     });
+});

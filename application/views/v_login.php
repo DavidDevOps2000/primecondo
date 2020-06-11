@@ -1,5 +1,4 @@
 <html>
-   
 
 <div id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 		<div class="modal-dialog modal-dialig-centered" role="document">
@@ -13,7 +12,7 @@
 
 					<form id="formLogin">
 						<div class="form-group">
-							<input class="form-control inputLoginGeral" placeholder="Email" name="txtEmail" id="txtEmail" type="text" autofocus  maxlength="110">
+							<input class="form-control inputLoginGeral" placeholder="Digite seu Apelido" name="txtApelido" id="txtApelido" type="text" autofocus  maxlength="110">
 						</div>
 							<div class="form-group">
 							<input class="form-control inputLoginGeral" placeholder="Senha" name="txtSenha" id="txtSenha" type="password"  maxlength="25">
