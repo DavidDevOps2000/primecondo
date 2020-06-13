@@ -23,7 +23,6 @@ class M_visitantes extends CI_Model {
             return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
-
     public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
         $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
@@ -33,7 +32,6 @@ class M_visitantes extends CI_Model {
                 return $retorno;
             }
         }
-        
         
     public function desativarVisi($nomeVisitante){    //Não usada        
                         
@@ -99,7 +97,7 @@ class M_visitantes extends CI_Model {
                                 return 1;//Inserção com sucesso
     
                             }else{
-                                 return 0; 
+                     return 0; 
                                 } //problema ao inserir
                 
         }

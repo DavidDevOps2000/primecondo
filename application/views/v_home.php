@@ -8,11 +8,11 @@
     </div>
 
 
-
                                     <?php //inicio menu ?>
 
                                 <div class="container-fluid">
-                                    </div><p style="color:white;  font-size: ; text- align: justify"> <?php echo $_SESSION['email']; ?></p>
+                                <label class="control-label" name="vlrApelido" id="vlrApelido"><?php echo $_SESSION['apelido'];?></label>
+
                                 </div>
 <div class="container-fluid" >
                 <nav class="navbar navbar-default menuPrinc">
@@ -56,3 +56,6 @@
 
 
 
+<? // DICA SUPER IMPORTANTE PARA TESTE DE PHP...
+// QUANDO VC EXECUTAR UMA FUNÇÃO E DER ERRO DE BANCO VÁ EM    CONSOLE - CLIQUE NA FUNÇAO COM STATUS DE ERRO - CLIQUE EM RESPONSE
+    // PARA SABER O ERRO ATRAVÉS DE AVISOS EM PHP ?>
