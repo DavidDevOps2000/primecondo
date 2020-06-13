@@ -50,6 +50,10 @@
     filter: blur(0px);
 }
 
+#vlrApelido{
+    color:white;
+    font-size: 150%;
+}
 
 .subMenuInterno{/*dropright*/ /*Usando*/
     background-color:#e3e5e8;

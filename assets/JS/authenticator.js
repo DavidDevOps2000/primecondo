@@ -46,3 +46,13 @@ $.ajax({
         return false;//Aqui vai desativar a função após execução
     });
 });
+
+
+
+function esqueceuSenhaLogin(){
+    swal({ //Caso retorne algo exibe uma mensagem ao usuario
+        title:"Atenção!",
+        text:"Para requisitar uma nova senha, é necessário ir até a portaria fazer uma solicitação ",
+        type:"info",
+        });
+}
