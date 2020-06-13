@@ -4,9 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
     public function index(){
-        $this->load->view('includes/header');
-        $this->load->view('v_home');
-        $this->load->view('includes/footer');
+
+        if($_SESSION['apelido']){//Se houver algum valor nesse sessão a pagina será contruida        
+            $this->load->view('includes/header');
+            $this->load->view('v_home');
+            $this->load->view('includes/footer');
+        }else{                  //Senão, ela não sera contruida
+
+            ECHO "POR FAVOR, FAÇA O LOGIN";
+        }
+
     }
 
     public function authAcessoPage(){

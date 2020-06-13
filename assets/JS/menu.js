@@ -1,5 +1,5 @@
 function authAcess(seuCaminho){
-    var vlrApelido = document.getElementById('vlrApelido').innerText;
+    var vlrApelido = document.getElementById('vlrApelido').innerText; //Para verificar se o usuario está logado ou não
     
     $.ajax({
             type:"POST",
@@ -44,8 +44,18 @@ function authAcess(seuCaminho){
 
 function prestador(){ 
     authAcess("prestador_serv");
-
 }
+
+
+function visitantes(){
+    authAcess("visitantes");
+}
+
+function home(){ 
+    window.location.href="home";
+}
+
+
 
 function multa(){ 
                     swal({ //Caso retorne algo exibe uma mensagem ao usuario
@@ -91,15 +101,4 @@ function aviso(){
 }
 
 
-function home(){ 
-        window.location.href="home";
-}
-
-
-
-function visitantes(){
-    
-    authAcess("visitantes");
-
-}
 

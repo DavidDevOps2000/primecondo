@@ -5,10 +5,15 @@ class Visitantes extends CI_Controller {
     
     public function index(){
 
-        $this->load->view('includes/header');//carregar o cabeçalho
-        $this->load->view('includes/menu');
-        $this->load->view('v_visitantes');//carrega o corpo da tela
-        $this->load->view('includes/footer');//carrega rodapé da tela
+        if($_SESSION['apelido']){//Se houver algum valor nesse sessão a pagina será contruida        
+            $this->load->view('includes/header');//carregar o cabeçalho
+            $this->load->view('includes/menu');
+            $this->load->view('v_visitantes');//carrega o corpo da tela
+            $this->load->view('includes/footer');//carrega rodapé da tela
+        }else{                  //Senão, ela não sera contruida
+
+            ECHO "POR FAVOR, FAÇA O LOGIN";
+        }
     }
 
     public function cadastrarVisitantes(){
