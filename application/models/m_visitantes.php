@@ -25,7 +25,9 @@ class M_visitantes extends CI_Model {
     }
     public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
             
-        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 'NÃO' else 'SIM' end status_visi from visi_apt;");
+        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN false THEN 'NÃO' ELSE 'SIM' END 
+                                    autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa = 1");
             
             //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){
@@ -33,31 +35,14 @@ class M_visitantes extends CI_Model {
             }
         }
         
-    public function desativarVisi($nomeVisitante){    //Não usada        
-                        
-        $retorno = $this->db->query("UPDATE visi_apt set status_visi = false where nome_visi = '$nomeVisitante'");
-            if($this->db->affected_rows()>0){
-                return 1;//Alterado com sucesso
-            }else{
-                return 0;//Problema ao alterar
-                }
-        }
-        
-    public function ativarVisi($nomeVisitante){  //Não usada          
-                        
-        $retorno = $this->db->query("UPDATE visi_apt set status_visi = true where nome_visi = '$nomeVisitante'");
-            if($this->db->affected_rows()>0){
-                return 1;//Alterado com sucesso
-            
-            }else{
-                return 0;//Problema ao alterar
-            }
-            
-        }
+
+
+
 
     public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
-        $retorno = $this->db->query("SELECT nome_visi, status_visi, diaFim, case status_visi when false then 
-                                                        'NÃO' else 'SIM' end status_visi from visi_apt where nome_visi = '$nomeVisitante'");
+        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN false THEN 'NÃO' ELSE 'SIM' END autorizado FROM tbl_pessoa 
+                                    JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE nome_visi = '$nomeVisitante' and id_pessoa=1");
     
             if($retorno->num_rows() > 0){
 

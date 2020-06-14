@@ -97,12 +97,12 @@ $.ajax({
 
                             document.getElementById("vlrAutoriza").innerHTML = data[0].status_visi;
 
-                            ano = data[0].diaFim[0] + '' + data[0].diaFim[1];//Convertendo DATA para o Front
-                            mes = data[0].diaFim[5] + '' + data[0].diaFim[6];
-                            dia = data[0].diaFim[8] + '' + data[0].diaFim[9];
+                            ano = data[0].data_fim_visi[0] + '' + data[0].data_fim_visi[1];//Convertendo DATA para o Front
+                            mes = data[0].data_fim_visi[5] + '' + data[0].data_fim_visi[6];
+                            dia = data[0].data_fim_visi[8] + '' + data[0].data_fim_visi[9];
                             diaConvert = dia +'/'+ mes +'/'+ ano;
 
-                            document.getElementById("vlrDiaFim").innerHTML = diaConvert;//Jogando data convertida na tela
+                            document.getElementById("vlrdata_fim_visi").innerHTML = diaConvert;//Jogando data convertida na tela
 
                            swal.close();//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
@@ -130,9 +130,9 @@ $.ajax({
 var mostrarData;
 function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table onde vc pega o valor da linha e a utiliza
 
-    ano = row.diaFim[0]+ '' + row.diaFim[1];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
-    mes = row.diaFim[5]+ '' + row.diaFim[6];//Peguei os 2 primeiros digitos do Mes dentro da linha do campo 'diaFim'
-    dia = row.diaFim[8]+ '' + row.diaFim[9];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'diaFim'
+    ano = row.data_fim_visi[0]+ '' + row.data_fim_visi[1];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'data_fim_visi'
+    mes = row.data_fim_visi[5]+ '' + row.data_fim_visi[6];//Peguei os 2 primeiros digitos do Mes dentro da linha do campo 'data_fim_visi'
+    dia = row.data_fim_visi[8]+ '' + row.data_fim_visi[9];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'data_fim_visi'
     diaConvert = dia +'/'+ mes +'/'+ ano;
 
     mostrarData = diaConvert;

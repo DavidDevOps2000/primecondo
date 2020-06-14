@@ -42,6 +42,8 @@ class Visitantes extends CI_Controller {
         $retorno = $this->m_visitantes->consultar();
 
         echo json_encode($retorno->result());
+
+
     }
 
 

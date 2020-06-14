@@ -87,7 +87,6 @@
                         </div>
                             
                         </div>
-
                     </div>
     </form>
 
@@ -113,11 +112,11 @@
                             <th data-field='nome_visi' class="col-md-1 text-center">Visitante</th>
                                 <?php  //campo usuario no bd ?>
 
-                            <th data-field='diaFim' data-formatter='diasRestantes' 
+                            <th data-field='data_fim_visi' data-formatter="diasRestantes"  
                                                 class="col-md-1 text-center">Valido até</th> 
                                 <?php  //campo ativo no bd ?>   <?php  ////aJUSTAR no banco?>
 
-                            <th data-field='status_visi' class="col-sm-1 text-center">Autorizado?</th> 
+                            <th data-field='autorizado' class="col-sm-1 text-center">Autorizado?</th> 
                                 <?php  //campo ativo no bd ?>  <?php  ////aJUSTAR no banco?>
 
                             <th  data-formatter="btnEditOpcoes" data-field='nome_visi' 
