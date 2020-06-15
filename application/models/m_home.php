@@ -9,8 +9,7 @@ class M_home extends CI_Model{
 
         if($retorno->num_rows() > 0){//Se a Variavel retorno tiver acima  1 é pq existe
                 
-        return $retorno;
-
+                return $retorno;
         }else{
                 return 0;// Se não tiver dado, então não foi logado
             }

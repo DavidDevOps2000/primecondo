@@ -30,7 +30,6 @@
                     </div>
                     <div>
                         <span class="col-md-5" style="margin-left:60%">
-
                             <select class="form-control" name="vlrMaisDias" id="vlrMaisDias">
                                 
                                 <option>0</option> 
@@ -70,6 +69,7 @@
                         <div class="form-group col-lg-2" >
                         <label for="textUsuario" class="control-label">Quantos dias de acesso ?</label>
                         <select name="valorDuracaoDias" id="valorDuracaoDias" class="form-control" data-container="body" data-width="100%">
+                                <option>Sem limite</option>
                                 <option>1</option> 
                                 <option>2</option>
                                 <option>3</option>
@@ -77,6 +77,11 @@
                                 <option>5</option>
                                 <option>6</option>
                         </select>    
+                        </div>
+                        <div><div class="form-group col-lg-2">
+                        <label for="textNome" class="control-label">Nº RG (opcional)</label>
+                        <input name="valorRg" id="valorRg" class="form-control" placeholder="Digite somente números" type="text"  maxlength="9">
+                    </div>
                         </div>
                     <div class="panel-footer clearfix">
                         <div class="btn-group pull-left">      

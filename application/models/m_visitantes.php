@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_visitantes extends CI_Model {
-
    //Visitantes 
     public function cadastrarVisitantes($nomeVisitante, $duracaoDias){                  //Cadastro Visitantes
 
@@ -23,11 +22,12 @@ class M_visitantes extends CI_Model {
             return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
-    public function consultar(){//Consulta os dados dentro do Banco e Joga na lISTA Visitantes
-            
-        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN false THEN 'NÃO' ELSE 'SIM' END 
+    public function consultar(){ //Consulta os dados dentro do Banco e Joga na lISTA Visitantes
+        $nameApelido = $_SESSION['apelido'];
+
+        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END 
                                     autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa = 1");
+                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE nomeApelido = '$nameApelido';");
             
             //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){

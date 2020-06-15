@@ -2,9 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Visitantes extends CI_Controller {
-    
-    public function index(){
 
+    public function index(){
         if($_SESSION['apelido']){//Se houver algum valor nesse sessão a pagina será contruida        
             $this->load->view('includes/header');//carregar o cabeçalho
             $this->load->view('includes/menu');
@@ -20,19 +19,15 @@ class Visitantes extends CI_Controller {
         //carregando as variáveis do que foi mandado via post
         $nomeVisitante = $this->input->post('valorNomeVisitante');
         $duracaoDias = $this->input->post('valorDuracaoDias');
-
-
+        $numRg = $this->input->post('valorRg');
         
         //Instancio a model m_visitantes
         $this->load->model('m_visitantes');
-
         //solicito a execução do método validalogin passando os
         //atributos necessários, e atribuindo a $retorno
         
         $retorno = $this->m_visitantes->cadastrarVisitantes($nomeVisitante, $duracaoDias);
-
         echo $retorno;
-
     }
 
     public function listar(){   
