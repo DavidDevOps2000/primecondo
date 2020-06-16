@@ -5,18 +5,30 @@ class M_visitantes extends CI_Model {
 
     public function cadastrarVisitantes($nomeVisitante, $duracaoDias, $numRg){                  //Cadastro Visitantes
         $idUsuario = $_SESSION['id_usuario'];
-        $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
 
-        if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
+        $retorno = $this->db->query("SELECT * FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa JOIN 
+                                            visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa=$idUsuario and nome_visi='$nomeVisitante'");// Aqui, será verificado se retorna algo
+                                                                     //Buscando id do Visitante recem cadastrado para jogar tbm agendamento
+        
+        if($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
 
-            if(is_array($duracaoDias)){
-                $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW());
-                              INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi) VALUES($idUsuario, 4");
-
-            }
+                if(is_string($duracaoDias)){//Esse agendamento só será executado se o não tiver dias definidos
                 
-            $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW());
-                              INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) VALUES(1, 4, NOW(), NOW() + INTERVAL $duracaoDias day)");
+                            $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW())"); //Inserindo dados de visitantes somente com o nome e RG ou só o nome
+                            
+                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
+
+                            $arrayVisi = array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
+                            
+                            $idVisi = $arrayVisi["id_visi"];//jogando o ID valor aqui
+
+                            $this->db->query("INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi) VALUES($idUsuario, $idVisi);");//Cadastrando e vinculando ao usuario e visitante
+                }else{
+
+                    
+                }
+                
+           
                 
             if($this->db->affected_rows() == true){//verifica a inserção
                     //Inserção com sucesso

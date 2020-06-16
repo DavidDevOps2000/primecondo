@@ -51,7 +51,8 @@
 
 <div class="divMsgCentro">
             <label class="msgCentro">Tecnologia e Segurança juntos por único objetivo.</label><br>
-            <input type="button" class="btn_queSomos" value="Quem Somos">
+            <input type="button" class="btn_queSomos" value="Quem Somos"><br>
+            <label class="msgCentro">© 2019-2020 PrimeCondo Todos os Direitos Reservados</label>
         </div>
 
 

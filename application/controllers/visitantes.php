@@ -19,14 +19,6 @@ class Visitantes extends CI_Controller {
         $nomeVisitante = $this->input->post('valorNomeVisitante');
         $duracaoDias = $this->input->post('valorDuracaoDias');
         $numRg = $this->input->post('valorRg');
-
-        if(is_array($duracaoDias)){//Se vier o texto aqui
-            $duracaoDias = null;//Converterei em nulo para não crachar o bd
-        }
-        
-        if(is_array($numRg)){
-            $numRg = null;
-        }
         
         //Instancio a model m_visitantes
         $this->load->model('m_visitantes');
