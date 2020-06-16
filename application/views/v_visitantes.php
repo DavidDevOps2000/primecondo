@@ -1,5 +1,23 @@
 <body>
 
+<script>
+
+function soNumero(e){//Evento
+
+var seuTeclado = (window.event)?event.keyCode:e.which;   //Criando um objeto
+
+if((seuTeclado > 47 && seuTeclado <58)) {
+
+    return true;
+
+}else{
+        if(seuTeclado == 8 || seuTeclado ==0) { return true;}
+    
+        else{  return false; }
+}
+}
+</script>
+
 <?php //-- atualização de Convidado ?>
 <div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 	<div class="modal-dialog modal-dialig-centered" role="document">
@@ -80,7 +98,7 @@
                         </div>
                         <div><div class="form-group col-lg-2">
                         <label for="textNome" class="control-label">Nº RG (opcional)</label>
-                        <input name="valorRg" id="valorRg" class="form-control" placeholder="Digite somente números" type="text"  maxlength="9">
+                        <input name="valorRg" text="text" onkeypress='return soNumero(event)' id="valorRg" class="form-control" placeholder="Digite somente números" maxlength="9">
                     </div>
                         </div>
                     <div class="panel-footer clearfix">
@@ -117,8 +135,7 @@
                             <th data-field='nome_visi' class="col-md-1 text-center">Visitante</th>
                                 <?php  //campo usuario no bd ?>
 
-                            <th data-field='data_fim_visi' data-formatter="diasRestantes"  
-                                                class="col-md-1 text-center">Valido até</th> 
+                            <th data-field='data_fim_visi'  class="col-md-1 text-center">Valido até</th> <?php ///*data-formatter="diasRestantes tirei essa função pois ela dá erro quando usuario não coloca a data e fica null*/?>
                                 <?php  //campo ativo no bd ?>   <?php  ////aJUSTAR no banco?>
 
                             <th data-field='autorizado' class="col-sm-1 text-center">Autorizado?</th> 

@@ -5,7 +5,7 @@ class M_home extends CI_Model{
 
     public function authAcessoPage($usuario){
 
-     $retorno = $this->db->query("SELECT nome_pessoa from tbl_pessoa where nomeApelido='$usuario' and status_pess = true;");
+     $retorno = $this->db->query("SELECT id_pessoa, nome_pessoa from tbl_pessoa where nomeApelido='$usuario' and status_pess = true;");
 
         if($retorno->num_rows() > 0){//Se a Variavel retorno tiver acima  1 é pq existe
                 

@@ -14,19 +14,26 @@ class Visitantes extends CI_Controller {
             ECHO "POR FAVOR, FAÇA O LOGIN";
         }
     }
-
     public function cadastrarVisitantes(){
         //carregando as variáveis do que foi mandado via post
         $nomeVisitante = $this->input->post('valorNomeVisitante');
         $duracaoDias = $this->input->post('valorDuracaoDias');
         $numRg = $this->input->post('valorRg');
+
+        if(is_array($duracaoDias)){//Se vier o texto aqui
+            $duracaoDias = null;//Converterei em nulo para não crachar o bd
+        }
+        
+        if(is_array($numRg)){
+            $numRg = null;
+        }
         
         //Instancio a model m_visitantes
         $this->load->model('m_visitantes');
         //solicito a execução do método validalogin passando os
         //atributos necessários, e atribuindo a $retorno
         
-        $retorno = $this->m_visitantes->cadastrarVisitantes($nomeVisitante, $duracaoDias);
+        $retorno = $this->m_visitantes->cadastrarVisitantes($nomeVisitante, $duracaoDias, $numRg);
         echo $retorno;
     }
 
@@ -80,20 +87,12 @@ class Visitantes extends CI_Controller {
     }
 
     public function ativarVisi(){ // Não usado
-
         $nomeVisitante = $this->input->post('nomeVisitante');
-
         $this->load->model('m_visitantes');
-
         $retorno = $this->m_visitantes->ativarVisi($nomeVisitante);
-
         echo $retorno;
-
     }
-
     
-
-
     public function logout(){
         $this->session->sess_destroy();
         redirect(base_url());

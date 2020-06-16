@@ -2,16 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_visitantes extends CI_Model {
-   //Visitantes 
-    public function cadastrarVisitantes($nomeVisitante, $duracaoDias){                  //Cadastro Visitantes
 
-     $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
-        
+    public function cadastrarVisitantes($nomeVisitante, $duracaoDias, $numRg){                  //Cadastro Visitantes
+        $idUsuario = $_SESSION['id_usuario'];
+        $retorno = $this->db->query("SELECT * from visi_apt where nome_visi = '$nomeVisitante'");// Aqui, será verificado se retorna algo
 
         if ($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
+
+            if(is_array($duracaoDias)){
+                $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW());
+                              INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi) VALUES($idUsuario, 4");
+
+            }
                 
-            $this->db->query("insert into visi_apt(nome_visi, diaInicio, diaFim, dt_hr_solicitacao) values('$nomeVisitante', now(), now() + interval $duracaoDias day, now());");
-                if($this->db->affected_rows() == true){//verifica a inserção
+            $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW());
+                              INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) VALUES(1, 4, NOW(), NOW() + INTERVAL $duracaoDias day)");
+                
+            if($this->db->affected_rows() == true){//verifica a inserção
                     //Inserção com sucesso
                     return 1;
                 }else{
@@ -23,11 +30,11 @@ class M_visitantes extends CI_Model {
             }
     }
     public function consultar(){ //Consulta os dados dentro do Banco e Joga na lISTA Visitantes
-        $nameApelido = $_SESSION['apelido'];
+        $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
 
         $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END 
                                     autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE nomeApelido = '$nameApelido';");
+                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa = $idUsuario;");
             
             //Retorno o resultado do SELECT
             if($retorno->num_rows() > 0){
@@ -56,7 +63,7 @@ class M_visitantes extends CI_Model {
 
     public function diasFaltam($nomeVisitante){// Não usado
         
-        $retorno = $this->db->query("SELECT diaFim - date(now())  from visi_apt where nome_visi = '$nomeVisitante';");
+        $retorno = $this->db->query("SELECT diaFim - date(NOW())  from visi_apt where nome_visi = '$nomeVisitante';");
         
         if($nomeVisitante > 0){
 
