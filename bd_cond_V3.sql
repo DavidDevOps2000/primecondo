@@ -133,7 +133,7 @@ CREATE TABLE visi_apt (							#WEB / DESKTOP
   dt_registro_visi DATETIME NOT NULL,
   rg_visi VARCHAR(9),# Esse campo só pode ser preenchido opcionalmente pelo Desktop
   PRIMARY KEY (id_visi),
-  UNIQUE INDEX rg_visiUNIQUE (rg_visi ASC));
+  INDEX rg_visiUNIQUE (rg_visi ASC));
   ALTER TABLE visi_apt ENGINE = InnoDB;
 
 

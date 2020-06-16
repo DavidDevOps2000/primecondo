@@ -11,7 +11,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
     return true;
 
 }else{
-        if(seuTeclado == 8 || seuTeclado ==0) { return true;}
+        if(seuTeclado == 8 || seuTeclado == 0) { return true;}
     
         else{  return false; }
 }
@@ -50,7 +50,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         <span class="col-md-5" style="margin-left:60%">
                             <select class="form-control" name="vlrMaisDias" id="vlrMaisDias">
                                 
-                                <option>0</option> 
+                                <option>Sem limite</option> 
                                 <option>1</option> 
                                 <option>2</option>
                                 <option>3</option>

@@ -1,4 +1,5 @@
-$(document).ready(function(){ $("#formCadasVisi").submit(function(event){
+$(document).ready(function(){ $("#formCadasVisi").submit(function(event){ 
+
 swal({
     title:"Atenção",
     text: "Tem certeza que quer cadastrar esse Visitante ?",
@@ -14,8 +15,11 @@ swal({
                     $.ajax({
                             type: "POST",
                             url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
-                            data: $("#formCadasVisi").serialize(),
-                                            success:(data)=>{
+                            data:{
+                                'vlrNomeVisi':$('#valorNomeVisitante').val(),
+                                'vlrDuracaoDias':$('#valorDuracaoDias').val(),
+                                'vlrRg':$('#valorDuracaoDias').val()                                   
+                                        },success:(data)=>{
                                                     if($.trim(data) == 1){
                                                             $("#formCadasVisi").trigger("reset");
 
@@ -33,22 +37,21 @@ swal({
                                                             swal({title: "ATENÇÃO!", text: "Erro ao inserir visitante, verifique!", type: "error"});
                                                             }
 
-                                                    },beforeSend: ()=>{
-                        swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
-                    },
-                    error:()=>{ swal({
-                        title: "OK",
-                        text: "Error no Banco de dados, Por Favor entre mais tarde",
-                        type: "error",
-                        showCancelButton: false,
-                        confirmButtonColor: "#54DD74",
-                        confirmButtonText: "OK!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                        });}//Só dá erro aqui, quando há um problema no banco de dados ou no model
+                                        },beforeSend:()=>{swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
+                                        
+                                        },error:()=>{ swal({
+                                                        title: "OK",
+                                                        text: "Error no Banco de dados, Por Favor entre mais tarde",
+                                                        type: "error",
+                                                        showCancelButton: false,
+                                                        confirmButtonColor: "#54DD74",
+                                                        confirmButtonText: "OK!",
+                                                        closeOnConfirm: false,
+                                                        closeOnCancel: false});
+                                                    }//Só dá erro aqui, quando há um problema no banco de dados ou no model
                     
-                });
-                return false;//Esse Returna deve ficar após os swal, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
+                        });
+            return false;//Esse Returna deve ficar após os swal, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
         }
     });
 

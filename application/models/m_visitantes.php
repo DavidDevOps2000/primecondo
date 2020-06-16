@@ -23,12 +23,21 @@ class M_visitantes extends CI_Model {
                             $idVisi = $arrayVisi["id_visi"];//jogando o ID valor aqui
 
                             $this->db->query("INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi) VALUES($idUsuario, $idVisi);");//Cadastrando e vinculando ao usuario e visitante
-                }else{
-
-                    
-                }
                 
-           
+                        
+                        }else{//Se o dia não tiver limite, entao vai cair aqui embaixo
+
+                            $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW())"); //Inserindo dados de visitantes somente com o nome e RG ou só o nome
+                            
+                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
+
+                            $arrayVisi = array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
+                            
+                            $idVisi = $arrayVisi["id_visi"];//jogando o ID valor aqui
+
+                            $this->db->query("INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+                                                                VALUES($idUsuario, $idVisi, now(), now() + interval $duracaoDias day)");//Cadastrando e vinculando ao usuario e visitante
+                            }
                 
             if($this->db->affected_rows() == true){//verifica a inserção
                     //Inserção com sucesso
