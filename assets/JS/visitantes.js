@@ -100,14 +100,7 @@ $.ajax({
 
                             document.getElementById("vlrAutoriza").innerHTML = data[0].status_visi;
 
-                            ano = data[0].data_fim_visi[0] + '' + data[0].data_fim_visi[1];//Convertendo DATA para o Front
-                            mes = data[0].data_fim_visi[5] + '' + data[0].data_fim_visi[6];
-                            dia = data[0].data_fim_visi[8] + '' + data[0].data_fim_visi[9];
-                            diaConvert = dia +'/'+ mes +'/'+ ano;
-
-                            document.getElementById("vlrdata_fim_visi").innerHTML = diaConvert;//Jogando data convertida na tela
-
-                           swal.close();//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
+                    swal.close();//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
             beforeSend:()=>{
                 swal({title: "Só um momento...",text: "Loading...", imageUrl: "assets/img/gifs/loading.gif",showConfirmButton:false });
@@ -138,9 +131,7 @@ function diasRestantes(numeroDia, row){//Esse Row é uma propriedadade da table 
     dia = row.data_fim_visi[8]+ '' + row.data_fim_visi[9];//Peguei os 2 primeiros digitos do Ano dentro da linha do campo 'data_fim_visi'
     diaConvert = dia +'/'+ mes +'/'+ ano;
 
-    mostrarData = diaConvert;
-   return diaConvert;
-  
+    mostrarData = diaConvert;return diaConvert;
 }
 
 function alterVisita(){
@@ -149,11 +140,8 @@ function alterVisita(){
     var vlrStatus = document.getElementById('vlrAutoriza').innerHTML;
 
     if(vlrStatus == 'NÃO'){//Convertendo em true ou false para bd
-        
         vlrStatus = false;
-
     }else{
-
         vlrStatus = true;
     }
 
@@ -178,7 +166,7 @@ function alterVisita(){
                                                 closeOnCancel: false
                                                 }
                                                 ,(isConfirm)=>{
-                                                         if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
+                                                                if(isConfirm){ document.location.reload(true); /*Atualizar documento caso pressionem Ok*/   }
                                                     }
                                             );
                                 }else{
@@ -207,6 +195,4 @@ function alterVisita(){
                             closeOnCancel: false
                             }); }
             });
-
-
-  }
+}

@@ -19,7 +19,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 </script>
 
 <?php //-- atualização de Convidado ?>
-<div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
+<div *classmodal fade* id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 	<div class="modal-dialog modal-dialig-centered" role="document">
 			    <div class="modal-content">
 				    <div class="modal-header"> <input type="button" class="close" data-dismiss="modal" aria-label="Fechar" aria-hidden="true" name="btnClose" value="&times;">
@@ -27,15 +27,17 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 				</div>
 		    <div class="modal-header">
 				<form id="formaAlter">
-					<div class="form-group">
-							<input class="form-control" type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva novo nome do visitante">
+                <div class="form-group">
+						<input class="form-control" type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva novo nome do visitante" maxlength="90"><br>
+
+                        <label for="textNome">Nº RG (opcional)</label>
+                        <input class="form-control" text="text" onkeypress='return soNumero(event)' id="vlrRg" name="vlrRg" placeholder="Digite somente números" maxlength="9">
+                        
 					</div>  
-                    <div class="row-md-1">
                         
                             <label class="control-label">Entrada Autorizado(a) ?</label><br>
                             <label class="control-label" style="padding-right:80%" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
                             <input type="button" class="btn btn-primary" onClick="mudarStatus()" value="Alterar">
-                    </div>
                     <br>
                     
                     <div class="row-md-1">
@@ -82,7 +84,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                 <div class="">
                     <div class="form-group col-lg-4">
                         <label for="textNome" class="control-label">Nome Visitante:</label>
-                        <input name="valorNomeVisitante" id="valorNomeVisitante" class="form-control" placeholder="Digite o nome do convidado" type="text"  maxlength="110" required>
+                        <input name="valorNomeVisitante" id="valorNomeVisitante" class="form-control" placeholder="Digite o nome do convidado" type="text"  maxlength="90" required>
                     </div>
                         <div class="form-group col-lg-2" >
                         <label for="textUsuario" class="control-label">Quantos dias de acesso ?</label>

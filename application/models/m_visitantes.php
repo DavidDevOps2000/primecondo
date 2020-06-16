@@ -50,6 +50,7 @@ class M_visitantes extends CI_Model {
             return 2;//Se o usuario existir, não vai cadastrar e vai retornar um aviso.
             }
     }
+    
     public function consultar(){ //Consulta os dados dentro do Banco e Joga na lISTA Visitantes
         $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
 

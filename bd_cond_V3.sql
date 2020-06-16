@@ -19,7 +19,7 @@ CREATE TABLE tbl_rfid (
 CREATE TABLE tbl_pessoa(      #desktop
   id_pessoa INT(11) NOT NULL AUTO_INCREMENT,
   cpf_pessoa VARCHAR(11) UNIQUE NOT NULL, #CPF só os numeros, sem hifens e pontos e não pode duplicar por causa do UNIQUE
-  nome_pessoa VARCHAR(50) /*NOT NULL*/,
+  nome_pessoa VARCHAR(90) /*NOT NULL*/,
   senha VARCHAR(20) /*NOT NULL*/,# Para uso do Login
   nomeApelido VARCHAR(20) UNIQUE /*NOT NULL*/,# Para uso do Login SOMENTE MAIORES DE 18 ANOS PODEM fazer o login, tirar essa opção de não moradores e proprietários
   dt_reg DATETIME DEFAULT NOW() NOT NULL, # Dia que a pessoa foi registrada
@@ -129,7 +129,7 @@ CREATE TABLE tbl_veiculo (
 -- -----------------------------------------------------
 CREATE TABLE visi_apt (							#WEB / DESKTOP 
   id_visi INT(11) NOT NULL AUTO_INCREMENT,
-  nome_visi VARCHAR(30) NOT NULL,
+  nome_visi VARCHAR(90) NOT NULL,
   dt_registro_visi DATETIME NOT NULL,
   rg_visi VARCHAR(9),# Esse campo só pode ser preenchido opcionalmente pelo Desktop
   PRIMARY KEY (id_visi),

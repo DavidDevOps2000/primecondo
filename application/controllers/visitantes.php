@@ -21,19 +21,17 @@ class Visitantes extends CI_Controller {
         $numRg = $this->input->post('vlrRg');
 
         if($duracaoDias != "Sem limite"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
-
             $duracaoDias = intval($duracaoDias); 
-
         }
 
         
-        
-        //Instancio a model m_visitantes
-        $this->load->model('m_visitantes');
+        $this->load->model('m_visitantes');//Instancio a model m_visitantes
+
         //solicito a execução do método validalogin passando os
         //atributos necessários, e atribuindo a $retorno
         
         $retorno = $this->m_visitantes->cadastrarVisitantes($nomeVisitante, $duracaoDias, $numRg);
+        
         echo $retorno;
     }
 
