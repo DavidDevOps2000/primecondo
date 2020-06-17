@@ -18,7 +18,7 @@ class Visitantes extends CI_Controller {
         //carregando as variáveis do que foi mandado via post
         $nomeVisitante = $this->input->post('vlrNomeVisi');
         $duracaoDias = $this->input->post('vlrDuracaoDias');
-        $numRg = $this->input->post('vlrRg');
+        $numRg = $this->input->post('valorRg');
 
         if($duracaoDias != "Sem limite"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
             $duracaoDias = intval($duracaoDias); 
@@ -38,14 +38,9 @@ class Visitantes extends CI_Controller {
     public function listar(){   
                     // Listo todos os meus Visitantes e jogo na lista do V_Visitantes
         $this->load->model('m_visitantes');
-
         $retorno = $this->m_visitantes->consultar();
-
         echo json_encode($retorno->result());
-
-
     }
-
 
     public function consultVisiToModel(){
 
@@ -64,10 +59,16 @@ class Visitantes extends CI_Controller {
         $duracaoDias = $this->input->post('maisDias');
         $novoNomeVisitante = $this->input->post('nomeNovoVisi');
         $novoStatus = $this->input->post('novoStatus');
+        $novoVlrRg = $this->input->post('vlrRg');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus);
+        if($duracaoDias != "Nenhum"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
+            $duracaoDias = intval($duracaoDias); 
+        }
+
+
+        $retorno = $this->m_visitantes->alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg);
 
         echo $retorno;
     }

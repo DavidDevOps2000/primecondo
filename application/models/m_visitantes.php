@@ -16,7 +16,7 @@ class M_visitantes extends CI_Model {
                 
                             $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW())"); //Inserindo dados de visitantes somente com o nome e RG ou só o nome
                             
-                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
+                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante' AND rg_visi='$numRg'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
 
                             $arrayVisi = array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
                             
@@ -29,7 +29,7 @@ class M_visitantes extends CI_Model {
 
                             $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW())"); //Inserindo dados de visitantes somente com o nome e RG ou só o nome
                             
-                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
+                            $retorno = $this->db->query("SELECT id_visi FROM visi_apt WHERE nome_visi='$nomeVisitante' AND rg_visi='$numRg'");//Buscando id do Visitante recem cadastrado para jogar tbm agendamento
 
                             $arrayVisi = array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
                             
@@ -64,55 +64,79 @@ class M_visitantes extends CI_Model {
             }
         }
         
-
-
-
-
     public function consultVisiToModel($nomeVisitante){// Essa funçao é para jogar os valores dos resultados dentro da Model ao se clicar com o btnEdit
-        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN false THEN 'NÃO' ELSE 'SIM' END autorizado FROM tbl_pessoa 
-                                    JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE nome_visi = '$nomeVisitante' and id_pessoa=1");
-    
-            if($retorno->num_rows() > 0){
+        $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
 
+        $retorno = $this->db->query("SELECT nome_visi, data_fim_visi, autorizado, rg_visi, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END 
+                                            autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                            JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
+                                            WHERE nome_visi='$nomeVisitante' and id_pessoa=$idUsuario;");
+            if($retorno->num_rows() > 0){
                 return $retorno;
             }
         }
 
 
-        
+        public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg){  
+            $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
+
+            if($duracaoDias == 'Nenhum'){// Se em duração de dias vier a palavra nenhum, que nesse caso é String, fazer isso abaixo
+
+                $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+                                                            JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                            SET nome_visi='$novoNomeVisitante',
+                                                                rg_visi='$novoVlrRg',
+                                                                data_fim_visi = null,
+                                                                autorizado = $novoStatus
+                                                                WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");
+
+            }else{//Se vier o numero de dias, vai fazer isso
+
+                $retorno = $this->db->query("SELECT data_fim_visi FROM tbl_pessoa /* Caso venha numero de dias, então faremos uma validação pra saber se o campo dataFim não está vazio, pra evitar update com erro*/
+                                                JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa
+                                                JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
+                                                WHERE nome_visi='$nomeVisitante' and id_pessoa=$idUsuario;");//Verificaremos qual é o campo
 
 
-    public function diasFaltam($nomeVisitante){// Não usado
-        
-        $retorno = $this->db->query("SELECT diaFim - date(NOW())  from visi_apt where nome_visi = '$nomeVisitante';");
-        
-        if($nomeVisitante > 0){
-
-                return $returno;
-
-            }else{
-                    
-                $returno="Data Expirada";
-                
-                return $returno;
-            
-            }
-        }
+                $temVlrNull = array('data_fim_visi'=>$retorno->row()->data_fim_visi);//Verificando se há um valor nulo no campo data Fim
+                $temVlrNull = $temVlrNull['data_fim_visi'];//colocando aqui o valor do id do visitante atualizado
 
 
-        public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus) {
+                            if($temVlrNull == null){// Se não houver valor null faremos seguinte insert, trocando o campo 'NOW() + INTERVAL $duracaoDias day'
+                                $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+                                                            JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                            SET nome_visi='$novoNomeVisitante', rg_visi='$novoVlrRg', data_fim_visi = (NOW() + INTERVAL $duracaoDias day)
+                                                            WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");/*Aqui será os dias atualizados 2*/
 
-            $retorno = $this->db->query("UPDATE visi_apt set diaFim = ADDDATE(diaFim, interval $duracaoDias day), 
-                                            status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where nome_visi = '$nomeVisitante'");
-    
-                if($this->db->affected_rows() == TRUE){//verifica a inserção
-                                
-                                return 1;//Inserção com sucesso
-    
                             }else{
-                     return 0; 
-                                } //problema ao inserir
+                                
+                                $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+                                                            JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                            SET nome_visi='$novoNomeVisitante', rg_visi='$novoVlrRg', data_fim_visi = ADDDATE(data_fim_visi, interval $duracaoDias day)
+                                                            WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");/*Aqui será os dias atualizados 1 */
+
+                            }
+                }
+
+            $retorno = $this->db->query("SELECT id_visi FROM tbl_pessoa JOIN agen_visi 
+                                        ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                        JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
+                                        WHERE nome_visi='$novoNomeVisitante' and id_pessoa=$idUsuario;");//Pegando o ID do visitante JÁ AGENDADO, que está Vinculado ao Usuario Web, e tbm pegar Visitante atual da modal
+            
+            $arrayVisi= array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
+            $idVisi = $arrayVisi["id_visi"];//jogando ID aqui
+
+            $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                            SET nome_visi='$novoNomeVisitante', rg_visi='$novoVlrRg', data_fim_visi = (NOW() + INTERVAL $duracaoDias day)
+                                                            WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");/*Aqui será os dias atualizados */
+            
+            if($this->db->affected_rows() == TRUE){//verifica a inserção
+                                
+                        return 1;//Inserção com sucesso
+                }else{
+                        return 0; 
+                                
+                    } //problema ao inserir
                 
         }
 

@@ -19,7 +19,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 </script>
 
 <?php //-- atualização de Convidado ?>
-<div *classmodal fade* id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
+<div class ="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 	<div class="modal-dialog modal-dialig-centered" role="document">
 			    <div class="modal-content">
 				    <div class="modal-header"> <input type="button" class="close" data-dismiss="modal" aria-label="Fechar" aria-hidden="true" name="btnClose" value="&times;">
@@ -44,7 +44,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         <span>
                             <label class="control-label">Validade:</label>
                             <label class="control-label" name="vlrDiaFim" id="vlrDiaFim">99/99/99</label>
-                            <label class="control-label"  style="padding-left:45%">Adicionar quantos dias?</label>
+                            <label class="control-label"  style="padding-left:65%">Adicionar quantos dias?</label>
                         </span>
                         <br>
                     </div>
@@ -52,7 +52,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         <span class="col-md-5" style="margin-left:60%">
                             <select class="form-control" name="vlrMaisDias" id="vlrMaisDias">
                                 
-                                <option>Sem limite</option> 
+                                <option>Nenhum</option> 
                                 <option>1</option> 
                                 <option>2</option>
                                 <option>3</option>
@@ -100,7 +100,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         </div>
                         <div><div class="form-group col-lg-2">
                         <label for="textNome" class="control-label">Nº RG (opcional)</label>
-                        <input name="valorRg" text="text" onkeypress='return soNumero(event)' id="valorRg" class="form-control" placeholder="Digite somente números" maxlength="9">
+                        <input name="valorRg"  id="valorRg" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
                     </div>
                         </div>
                     <div class="panel-footer clearfix">

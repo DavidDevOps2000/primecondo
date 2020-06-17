@@ -96,10 +96,10 @@ $.ajax({
             success:(data)=>{
                             nomeSeu = data[0].nome_visi;//Salvando nome antigo aqui, para ser usado no insert na conficional Where
 
-                            $('#vlrNomeVisi').val(data[0].nome_visi);//Insertando os valores do JSN result da controller 
-
-                            document.getElementById("vlrAutoriza").innerHTML = data[0].status_visi;
-
+                            $('#vlrNomeVisi').val(data[0].nome_visi);//Insertando os valores do JSN result da controller
+                            $('#vlrRg').val(data[0].rg_visi);
+                            $('#vlrAutoriza').val(data[0].autorizado);
+                            document.getElementById("vlrDiaFim").innerHTML=data[0].data_fim_visi;
                     swal.close();//Esse close,é para evitar que carregue, pois senão, vao carregar ETERNAMENTE SEM DAR OS RESULTADOS
             },
             beforeSend:()=>{
@@ -154,6 +154,7 @@ function alterVisita(){
             'nomeNovoVisi':$('#vlrNomeVisi').val(),
             'maisDias':vlrMaisDias,
             'novoStatus':vlrStatus,
+            'vlrRg': $('#vlrRg').val()
                     },success:(data)=>{
                                 if(data == 1){
                                         swal({  title: "OK", 
