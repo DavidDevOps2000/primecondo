@@ -16,14 +16,13 @@ class Visitantes extends CI_Controller {
     }
     public function cadastrarVisitantes(){
         //carregando as variáveis do que foi mandado via post
-        $nomeVisitante = $this->input->post('vlrNomeVisi');
-        $duracaoDias = $this->input->post('vlrDuracaoDias');
+        $nomeVisitante = $this->input->post('valorNomeVisi');
+        $duracaoDias = $this->input->post('valorDuracaoDias');
         $numRg = $this->input->post('valorRg');
 
         if($duracaoDias != "Sem limite"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
             $duracaoDias = intval($duracaoDias); 
         }
-
         
         $this->load->model('m_visitantes');//Instancio a model m_visitantes
 

@@ -31,7 +31,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 						<input class="form-control" type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva novo nome do visitante" maxlength="90"><br>
 
                         <label for="textNome">Nº RG (opcional)</label>
-                        <input class="form-control" text="text" onkeypress='return soNumero(event)' id="vlrRg" name="vlrRg" placeholder="Digite somente números" maxlength="9">
+                        <input class="form-control" text="text" onkeypress='return soNumero(event)' id="vlrRgVisi" name="vlrRgVisi" placeholder="Digite somente números" maxlength="9">
                         
 					</div>  
                         
@@ -100,7 +100,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         </div>
                         <div><div class="form-group col-lg-2">
                         <label for="textNome" class="control-label">Nº RG (opcional)</label>
-                        <input name="valorRg"  id="valorRg" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
+                        <input name="valorRgVisi"  id="valorRgVisi" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
                     </div>
                         </div>
                     <div class="panel-footer clearfix">
@@ -134,13 +134,13 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                  <?php //Endereço do Controller responsável em buscar os dados da lista ?>
                     <thead>
                        <tr class="table-primary"> 
-                            <th data-field='nome_visi' class="col-md-1 text-center">Visitante</th>
+                            <th data-field='nome_visi' class="col-md-2 text-center">Visitante</th>
                                 <?php  //campo usuario no bd ?>
 
                             <th data-field='data_fim_visi'  class="col-md-1 text-center">Valido até</th> <?php ///*data-formatter="diasRestantes tirei essa função pois ela dá erro quando usuario não coloca a data e fica null*/?>
                                 <?php  //campo ativo no bd ?>   <?php  ////aJUSTAR no banco?>
 
-                            <th data-field='autorizado' class="col-sm-1 text-center">Autorizado?</th> 
+                            <th data-field='autorizado' class="col-md-1 text-center">Autorizado?</th> 
                                 <?php  //campo ativo no bd ?>  <?php  ////aJUSTAR no banco?>
 
                             <th  data-formatter="btnEditOpcoes" data-field='nome_visi' 
