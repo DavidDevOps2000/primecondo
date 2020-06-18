@@ -134,7 +134,7 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                  <?php //Endereço do Controller responsável em buscar os dados da lista ?>
                     <thead>
                        <tr class="table-primary"> 
-                            <th data-field='nome_visi' class="col-md-2 text-center">Visitante</th>
+                            <th data-field='nome_visi' class="col-md-1 text-center">Visitante</th>
                                 <?php  //campo usuario no bd ?>
 
                             <th data-field='data_fim_visi'  class="col-md-1 text-center">Valido até</th> <?php ///*data-formatter="diasRestantes tirei essa função pois ela dá erro quando usuario não coloca a data e fica null*/?>

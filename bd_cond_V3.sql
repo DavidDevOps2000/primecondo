@@ -18,7 +18,7 @@ CREATE TABLE tbl_rfid (
 -- -----------------------------------------------------
 CREATE TABLE tbl_pessoa(      #desktop
   id_pessoa INT(11) NOT NULL AUTO_INCREMENT,
-  cpf_pessoa VARCHAR(11) UNIQUE NOT NULL, #CPF só os numeros, sem hifens e pontos e não pode duplicar por causa do UNIQUE
+  cpf_pessoa VARCHAR(11) UNIQUE NOT NULL, #CPF só os numeros, sem hifens e pontos e não pode duplicar por causa do UNIQUE,cpf  Todas as idades, a parti de zeroa anos, são obrigatorios por causa de uma lei de 2019
   nome_pessoa VARCHAR(90) /*NOT NULL*/,
   senha VARCHAR(20) /*NOT NULL*/,# Para uso do Login
   nomeApelido VARCHAR(20) UNIQUE /*NOT NULL*/,# Para uso do Login SOMENTE MAIORES DE 18 ANOS PODEM fazer o login, tirar essa opção de não moradores e proprietários

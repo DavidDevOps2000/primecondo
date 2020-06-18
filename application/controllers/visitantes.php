@@ -23,7 +23,7 @@ class Visitantes extends CI_Controller {
         if($duracaoDias != "Sem limite"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
             $duracaoDias = intval($duracaoDias); 
         }
-        
+
         $this->load->model('m_visitantes');//Instancio a model m_visitantes
 
         //solicito a execução do método validalogin passando os
@@ -62,8 +62,10 @@ class Visitantes extends CI_Controller {
 
         $this->load->model('m_visitantes');
 
-        if($duracaoDias != "Nenhum"){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
+        if($duracaoDias != 'Nenhum'){//se não vir essa msg na var, então vamos convertela em numero para a condição da modal
             $duracaoDias = intval($duracaoDias); 
+        }else {
+            $duracaoDias ='Nenhum';
         }
 
 

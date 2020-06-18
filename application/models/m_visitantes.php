@@ -12,7 +12,7 @@ class M_visitantes extends CI_Model {
         
         if($retorno->num_rows() == false){ // Aqui será verificado se NÃO existe nenhuma linha, se existir é pq nome é repetido
 
-                if(is_string($duracaoDias)){//Esse agendamento só será executado se o não tiver dias definidos
+                if(is_string($duracaoDias)){//Esse agendamento só será executado se o não tiver dias definidos, ou seja, aqui tera STRINGS
                 
                             $this->db->query("INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) VALUES('$nomeVisitante', '$numRg', NOW())"); //Inserindo dados de visitantes somente com o nome e RG ou só o nome
                             
@@ -76,20 +76,18 @@ class M_visitantes extends CI_Model {
             }
         }
 
-
         public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg){  
             $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
 
-            if($duracaoDias == 'Nenhum'){// Se em duração de dias vier a palavra nenhum, que nesse caso é String, fazer isso abaixo
+            if(is_string($duracaoDias)){// Se em duração de dias vier a palavra nenhum, que nesse caso é String, fazer isso abaixo
 
                 $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
                                                             JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
                                                             SET nome_visi='$novoNomeVisitante',
                                                                 rg_visi='$novoVlrRg',
-                                                                data_fim_visi = null,
+                                                                data_fim_visi = null,/* aqui apagamos o numero de dias pois o usuario usou o Nenhum como opcao */
                                                                 autorizado = $novoStatus
                                                                 WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");
-
             }else{//Se vier o numero de dias, vai fazer isso
 
                 $retorno = $this->db->query("SELECT data_fim_visi FROM tbl_pessoa /* Caso venha numero de dias, então faremos uma validação pra saber se o campo dataFim não está vazio, pra evitar update com erro*/
@@ -114,22 +112,10 @@ class M_visitantes extends CI_Model {
                                                             JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
                                                             SET nome_visi='$novoNomeVisitante', rg_visi='$novoVlrRg', data_fim_visi = ADDDATE(data_fim_visi, interval $duracaoDias day)
                                                             WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");/*Aqui será os dias atualizados 1 */
-
                             }
                 }
 
-            $retorno = $this->db->query("SELECT id_visi FROM tbl_pessoa JOIN agen_visi 
-                                        ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-                                        JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
-                                        WHERE nome_visi='$novoNomeVisitante' and id_pessoa=$idUsuario;");//Pegando o ID do visitante JÁ AGENDADO, que está Vinculado ao Usuario Web, e tbm pegar Visitante atual da modal
-            
-            $arrayVisi= array("id_visi"=>$retorno->row()->id_visi);//Pegando O id  e jogando em um array 
-            $idVisi = $arrayVisi["id_visi"];//jogando ID aqui
-
-            $this->db->query("UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-                                                            SET nome_visi='$novoNomeVisitante', rg_visi='$novoVlrRg', data_fim_visi = (NOW() + INTERVAL $duracaoDias day)
-                                                            WHERE nome_visi='$nomeVisitante' AND id_pessoa = $idUsuario;");/*Aqui será os dias atualizados */
-            
+                
             if($this->db->affected_rows() == TRUE){//verifica a inserção
                                 
                         return 1;//Inserção com sucesso

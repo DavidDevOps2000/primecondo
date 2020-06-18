@@ -1,21 +1,62 @@
-use bd_vendas;
+use bd_cond;
 
-BEGIN;			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
-INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) 
-VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 	'Proprietario');
-INSERT INTO tbl_moradia(num_ap, bloco_ap, tbl_pessoa_id_pessoa1, num_vaga_car) 
-VALUES (1, 			'B', 					  1,			1);
-commit;
-#SELECT * FROM TBL_PESSOA;
-#ROLLBACK;
+			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
+INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) /*Inserindo Moradores*/
+VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 		'Proprietario'), /* Usuario administrador, senha: admin123 */
+					  ('12345678123',	'Jose da Silva', 	'jose123', 				'joseadmin', 		'Proprietario'); /* Usuario joseAdmin, senha: jose123 */
+        
+        
+        
+INSERT INTO tbl_moradia(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
+VALUES 					(1, 				'B', 					  		1,				1),/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
+						(2, 				'C', 						    2,				2);/* Vinculando Moradia Jose da Silva e apt num 1 Bloco 'C'*/
 
-#Cadastrando um casal
-begin;
-INSERT INTO tbl_pessoa(cpf_pessoa, 		nome_pessoa, 			senha, 		nomeApelido, 		tipo_pessoa) 
-VALUES				  ('12345678123',	'Jose da Silva', 	'jose123', 		'joseadmin', 		'Proprietario');
-INSERT INTO tbl_moradia(num_ap, 	bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
-VALUES 				   (2, 				'C', 						    2,				2);
-commit;
+
+                            
+                            
+
+select * from agen_visi;
+select * from visi_apt;        
+
+UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa 
+ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa SET nome_visi='Dr. Marcio', 
+rg_visi='6484846', data_fim_visi = (NOW() + INTERVAL Nenhum day) WHERE nome_visi='Dr. Marcio' AND id_pessoa = 1;
+############################################################################################################################
+####
+
+
+/*
+
+UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+SET nome_visi='Francisco Saulo', rg_visi='546456456', 
+data_fim_visi = now() + INTERVAL 1 day WHERE nome_visi='Francisco Saulo' AND id_pessoa = 1;
+
+SELECT nome_visi from tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa=1 and id_visi= 4;
+
+UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN 
+tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa SET nome_visi='Francisco Funcionou', rg_visi='543453645', data_fim_visi = (NOW() + INTERVAL 2 day) 
+WHERE nome_visi='Francisco Saulo' AND id_pessoa = 1;
+
+
+UPDATE agen_visi JOIN visi_apt ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+SET data_fim_visi=null,
+nome_visi="Aqui eu"
+WHERE id_visi=1 AND id_pessoa = 1;
+
+
+SELECT id_visi FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                                            JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
+                                                                            WHERE nome_visi='Larissa Souza' and id_pessoa=2;
+                                    
+UPDATE visi_apt join agen_visi ON visi_apt.id_visi = agen_visi.visi_apt.id_visi 
+JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa set data_fim_visi = ADDDATE(data_fim_visi, interval $duracaoDias day), 
+							autorizado = $novoStatus, nome_visi = '$novoNomeVisitante' WHERE nome_visi='$nomeVisitante' and id_pessoa = $idUsuario;
+                            
+UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa SET nome_visi='Aqui ', rg_visi='',
+ data_fim_visi = (NOW() + INTERVAL Nenhum day)/*Aqui será os dias atualizados WHERE nome_visi='Aqui eu' AND id_pessoa = 1;
 
 BEGIN;
 INSERT INTO tbl_pessoa(cpf_pessoa, 	nome_pessoa, 				senha, 			nomeApelido, 	tipo_pessoa) 
@@ -23,52 +64,125 @@ VALUES				  ('12345674563', 'Maria da Silva', 	'admin123', 		'Maria123', 	'Morad
 INSERT INTO tbl_moradia(num_ap, bloco_ap, tbl_pessoa_id_pessoa1, num_vaga_car) 
 VALUES (2, 			'C', 					  3,			1);
 commit;
-
 ## Temina aqui
 
+#Cadastrando Visitantes para morador 1
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Darius Mandatte', '183456789', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(1, 1, now(), now() + INTERVAL 2 day);
+COMMIT;
 
-SELECT bloco_ap from tbl_pessoa join tbl_moradia on tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 where nome_pessoa='Davi da Silva';
 
-#Cadastrando Visitantes
-begin;
-insert into visi_apt(nome_visi, rg_visi, dt_registro_visi) values('Darius Mandatte', '183456789', now());
-insert into agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) values(1, 1, now(), now() + interval 2 day );
-commit;
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Frascismaldo Silva', '', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(1, 2, now(), now() + INTERVAL 9 day);
+COMMIT;
 
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Daiane Silva Ribeiro', '1834584', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(1, 3, now(), now() + INTERVAL 2 day);
+COMMIT;
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Fanbianno Silva Costa', '', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(1, 4, now(), now() + INTERVAL 9 day);
+COMMIT;
+
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Fanbianno Costa', '', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(1, 5, null, null);
+COMMIT;
+
+select * from tbl_pessoa;
+
+tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi
+
+UPDATE visi_apt set data_fim_visi = ADDDATE(data_fim_visi, interval $duracaoDias day),
+                                            status_visi = $novoStatus, nome_visi = '$novoNomeVisitante' where id_pessoa = '$nomeVisitante';
+
+
+
+
+#Cadastrando Visitantes para morador 2
+
+############################################################################################################################
+
+####################################### Testes
+/*
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Darius Mandatte', '183456789', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(2, 1, now(), now() + INTERVAL 2 day);
+COMMIT;
+
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Frascismaldo Silva', '', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(2, 2, now(), now() + INTERVAL 9 day);
+COMMIT;
+
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Daiane Silva Ribeiro', '1834584', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(2, 3, now(), now() + INTERVAL 2 day);
+COMMIT;
+
+
+BEGIN;
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('Fanbianno Silva Costa', '', now());
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) 
+			 VALUES(2, 4, now(), now() + INTERVAL 9 day);
+COMMIT;
+####
+INSERT INTO visi_apt(nome_visi, rg_visi, dt_registro_visi) 
+			  VALUES('David peira', '', now());
 select * from visi_apt;
-select * from agen_visi;
 
-
-BEGIN;
-insert into visi_apt(nome_visi, rg_visi, dt_registro_visi) values('Santos Silva', '828798523', now());
-insert into agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) values(1, 2, now(), now() + interval 2 day );
-commit;
-
-
-BEGIN;
-insert into visi_apt(nome_visi, rg_visi, dt_registro_visi) values('Francisco Silva', '', now());
-insert into agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi, data_visi, data_fim_visi) values(1, 3, now(), now() + interval 2 day );
-commit;
-
+SELECT nome_visi from tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa=1 and id_visi= 4;
 
 
 #rollback;
-select * from visi_apt;
-select * from agen_visi;
+select * from tbl_pessoa;
 
-SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END 
-autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
-JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa='1';
+SELECT nome_visi FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa=1 and nome_visi = "Darius Mandatte";
 
 set session sql_mode = 'No_engine_substitution';
 
+select id_visi from visi_apt where nome_visi="Darius Mandatte"; 
 
+SELECT nome_visi FROM tbl_pessoa JOIN agen_visi ON 
+                                            tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                            JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi 
+                                            WHERE id_pessoa=1 and nome_visi = 'Darius Mandatte';
+SELECT id_visi from visi_apt WHERE nome_visi = 'Darius Mandatte';
+
+select * from visi_apt;
+INSERT INTO agen_visi(tbl_pessoa_id_pessoa, visi_apt_id_visi) VALUES(2, 1);
 SELECT nome_visi, data_fim_visi, autorizado, CASE autorizado WHEN false THEN 'NÃO' ELSE 'SIM' END 
                                     autorizado FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
                                     JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa = 1;
-
-####################################### Testes
-/*INSERT INTO tbl_pessoa(cpf_pessoa, 	nome_pessoa, 	senha, nomeApelido, tipo_pessoa) values
+INSERT INTO tbl_pessoa(cpf_pessoa, 	nome_pessoa, 	senha, nomeApelido, tipo_pessoa) values
 ('12345678901','Davi da Silva', 	'admin123', 		'administrador', 	'Proprietario'),
 
 ('83374003114','Devon Tynis', 	 	'11f030dd31s', 		'SeiLa', 			'Proprietario'),

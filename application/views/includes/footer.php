@@ -1,3 +1,4 @@
+<?php //TODA A CHAMADA EM JQUERY deve ficar em baixo?>
 <script type="text/javascript" src="<?= base_url('assets/JS/jquery.min.js')?>"></script>
 
 <script type="text/javascript" src="<?= base_url('assets/JS/sweetalert.min.js')?>"></script>
@@ -43,7 +44,7 @@
 
 <script type="text/javascript" src="<?= base_url('assets/js/select2.full.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/menu.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/visitantes.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/visitantesFunc.js')?>"></script> <?php //FUNÇÃO VISITANTES?>
 <script type="text/javascript" src="<?= base_url('assets/js/prestadores.js')?>"></script>
 
 </html>
