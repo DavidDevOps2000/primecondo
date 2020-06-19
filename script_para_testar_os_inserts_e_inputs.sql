@@ -1,5 +1,7 @@
 use bd_cond;
 
+
+BEGIN;
 			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
 INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) /*Inserindo Moradores*/
 VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 		'Proprietario'), /* Usuario administrador, senha: admin123 */
@@ -10,23 +12,77 @@ VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 		'
 INSERT INTO tbl_moradia(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
 VALUES 					(1, 				'B', 					  		1,				1),/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
 						(2, 				'C', 						    2,				2);/* Vinculando Moradia Jose da Silva e apt num 1 Bloco 'C'*/
-
+COMMIT;
 
                             
-                            
 
+
+
+
+BEGIN;
+		
+		
+			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
+	INSERT INTO tbl_pessoa		(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa) /*Inserindo Moradores*/
+	VALUES				  		('',						'', 				'', 			'', 				''		); /* Usuario administrador, senha: admin123 */
+        
+	INSERT INTO tbl_moradia		(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
+	VALUES 						(1, 				'B', 					  		1,				1),/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
+
+	INSERT INTO tbl_contato		(tel, 		email)
+	VALUES						('',			'');
+
+	INSERT INTO tbl_veiculo		(cor_vei, marca_vei, modelo_vei, num_vaga, placa_vei, tbl_moradia_id_moradia)
+	VALUES 						('',			'', 		'',		1,			'',						'');
+
+	INSERT INTO tbl_rfid		(reg_tag, data_hora_reg)
+	VALUES						('', 			NOW());
+
+INSERT INTO tbl_contatos_pessoa	(tbl_contato_id_contato, tbl_contatos_pessoa)
+	VALUES						(1,										    1);
+
+    #INSERT INTO tbl_biometria	(amz_img, 		dt_tp_reg, 				c_img ) #Verifique os campos necessarios
+	#VALUES						('',				'',						'')
+
+#INSERT INTO pessoa_biometria	(tbl_pessoa_id_pessoa,	tbl_biometria_id_bio)
+#	VALUES						(1,											1);
+COMMIT;
+
+
+
+
+
+CREATE TABLE tbl_contato (				#DESKTOP
+  id_contato INT(11) NOT NULL AUTO_INCREMENT,
+  tel VARCHAR(19) NOT NULL,
+  email VARCHAR(59), 
+ PRIMARY KEY (id_contato));
+  ALTER TABLE tbl_contato ENGINE = InnoDB;
+use bd_cond;
 select * from agen_visi;
 select * from visi_apt;        
 
-UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa 
-ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa SET nome_visi='Dr. Marcio', 
-rg_visi='6484846', data_fim_visi = (NOW() + INTERVAL Nenhum day) WHERE nome_visi='Dr. Marcio' AND id_pessoa = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SHOW  tables;
 ############################################################################################################################
 ####
 
 
 /*
 
+     
 UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
 JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
 SET nome_visi='Francisco Saulo', rg_visi='546456456', 
@@ -38,7 +94,6 @@ JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa=1
 UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN 
 tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa SET nome_visi='Francisco Funcionou', rg_visi='543453645', data_fim_visi = (NOW() + INTERVAL 2 day) 
 WHERE nome_visi='Francisco Saulo' AND id_pessoa = 1;
-
 
 UPDATE agen_visi JOIN visi_apt ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
 JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
