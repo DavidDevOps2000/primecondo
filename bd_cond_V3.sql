@@ -24,6 +24,7 @@ CREATE TABLE tbl_pessoa(      #desktop
   nomeApelido VARCHAR(20) UNIQUE /*NOT NULL*/,# Para uso do Login SOMENTE MAIORES DE 18 ANOS PODEM fazer o login, tirar essa opção de não moradores e proprietários
   dt_reg DATETIME DEFAULT NOW() NOT NULL, # Dia que a pessoa foi registrada
   status_pess BOOLEAN DEFAULT TRUE NOT NULL,
+  data_nascimento VARCHAR (10),#Aqui teria a data de nascimento 99/99/9999
   tipo_pessoa ENUM('Proprietário', 'Morador', 'Dependente') DEFAULT 'Proprietário' NOT NULL, #TIPOS DE 'MORADORES' se for proprietário ele pode entrar assim como o morador
   tbl_rfid_id_tag INT(11) /*NOT NULL*/,			# Tiramos o funcionario, pois precisamo de mais detalhes
   PRIMARY KEY (id_pessoa),
@@ -87,7 +88,7 @@ CREATE TABLE tbl_biometria(
   id_bio INT(11) NOT NULL AUTO_INCREMENT,
   amz_img BLOB NOT NULL,
   dt_tp_reg TIMESTAMP NOT NULL,
-  c_img VARCHAR(45) NOT NULL DEFAULT NULL,
+  c_img VARCHAR(45) NOT NULL,
   PRIMARY KEY (id_bio));
   ALTER TABLE tbl_biometria ENGINE = InnoDB;
 
@@ -120,10 +121,12 @@ CREATE TABLE tbl_moradia ( # Tabela moradia tem que ter dados inseridos APÓS da
 CREATE TABLE tbl_veiculo (
   id_veiculo INT(11) NOT NULL AUTO_INCREMENT,
   placa_vei VARCHAR(7) NOT NULL UNIQUE,
-  marca_vei VARCHAR(15) NOT NULL,
+  tipo ENUM('Carro', 'Moto', 'Outros'),
+  #marca_vei VARCHAR(15) NOT NULL,
   modelo_vei VARCHAR(15) NOT NULL,
   cor_vei VARCHAR(20) NOT NULL,
   tbl_moradia_id_moradia INT(11) NOT NULL,
+  /*data_fabricacao VARCHAR ()*/
   num_vaga INT NOT NULL,
   PRIMARY KEY (id_veiculo),
   INDEX fk_tbl_veiculo_tbl_moradia1_idx (tbl_moradia_id_moradia ASC));

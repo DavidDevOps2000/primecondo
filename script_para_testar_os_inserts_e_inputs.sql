@@ -20,8 +20,6 @@ COMMIT;
 
 
 BEGIN;
-		
-		
 			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
 	INSERT INTO tbl_pessoa		(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa) /*Inserindo Moradores*/
 	VALUES				  		('',						'', 				'', 			'', 				''		); /* Usuario administrador, senha: admin123 */
@@ -50,14 +48,6 @@ COMMIT;
 
 
 
-
-
-CREATE TABLE tbl_contato (				#DESKTOP
-  id_contato INT(11) NOT NULL AUTO_INCREMENT,
-  tel VARCHAR(19) NOT NULL,
-  email VARCHAR(59), 
- PRIMARY KEY (id_contato));
-  ALTER TABLE tbl_contato ENGINE = InnoDB;
 use bd_cond;
 select * from agen_visi;
 select * from visi_apt;        

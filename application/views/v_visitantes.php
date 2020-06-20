@@ -36,8 +36,8 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 					</div>  
                         
                             <label class="control-label">Entrada Autorizado(a) ?</label><br>
-                            <label class="control-label" style="padding-right:80%" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
-                            <input type="button" class="btn btn-primary" onClick="mudarStatus()" value="Alterar">
+                            <label class="control-label" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
+                            <input type="button" class="btn btn-primary pull-right" onClick="mudarStatus()" value="Alterar">
                     <br>
                     
                     <div class="row-md-1">
