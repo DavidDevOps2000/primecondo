@@ -43,12 +43,14 @@ function authAcess(seuCaminho){
 
 
 function prestador(){ 
-    authAcess("prestador_serv");
+    //authAcess("prestador_serv");
+    window.location.href="prestador_serv";
 }
 
 
 function visitantes(){
-    authAcess("visitantes");
+    //authAcess("visitantes");
+    window.location.href="visitantes";
 }
 
 function home(){ 

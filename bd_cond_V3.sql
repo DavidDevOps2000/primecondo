@@ -7,8 +7,8 @@ USE bd_cond;
 -- -----------------------------------------------------
 CREATE TABLE tbl_rfid ( 
   id_tag INT(11) NOT NULL AUTO_INCREMENT, #Id da mesma
-  reg_tag VARCHAR(50) NOT NULL, #Registro da Tag
-  data_hora_reg TIMESTAMP NOT NULL, # Hora do registro da Entrada
+  reg_tag VARCHAR(15) NOT NULL, #Registro da Tag
+  data_hora_reg TIMESTAMP /*NOT NULL*/, # Hora do registro da Entrada
   status_tag BOOLEAN DEFAULT TRUE NOT NULL, # Verifica se está ativo ou não
   PRIMARY KEY (id_tag));
   ALTER TABLE tbl_rfid ENGINE = InnoDB;
@@ -18,15 +18,15 @@ CREATE TABLE tbl_rfid (
 -- -----------------------------------------------------
 CREATE TABLE tbl_pessoa(      #desktop
   id_pessoa INT(11) NOT NULL AUTO_INCREMENT,
-  cpf_pessoa VARCHAR(11) UNIQUE NOT NULL, #CPF só os numeros, sem hifens e pontos e não pode duplicar por causa do UNIQUE,cpf  Todas as idades, a parti de zeroa anos, são obrigatorios por causa de uma lei de 2019
-  nome_pessoa VARCHAR(90) /*NOT NULL*/,
+  cpf_pessoa VARCHAR(14) UNIQUE NOT NULL, #cpf  Todas as idades, a parti de zeroa anos, são obrigatorios por causa de uma lei de 2019
+  nome_pessoa VARCHAR(89) /*NOT NULL*/,
   senha VARCHAR(20) /*NOT NULL*/,# Para uso do Login
   nomeApelido VARCHAR(20) UNIQUE /*NOT NULL*/,# Para uso do Login SOMENTE MAIORES DE 18 ANOS PODEM fazer o login, tirar essa opção de não moradores e proprietários
   dt_reg DATETIME DEFAULT NOW() NOT NULL, # Dia que a pessoa foi registrada
   status_pess BOOLEAN DEFAULT TRUE NOT NULL,
   data_nascimento VARCHAR (10),#Aqui teria a data de nascimento 99/99/9999
   tipo_pessoa ENUM('Proprietário', 'Morador', 'Dependente') DEFAULT 'Proprietário' NOT NULL, #TIPOS DE 'MORADORES' se for proprietário ele pode entrar assim como o morador
-  tbl_rfid_id_tag INT(11) /*NOT NULL*/,			# Tiramos o funcionario, pois precisamo de mais detalhes
+  tbl_rfid_id_tag INT(11) NOT NULL,			# Tiramos o funcionario, pois precisamo de mais detalhes
   PRIMARY KEY (id_pessoa),
   INDEX fk_tbl_pessoa_tbl_rfid1_idx (tbl_rfid_id_tag ASC));
   ALTER TABLE tbl_pessoa ENGINE = InnoDB;
@@ -84,7 +84,7 @@ CREATE TABLE agen_servi (# Tabela agendamento de  serviço, e agendamento de ser
 -- -----------------------------------------------------
 -- Table bd_cond.tbl_biometria
 -- -----------------------------------------------------
-CREATE TABLE tbl_biometria(
+CREATE TABLE tbl_biometria (
   id_bio INT(11) NOT NULL AUTO_INCREMENT,
   amz_img BLOB NOT NULL,
   dt_tp_reg TIMESTAMP NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE tbl_biometria(
 CREATE TABLE tbl_contato (				#DESKTOP
   id_contato INT(11) NOT NULL AUTO_INCREMENT,
   tel VARCHAR(19) NOT NULL,
-  email VARCHAR(59), 
+  email VARCHAR(46), 
   PRIMARY KEY (id_contato));
   ALTER TABLE tbl_contato ENGINE = InnoDB;
 

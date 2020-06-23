@@ -1,0 +1,4 @@
+git add application/controllers/visitantes.php
+git add application/models/m_visitantes.php   
+git add application/views/v_visitantes.php    
+git add assets/JS/visitantesFunc.js

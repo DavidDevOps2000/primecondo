@@ -16,16 +16,17 @@ COMMIT;
 
                             
 
+INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento) /*Inserindo Moradores*/
+VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020');
 
-
-
+use bd_cond;
 BEGIN;
 			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
 	INSERT INTO tbl_pessoa		(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa) /*Inserindo Moradores*/
 	VALUES				  		('',						'', 				'', 			'', 				''		); /* Usuario administrador, senha: admin123 */
         
 	INSERT INTO tbl_moradia		(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
-	VALUES 						(1, 				'B', 					  		1,				1),/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
+	VALUES 						(1, 				'B', 					  		1,				1);/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
 
 	INSERT INTO tbl_contato		(tel, 		email)
 	VALUES						('',			'');
@@ -33,8 +34,20 @@ BEGIN;
 	INSERT INTO tbl_veiculo		(cor_vei, marca_vei, modelo_vei, num_vaga, placa_vei, tbl_moradia_id_moradia)
 	VALUES 						('',			'', 		'',		1,			'',						'');
 
+BEGIN;
 	INSERT INTO tbl_rfid		(reg_tag, data_hora_reg)
 	VALUES						('', 			NOW());
+    INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento, tbl_rfid_id_tag) /*Inserindo Moradores*/
+VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020', 1);
+COMMIT;
+
+
+use bd_cond;
+select * from tbl_rfid;
+    
+SELECT data_hora_reg from tbl_rfid JOIN tbl_pessoa ON tbl_pessoa.tbl_rfid_id_tag = tbl_rfid.id_tag where id_tag=1;#Aqui no id_tag, deve ficar o id do morador
+    
+select * FROM TBL_PESSOA;
 
 INSERT INTO tbl_contatos_pessoa	(tbl_contato_id_contato, tbl_contatos_pessoa)
 	VALUES						(1,										    1);
@@ -52,6 +65,7 @@ use bd_cond;
 select * from agen_visi;
 select * from visi_apt;        
 
+SELECT * from tbl_pessoa;
 
 
 
