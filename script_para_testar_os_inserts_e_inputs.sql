@@ -40,24 +40,12 @@ BEGIN;
     INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento, tbl_rfid_id_tag) /*Inserindo Moradores*/
 VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020', 1);
 COMMIT;
+  
 
 
-use bd_cond;
-select * from tbl_rfid;
-    
-SELECT data_hora_reg from tbl_rfid JOIN tbl_pessoa ON tbl_pessoa.tbl_rfid_id_tag = tbl_rfid.id_tag where id_tag=1;#Aqui no id_tag, deve ficar o id do morador
-    
-select * FROM TBL_PESSOA;
+INSERT INTO tbl_contatos_pessoa (tbl_contato_id_contato, tbl_contatos_pessoa) VALUES(2, 2);
 
-INSERT INTO tbl_contatos_pessoa	(tbl_contato_id_contato, tbl_contatos_pessoa)
-	VALUES						(1,										    1);
-
-    #INSERT INTO tbl_biometria	(amz_img, 		dt_tp_reg, 				c_img ) #Verifique os campos necessarios
-	#VALUES						('',				'',						'')
-
-#INSERT INTO pessoa_biometria	(tbl_pessoa_id_pessoa,	tbl_biometria_id_bio)
-#	VALUES						(1,											1);
-COMMIT;
+SELECT id_moradia FROM tbl_moradia JOIN tbl_pessoa WHERE id_pessoa = 1 AND num_ap = 1;
 
 
 
@@ -68,23 +56,86 @@ select * from visi_apt;
 SELECT * from tbl_pessoa;
 
 
-
-
-
-
-
-
-
-
-
-
-
-SHOW  tables;
 ############################################################################################################################
 ####
 
 
 /*
+SELECT * FROM tbl_moradia;
+SELECT nome_pessoa, num_ap, bloco_ap, tipo_pessoa, dt_reg, status_pess FROM tbl_pessoa JOIN tbl_moradia 
+ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 JOIN tbl_veiculo 
+ON tbl_veiculo.tbl_moradia_id_moradia = tbl_moradia.id_moradia WHERE nome_pessoa = 'David';
+
+
+SELECT nome_pessoa, num_ap, bloco_ap, tipo_pessoa, dt_reg, status_pess FROM tbl_pessoa 
+JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE nome_pessoa='Davi da Silva';
+SHOW  tables;
+
+	SELECT nome_pessoa, num_ap, bloco_ap, tipo_pessoa, dt_reg, status_pess "\
+                "FROM tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 "\
+                "JOIN tbl_veiculo ON tbl_veiculo.tbl_moradia_id_moradia = tbl_moradia.id_veiculo WHERE %s = '%s';
+    #INSERT INTO tbl_biometria	(amz_img, 		dt_tp_reg, 				c_img ) #Verifique os campos necessarios
+	#VALUES						('',				'',						'')
+
+#INSERT INTO pessoa_biometria	(tbl_pessoa_id_pessoa,	tbl_biometria_id_bio)
+#	VALUES						(1,											1);
+COMMIT;
+
+    
+SELECT data_hora_reg from tbl_rfid JOIN tbl_pessoa ON tbl_pessoa.tbl_rfid_id_tag = tbl_rfid.id_tag where id_tag=1;#Aqui no id_tag, deve ficar o id do morador
+use bd_cond;
+select * FROM visi_apt;
+
+SELECT nome_visi, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END autorizado, 
+CASE data_fim_visi WHEN !NULL THEN data_fim_visi ELSE 'Sem limite' END data_fim_visi,bloco_ap, num_ap, rg_visi, 
+dt_registro_visi FROM visi_apt JOIN agen_visi ON visi_apt.id_visi= agen_visi.visi_apt_id_visi JOIN tbl_pessoa 
+ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+WHERE nome_visi='Joana Darc';
+
+SELECT nome_visi, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END autorizado,CASE data_fim_visi WHEN !NULL THEN data_fim_visi ELSE 'Sem limite' END data_fim_visi,bloco_ap, num_ap, rg_visi, dt_registro_visi FROM visi_apt JOIN agen_visi ON visi_apt.id_visi= agen_visi.visi_apt_id_visi JOIN tbl_pessoa ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE rg_visi= '123456';
+
+
+
+SELECT nome_visi, autorizado, data_visi, data_fim_visi, bloco_ap, rg_visi 
+FROM visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
+JOIN tbl_pessoa ON agen_visi.tbl_pessoa_id_pessoa1 = tbl_pessoa.id_pessoa 
+JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE id_pessoa =1;
+
+
+
+
+SELECT nome_visi, autorizado, data_visi, data_fim_visi, bloco_ap, rg_visi
+FROM visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi
+JOIN tbl_pessoa ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa
+JOIN tbl_moradia on tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 where nome_pessoa='Davi da Silva';
+
+select bloco_ap from tbl_pessoa JOIN tbl_moradia on tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 where id_pessoa=1;
+
+
+SELECT nome_visi, autorizado, data_visi, data_fim_visi, bloco_ap, rg_visi
+FROM visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi
+JOIN tbl_pessoa ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa
+JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE nome_pessoa='Davi da Silva';
+
+
+SELECT nome_visi, autorizado, data_visi, data_fim_visi, bloco_ap, rg_visi, 
+CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END autorizado FROM visi_apt 
+JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa 
+ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa 
+JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+WHERE nome_pessoa='Davi da Silva';
+
+
+SELECT * FROM AGEN_VISI;
+
+
+SELECT nome_visi, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END autorizado, dt_registro_visi, CASE data_fim_visi WHEN !NULL THEN data_fim_visi ELSE 'Sem limite' END data_fim_visi, bloco_ap, rg_visi FROM visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi JOIN tbl_pessoa ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE nome_pessoa='Davi da Silva';
+
+
+SELECT nome_visi, data_fim_visi, CASE autorizado WHEN FALSE OR 0 THEN 'NÃO' ELSE 'SIM' END 
+                                    autorizado,  FROM tbl_pessoa JOIN agen_visi ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                    JOIN visi_apt ON agen_visi.visi_apt_id_visi = visi_apt.id_visi WHERE id_pessoa =1;
+
 
      
 UPDATE visi_apt JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi 
