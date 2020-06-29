@@ -51,10 +51,23 @@ SELECT id_moradia FROM tbl_moradia JOIN tbl_pessoa WHERE id_pessoa = 1 AND num_a
 
 use bd_cond;
 select * from agen_visi;
-select * from visi_apt;        
+select * from visi_apt;
+SELECT * FROM tbl_pessoa;        
 
-SELECT * from tbl_pessoa;
 
+SELECT data_nascimento, num_ap, bloco_ap, tipo_pessoa, tel, email, nomeApelido, 
+		senha, num_vaga_vei, status_pess, tipo_vei, modelo_vei, cor_vei, placa_vei
+		FROM tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1
+		JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.id_veiculo
+		JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa
+		JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
+		WHERE nome_pessoa='' OR cpf_pessoa='464.646.464-64';
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia
+		JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+		SET data_nascimento ='dvdvxcvxb', num_ap =5454, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='(564) 51561-61  ', email ='464564', nomeApelido ='54552', senha ='45546', 
+			num_vaga_vei =23, status_pess = 0, tipo_vei ='Carro',
+            modelo_vei ='Sei lá', cor_vei ='sadlfjslak', placa_vei ='adfhgk', nome_pessoa ='Foi', cpf_pessoa ='%s' WHERE nome_pessoa ='dvd' OR cpf_pessoa='465.456.465-45' ;
 
 ############################################################################################################################
 ####
