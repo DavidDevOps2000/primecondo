@@ -129,5 +129,3 @@ CREATE TABLE agen_visi (#WEB / DESKTOP
   INDEX fk_tbl_pessoa_has_visi_apt_visi_apt1_idx (visi_apt_id_visi ASC),
   INDEX fk_tbl_pessoa_has_visi_apt_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
   ALTER TABLE agen_visi ENGINE = InnoDB;
-
-  SHOW TABLES;

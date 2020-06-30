@@ -55,6 +55,8 @@ select * from visi_apt;
 SELECT * FROM tbl_pessoa;        
 
 
+
+
 SELECT data_nascimento, num_ap, bloco_ap, tipo_pessoa, tel, email, nomeApelido, 
 		senha, num_vaga_vei, status_pess, tipo_vei, modelo_vei, cor_vei, placa_vei
 		FROM tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1
@@ -63,14 +65,78 @@ SELECT data_nascimento, num_ap, bloco_ap, tipo_pessoa, tel, email, nomeApelido,
 		JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
 		WHERE nome_pessoa='' OR cpf_pessoa='464.646.464-64';
 
-UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia
-		JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
-		SET data_nascimento ='dvdvxcvxb', num_ap =5454, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='(564) 51561-61  ', email ='464564', nomeApelido ='54552', senha ='45546', 
-			num_vaga_vei =23, status_pess = 0, tipo_vei ='Carro',
-            modelo_vei ='Sei lá', cor_vei ='sadlfjslak', placa_vei ='adfhgk', nome_pessoa ='Foi', cpf_pessoa ='%s' WHERE nome_pessoa ='dvd' OR cpf_pessoa='465.456.465-45' ;
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='() -', 
+email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', 
+modelo_vei ='dfsdf', cor_vei ='Outros', placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
+
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Proprietário', 
+tel ='() -', email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, 
+status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros', 
+placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
+SELECT * FROM tbl_moradia;
+use bd_cond;
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato  SET data_nascimento ='15/64/5646', num_ap =4596, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='() -', email ='4564', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros', placa_vei ='sdfs' WHERE nome_pessoa ='Funcionou 1' OR cpf_pessoa='456.464.564-65';
 
 ############################################################################################################################
 ####
+
+/*
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
+SET data_nascimento ='dvdvxcvxb', num_ap =5454, bloco_ap ='A', 
+tipo_pessoa ='Proprietário', tel ='(564) 51561-61  ', email ='464564', nomeApelido ='5455', senha ='45546', 
+num_vaga_vei =23, status_pess = 0, /*tipo_vei ='Carro',
+modelo_vei ='Sei lá', cor_vei ='sadlfjslak', placa_vei ='adfhgk',
+nome_pessoa ='Foi', cpf_pessoa ='' WHERE nome_pessoa ='dfgdz' OR cpf_pessoa='';
+
+
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+SET data_nascimento ='', num_ap =1, bloco_ap ='B', tipo_pessoa ='%s', tel ='%s', email ='%s', nomeApelido ='%s', 
+senha ='%s', num_vaga_vei= 3, status_pess = 0, tipo_vei ='s', modelo_vei ='%s', cor_vei ='%s', placa_vei ='%s'
+ WHERE nome_pessoa ='%s' OR cpf_pessoa='545.454.545-45';
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
+SET nome_pessoa ='Fdfgoi', cpf_pessoa ='51545', status_pess = 0, tipo_pessoa ='Proprietário',
+data_nascimento ='dvdvxcvxb' WHERE nome_pessoa ='' OR cpf_pessoa='465.465.456-46';
+
+
+
+
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia
+select * from tbl_pessoa;
+
+SET data_nascimento ='5vdvxcv', status_pess = 0, nome_pessoa ='fsdfs', tel ='(564) 51561-61  ', email ='464564' 
+WHERE nome_pessoa ='' OR cpf_pessoa='465.465.456-46';
+
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='5vdvx', status_pess = 1, nome_pessoa ='fsdfs', tel ='(564) 51561-61  ', email ='4645dfsd64'  
+WHERE nome_pessoa ='' OR cpf_pessoa='546.546.546-54';
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_veiculo.tbl_moradia_id_moradia = tbl_moradia.id_moradia SET #
+
+UPDATE tbl_pessoa JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato SET nome_pessoa = 'Davi Souza1' WHERE nome_pessoa='Davi Souza';
+
 
 
 /*
