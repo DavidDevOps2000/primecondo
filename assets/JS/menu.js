@@ -76,31 +76,15 @@ function reclamacao(){
                         });   
 }
 
-function regra(){ 
-                    swal({ //Caso retorne algo exibe uma mensagem ao usuario
-                    title: "Atenção!",
-                    text:"Esse módulo não foi construido",
-                    type:"error",
-                    });   
+function regras(){ window.location.href="regras";}
+
+
+function contatos(){ 
+    window.location.href="contatos";
 }
 
 
-function ajuda(){ 
-                    swal({ //Caso retorne algo exibe uma mensagem ao usuario
-                    title: "Atenção!",
-                    text:"Esse módulo não foi construido",
-                    type:"error",
-                    });   
-}
-
-
-function aviso(){ 
-                    swal({ //Caso retorne algo exibe uma mensagem ao usuario
-                    title: "Atenção!",
-                    text:"Esse módulo não foi construido",
-                    type:"error",
-                    });   
-}
+function aviso(){ window.location.href="avisos";}
 
 
 

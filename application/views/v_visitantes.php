@@ -153,7 +153,12 @@ if((seuTeclado > 47 && seuTeclado <58)) {
         </div>
 </div>
 </div>
-
+<div class="container body-content">
+                
+                <footer class="fixarRodape">
+                    <p>&copy; 2019 - 2020 Prime Condo Todos os Direitos Reservados</p>
+                </footer>
+        </div>
 
 
 </body>

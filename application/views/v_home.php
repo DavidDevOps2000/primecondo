@@ -32,9 +32,9 @@
                     <ul role="menu" class="dropdown-menu" ></ul>
                         <li class="" style="margin-left:265px"><a href="#" onclick="home()">INICIO</a></li>
                         <li class=""><a href="#" onclick="aviso()">AVISOS</a></li>
-                        <li class=""><a href="#" onclick="regra()">REGRAS</a></li>
+                        <li class=""><a href="#" onclick="regras()">REGRAS</a></li>
                         <li class=""><a href="#" onclick="visitantes();">VISITANTES</a></li>
-                        <li class=""><a href="#" onclick="ajuda()"> AJUDA</a></li>
+                        <li class=""><a href="#" onclick="contatos()"> CONTATOS</a></li>
 
                         <li class="caixa_alta navbar-right"><a href="<?php echo base_url('Visitantes/logout'); ?>">SAIR</a></li>
                     </ul>
