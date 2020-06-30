@@ -31,7 +31,7 @@
                         
                     <ul role="menu" class="dropdown-menu" ></ul>
                         <li class="" style="margin-left:265px"><a href="#" onclick="home()">INICIO</a></li>
-                        <li class=""><a href="#" onclick="aviso()">AVISOS</a></li>
+                        <li class=""><a href="#" onclick="avisos()">AVISOS</a></li>
                         <li class=""><a href="#" onclick="regras()">REGRAS</a></li>
                         <li class=""><a href="#" onclick="visitantes();">VISITANTES</a></li>
                         <li class=""><a href="#" onclick="contatos()"> CONTATOS</a></li>
@@ -45,6 +45,22 @@
 </div>
 
 
+<Script>
+
+function visitantes(){ window.location.href="visitantes";}
+
+function home(){ window.location.href="home";}
+
+
+function regras(){ window.location.href="regras";}
+
+
+function contatos(){ window.location.href="contatos";}
+
+
+function avisos(){ window.location.href="avisos";}
+
+</script>
 
 
 <div class="divMsgCentro">
