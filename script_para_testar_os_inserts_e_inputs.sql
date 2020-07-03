@@ -1,43 +1,39 @@
 use bd_cond;
+select * from agen_visi;
+select * from visi_apt;
+SELECT * FROM tbl_pessoa;        
 
 
-BEGIN;
-			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
-INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) /*Inserindo Moradores*/
-VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 		'Proprietario'), /* Usuario administrador, senha: admin123 */
-					  ('12345678123',	'Jose da Silva', 	'jose123', 				'joseadmin', 		'Proprietario'); /* Usuario joseAdmin, senha: jose123 */
-        
-        
-        
-INSERT INTO tbl_moradia(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
-VALUES 					(1, 				'B', 					  		1,				1),/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
-						(2, 				'C', 						    2,				2);/* Vinculando Moradia Jose da Silva e apt num 1 Bloco 'C'*/
-COMMIT;
 
-                            
 
-INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento) /*Inserindo Moradores*/
-VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020');
 
+
+
+################################################################################################################################
+
+/*
+
+
+UPDATE tbl_pessoa LEFT JOIN  tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+LEFT JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+LEFT JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='26/04/1995', num_ap =9999, bloco_ap ='A', tipo_pessoa ='Proprietário', 
+tel ='(999) 99999-9999', email ='umEmail@gmail.com', nomeApelido ='DavidSilva', 
+senha ='123', num_vaga_vei= 1, status_pess = True, nome_pessoa ='David ' 
+WHERE nome_pessoa ='David Silva' OR cpf_pessoa='999.999.999-99';
 use bd_cond;
-BEGIN;
-			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
-	INSERT INTO tbl_pessoa		(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa) /*Inserindo Moradores*/
-	VALUES				  		('',						'', 				'', 			'', 				''		); /* Usuario administrador, senha: admin123 */
-        
-	INSERT INTO tbl_moradia		(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
-	VALUES 						(1, 				'B', 					  		1,				1);/* Vinculando Moradia Davi da Silva e apt num 1 Bloco 'B'*/
 
-	INSERT INTO tbl_contato		(tel, 		email)
-	VALUES						('',			'');
-
-	INSERT INTO tbl_veiculo		(cor_vei, marca_vei, modelo_vei, num_vaga, placa_vei, tbl_moradia_id_moradia)
-	VALUES 						('',			'', 		'',		1,			'',						'');
-
-BEGIN;
+UPDATE tbl_pessoa p LEFT JOIN tbl_moradia m ON p.id_pessoa = m.tbl_pessoa_id_pessoa1 
+LEFT JOIN tbl_veiculo v ON m.id_moradia = v.tbl_moradia_id_moradia 
+LEFT JOIN contatos_pessoa cp ON p.id_pessoa = cp.tbl_pessoa_id_pessoa 
+LEFT JOIN tbl_contato c ON cp.tbl_contato_id_contato = c.id_contato 
+SET data_nascimento ='26/05/', num_ap =54, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='() -', 
+email ='None', nomeApelido ='admin2', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', 
+modelo_vei ='Meriva', cor_vei ='Prata', 
+placa_vei ='12', nome_pessoa ='funcionario ' WHERE nome_pessoa ='funcionario teste' OR cpf_pessoa='489.889.899-89';
 	INSERT INTO tbl_rfid		(reg_tag, data_hora_reg)
 	VALUES						('', 			NOW());
-    INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento, tbl_rfid_id_tag) /*Inserindo Moradores*/
+    INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento, tbl_rfid_id_tag) 
 VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020', 1);
 COMMIT;
   
@@ -49,11 +45,27 @@ SELECT id_moradia FROM tbl_moradia JOIN tbl_pessoa WHERE id_pessoa = 1 AND num_a
 
 
 
-use bd_cond;
-select * from agen_visi;
-select * from visi_apt;
-SELECT * FROM tbl_pessoa;        
+BEGIN;
+			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
+INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) 
+VALUES				  ('12345678901',	'Davi da Silva', 	'admin123', 		'administrador', 		'Proprietario'),
+					  ('12345678123',	'Jose da Silva', 	'jose123', 				'joseadmin', 		'Proprietario');
+INSERT INTO tbl_moradia(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
+VALUES 					(1, 				'B', 					  		1,				1),
+						(2, 				'C', 						    2,				2);                          
 
+INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa, data_nascimento)
+VALUES				  ('1234567001',	'Joao Silva', 	'admin123', 		'joaoAdmin', 		'Proprietario', '26-04-2020');
+
+;
+
+SELECT data_nascimento, num_ap, bloco_ap, tipo_pessoa, tel, email, nomeApelido, 
+		senha, num_vaga_vei, status_pess, tipo_vei, modelo_vei, cor_vei, placa_vei
+		FROM tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1
+		JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.id_veiculo
+		JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa
+		JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
+		WHERE nome_pessoa='' OR cpf_pessoa='464.646.464-64';
 
 
 
@@ -65,7 +77,7 @@ SELECT data_nascimento, num_ap, bloco_ap, tipo_pessoa, tel, email, nomeApelido,
 		JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
 		WHERE nome_pessoa='' OR cpf_pessoa='464.646.464-64';
 
-
+ 
 UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
 JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
@@ -74,6 +86,23 @@ SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Pr
 email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', 
 modelo_vei ='dfsdf', cor_vei ='Outros', placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
 
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Proprietário', 
+tel ='() -', email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, 
+status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros', 
+placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
+
+
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='() -', 
+email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', 
+modelo_vei ='dfsdf', cor_vei ='Outros', placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
 
 UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
@@ -85,12 +114,17 @@ status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros',
 placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
 SELECT * FROM tbl_moradia;
 use bd_cond;
-UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato  SET data_nascimento ='15/64/5646', num_ap =4596, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='() -', email ='4564', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros', placa_vei ='sdfs' WHERE nome_pessoa ='Funcionou 1' OR cpf_pessoa='456.464.564-65';
 
-############################################################################################################################
-####
-
-/*
+UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
+JOIN tbl_veiculo ON tbl_moradia.id_moradia = tbl_veiculo.tbl_moradia_id_moradia 
+JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
+JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 
+SET data_nascimento ='15/64/5646', num_ap =4568, bloco_ap ='A', tipo_pessoa ='Proprietário', 
+tel ='() -', email ='45644654', nomeApelido ='amins', senha ='123', num_vaga_vei= 123, 
+status_pess = True, tipo_vei ='Carro', modelo_vei ='dfsdf', cor_vei ='Outros', 
+placa_vei ='sdfs' WHERE nome_pessoa ='' OR cpf_pessoa='456.464.564-65';
+SELECT * FROM tbl_moradia;
+use bd_cond;
 UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
 JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
 JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
@@ -101,7 +135,20 @@ modelo_vei ='Sei lá', cor_vei ='sadlfjslak', placa_vei ='adfhgk',
 nome_pessoa ='Foi', cpf_pessoa ='' WHERE nome_pessoa ='dfgdz' OR cpf_pessoa='';
 
 
+use bd_cond;
+BEGIN;
+			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
+	INSERT INTO tbl_pessoa		(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 		tipo_pessoa) 
+	VALUES				  		('',						'', 				'', 			'', 				''		);
+	INSERT INTO tbl_moradia		(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
+	VALUES 						(1, 				'B', 					  		1,				1);
+	INSERT INTO tbl_contato		(tel, 		email)
+	VALUES						('',			'');
 
+	INSERT INTO tbl_veiculo		(cor_vei, marca_vei, modelo_vei, num_vaga, placa_vei, tbl_moradia_id_moradia)
+	VALUES 						('',			'', 		'',		1,			'',						'');
+
+BEGIN
 UPDATE tbl_pessoa JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
 JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
 JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato
