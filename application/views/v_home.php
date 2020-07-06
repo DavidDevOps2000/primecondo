@@ -12,11 +12,10 @@
 
                                 <div class="container-fluid">
                                 <label class="control-label" name="vlrApelido" id="vlrApelido"><?php echo $_SESSION['apelido'];?></label>
-
                                 </div>
-<div class="container-fluid" >
+<div class="container" >
                 <nav class="navbar navbar-default menuPrinc">
-                        <div class="container-fluid"> 
+                        <div class="container"> 
                             <div class="navbar-header">
                                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche"><?php //Btn Menu sanduihce ?>
                                         <span class="sr-only">Toggle navigation</span>
@@ -27,10 +26,8 @@
                             </div>
 
                     <div class="collapse navbar-collapse fundoMenuSanduiche" id="menuSanduiche">
-                    <ul class="nav navbar-nav">                       
-                        
-                    <ul role="menu" class="dropdown-menu" ></ul>
-                        <li class="" style="margin-left:265px"><a href="#" onclick="home()">INICIO</a></li>
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="#" onclick="home()">INICIO</a></li>
                         <li class=""><a href="#" onclick="avisos()">AVISOS</a></li>
                         <li class=""><a href="#" onclick="regras()">REGRAS</a></li>
                         <li class=""><a href="#" onclick="visitantes();">VISITANTES</a></li>

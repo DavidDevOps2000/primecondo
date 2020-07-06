@@ -159,6 +159,4 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                     <p>&copy; 2019 - 2020 Prime Condo Todos os Direitos Reservados</p>
                 </footer>
         </div>
-
-
 </body>

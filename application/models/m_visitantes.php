@@ -76,7 +76,7 @@ class M_visitantes extends CI_Model {
             }
         }
 
-        public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg){  
+    public function alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg){  
             $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
 
             if(is_string($duracaoDias)){// Se em duração de dias vier a palavra nenhum, que nesse caso é String, fazer isso abaixo
@@ -97,6 +97,7 @@ class M_visitantes extends CI_Model {
 
 
                 $temVlrNull = array('data_fim_visi'=>$retorno->row()->data_fim_visi);//Verificando se há um valor nulo no campo data Fim
+
                 $temVlrNull = $temVlrNull['data_fim_visi'];//colocando aqui o valor do id do visitante atualizado
 
 
@@ -126,6 +127,29 @@ class M_visitantes extends CI_Model {
                 
         }
 
-}
+    public function delVisi($nomeVisiDel){
+
+        $idUsuario = $_SESSION['id_usuario'];//id do usuario atual
+
+        $retorno = $this->db->query("SELECT id_visi FROM visi_apt LEFT JOIN agen_visi ON visi_apt.id_visi = agen_visi.visi_apt_id_visi /* Se morador e visitante coexitirem será retornado 1 linha*/
+                                                    LEFT JOIN tbl_pessoa ON tbl_pessoa.id_pessoa = agen_visi.tbl_pessoa_id_pessoa 
+                                                    WHERE nome_visi='$nomeVisiDel' AND id_pessoa = $idUsuario;");
+
+        if($retorno->num_rows() > 0){
+
+            $this->db->query("DELETE FROM visi_apt WHERE nome_visi = '$nomeVisiDel';");
+
+            return 1;//Inserção com sucesso
+
+        }else{            
+
+            return 0; 
+                    
+        } //problema ao inserir
+
+        }
+
+    }
+
 
 ?>

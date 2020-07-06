@@ -68,28 +68,19 @@ class Visitantes extends CI_Controller {
             $duracaoDias ='Nenhum';
         }
 
-
         $retorno = $this->m_visitantes->alterVisi($nomeVisitante, $duracaoDias, $novoNomeVisitante, $novoStatus, $novoVlrRg);
 
         echo $retorno;
     }
 
+    public function delVisi(){
 
-    public function desativarVisi(){// Não usado
-
-        $nomeVisitante = $this->input->post('nomeVisitante');
+        $nomeVisiDel = $this->input->post('nomeVisitanteDel');
 
         $this->load->model('m_visitantes');
 
-        $retorno = $this->m_visitantes->desativarVisi($nomeVisitante);
+        $retorno = $this->m_visitantes->delVisi($nomeVisiDel);
 
-        echo $retorno;
-    }
-
-    public function ativarVisi(){ // Não usado
-        $nomeVisitante = $this->input->post('nomeVisitante');
-        $this->load->model('m_visitantes');
-        $retorno = $this->m_visitantes->ativarVisi($nomeVisitante);
         echo $retorno;
     }
     

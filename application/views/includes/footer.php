@@ -45,6 +45,5 @@
 <script type="text/javascript" src="<?= base_url('assets/js/select2.full.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/menu.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/visitantesFunc.js')?>"></script> <?php //FUNÇÃO VISITANTES?>
-<script type="text/javascript" src="<?= base_url('assets/js/prestadores.js')?>"></script>
 
 </html>
