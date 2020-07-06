@@ -13,7 +13,7 @@
                                 <div class="container-fluid">
                                 <label class="control-label" name="vlrApelido" id="vlrApelido"><?php echo $_SESSION['apelido'];?></label>
                                 </div>
-<div class="container" >
+<div class="container fluid" >
                 <nav class="navbar navbar-default menuPrinc">
                         <div class="container"> 
                             <div class="navbar-header">
@@ -32,8 +32,7 @@
                         <li class=""><a href="#" onclick="regras()">REGRAS</a></li>
                         <li class=""><a href="#" onclick="visitantes();">VISITANTES</a></li>
                         <li class=""><a href="#" onclick="contatos()"> CONTATOS</a></li>
-
-                        <li class="caixa_alta navbar-right"><a href="<?php echo base_url('Visitantes/logout'); ?>">SAIR</a></li>
+                        <li class=""><a href="<?php echo base_url('Visitantes/logout'); ?>">SAIR</a></li>
                     </ul>
                 </div>
             </div>
