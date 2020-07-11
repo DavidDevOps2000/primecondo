@@ -1,18 +1,29 @@
 use bd_cond;
 select * from agen_visi;
 select * from visi_apt;
-SELECT * FROM tbl_pessoa;        
+SELECT * FROM tbl_pessoa;   			
+SELECT * FROM tbl_veiculo;
 
-
-
-
-DELETE FROM visi_apt WHERE id_visi =1;
-
+USE bd_cond;
+SELECT num_ap, bloco_ap, CASE status_pess WHEN TRUE THEN 'ATIVO' ELSE 'DESATIVADO' END status_pess, nome_pessoa, num_vaga_vei FROM tbl_pessoa p LEFT JOIN tbl_moradia m ON p.id_pessoa = m.tbl_pessoa_id_pessoa1 LEFT JOIN contatos_pessoa cp ON p.id_pessoa = cp.tbl_pessoa_id_pessoa LEFT JOIN tbl_contato c ON cp.tbl_contato_id_contato = c.id_contato WHERE nome_pessoa ='' OR cpf_pessoa='111.111.111-11';
 ################################################################################################################################
 
 /*
+SELECT * FROM tbl_veiculo WHERE  placa_vei = '1';
+DELETE tbl_pessoa.*, tbl_moradia.*, tbl_veiculo.*, contatos_pessoa.*, tbl_contato.*,
+agen_visi.*, visi_apt.* FROM tbl_pessoa, tbl_moradia, tbl_veiculo, contatos_pessoa, tbl_contato,
+agen_visi, visi_apt WHERE id_pessoa=?;
 
+SELECT cpf_pessoa FROM tbl_pessoa WHERE cpf_pessoa = '456.456.464-64' ;
+			# Cadastrando morador e apt ao mesmo tempo EM UM INSERT COM BEGIN TRANSACTION
+INSERT INTO tbl_pessoa(cpf_pessoa, 			nome_pessoa, 		senha, 			nomeApelido, 			tipo_pessoa) 
+VALUES				  ('123.456.789-01',	'Davi da Silva', 	'admin123', 		'administrador', 		'Proprietario'),
+					  ('123.456.781-23',	'Jose da Silva', 	'jose123', 				'joseadmin', 		'Proprietario');
+INSERT INTO tbl_moradia(num_ap, 		bloco_ap, 		tbl_pessoa_id_pessoa1, 	num_vaga_car) 
+VALUES 					(1, 				'B', 					  		1,				1),
+						(2, 				'C', 						    2,				2);                          
 
+SELECT * FROM tbl_pessoa WHERE nomeApelido = 'admin'
 UPDATE tbl_pessoa LEFT JOIN  tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 
 LEFT JOIN contatos_pessoa ON tbl_pessoa.id_pessoa = contatos_pessoa.tbl_pessoa_id_pessoa 
 LEFT JOIN tbl_contato ON contatos_pessoa.tbl_contato_id_contato = tbl_contato.id_contato 

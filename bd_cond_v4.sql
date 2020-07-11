@@ -1,17 +1,6 @@
-DROP DATABASE bd_cond;
+#DROP DATABASE bd_cond;
 CREATE database bd_cond;
 USE bd_cond;
-
--- -----------------------------------------------------
--- Table bd_cond.tbl_rfid
--- -----------------------------------------------------
-CREATE TABLE tbl_rfid ( 
-  id_tag INT(11) NOT NULL AUTO_INCREMENT, #Id da mesma
-  reg_tag VARCHAR(15) NOT NULL, #Registro da Tag
-  data_hora_reg DATETIME NOT NULL, # Hora do registro da Entrada
-  status_tag BOOLEAN DEFAULT TRUE NOT NULL, # Verifica se está ativo ou não
-  PRIMARY KEY (id_tag));
-  ALTER TABLE tbl_rfid ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table bd_cond.tbl_pessoa
@@ -27,20 +16,8 @@ CREATE TABLE tbl_pessoa (      #desktop
   data_nascimento VARCHAR (10),#Aqui teria a data de nascimento 99/99/9999
   tipo_pessoa ENUM('Proprietário', 'Morador', 'Dependente') DEFAULT 'Proprietário' NOT NULL, #TIPOS DE 'MORADORES' se for proprietário ele pode entrar assim como o morador
   tbl_rfid_id_tag INT(11) /*NOT NULL*/,			# Tiramos o funcionario, pois precisamo de mais detalhes
-  PRIMARY KEY (id_pessoa),
-  INDEX fk_tbl_pessoa_tbl_rfid1_idx (tbl_rfid_id_tag ASC));
+  PRIMARY KEY (id_pessoa));
   ALTER TABLE tbl_pessoa ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table bd_cond.tbl_biometria
--- -----------------------------------------------------
-CREATE TABLE tbl_biometria (
-  id_bio INT(11) NOT NULL AUTO_INCREMENT,
-  amz_img BLOB NOT NULL,
-  dt_tp_reg TIMESTAMP NOT NULL,
-  c_img VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_bio));
-  ALTER TABLE tbl_biometria ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table bd_cond.tbl_contato
@@ -79,7 +56,6 @@ CREATE TABLE tbl_veiculo (
   INDEX fk_tbl_veiculo_tbl_moradia1_idx (tbl_moradia_id_moradia ASC));
   ALTER TABLE tbl_veiculo ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table bd_cond.visi_apt
 -- -----------------------------------------------------
@@ -87,11 +63,10 @@ CREATE TABLE visi_apt (							#WEB / DESKTOP
   id_visi INT(11) NOT NULL AUTO_INCREMENT,
   nome_visi VARCHAR(90) NOT NULL,
   dt_registro_visi DATETIME NOT NULL,
-  rg_visi VARCHAR(9),# Esse campo só pode ser preenchido opcionalmente pelo Desktop
+  rg_visi VARCHAR(12),# Esse campo só pode ser preenchido opcionalmente pelo Desktop ou WEB
   PRIMARY KEY (id_visi),
   INDEX rg_visiUNIQUE (rg_visi ASC));
   ALTER TABLE visi_apt ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table bd_cond.contatos_pessoa
@@ -103,18 +78,6 @@ CREATE TABLE contatos_pessoa (# Isso é para que uma pessoa tenha varios numeros
   INDEX fk_tbl_contato_has_tbl_pessoa_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC),
   INDEX fk_tbl_contato_has_tbl_pessoa_tbl_contato_idx (tbl_contato_id_contato ASC));
   ALTER TABLE contatos_pessoa ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table bd_cond.pessoa_biometria
--- -----------------------------------------------------
-  -- -----------------------------------------------------
-CREATE TABLE pessoa_biometria ( #DESKTOP
-  tbl_pessoa_id_pessoa INT(11) NOT NULL,
-  tbl_biometria_id_bio INT(11) NOT NULL,
-  PRIMARY KEY (tbl_pessoa_id_pessoa, tbl_biometria_id_bio),#Nao implementar esse banco sem que tenhamos colocado essas ligações em uma constraint
-  INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_biometria1_idx (tbl_biometria_id_bio ASC) ,
-  INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
-  ALTER TABLE pessoa_biometria ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table bd_cond.agendamento_visitas
@@ -129,3 +92,37 @@ CREATE TABLE agen_visi (#WEB / DESKTOP
   INDEX fk_tbl_pessoa_has_visi_apt_visi_apt1_idx (visi_apt_id_visi ASC),
   INDEX fk_tbl_pessoa_has_visi_apt_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
   ALTER TABLE agen_visi ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table bd_cond.tbl_biometria
+-- -----------------------------------------------------
+CREATE TABLE tbl_biometria (
+  id_bio INT(11) NOT NULL AUTO_INCREMENT,
+  amz_img BLOB NOT NULL,
+  dt_tp_reg TIMESTAMP NOT NULL,
+  c_img VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_bio));
+  ALTER TABLE tbl_biometria ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table bd_cond.pessoa_biometria
+-- -----------------------------------------------------
+  -- -----------------------------------------------------
+CREATE TABLE pessoa_biometria ( #DESKTOP
+  tbl_pessoa_id_pessoa INT(11) NOT NULL,
+  tbl_biometria_id_bio INT(11) NOT NULL,
+  PRIMARY KEY (tbl_pessoa_id_pessoa, tbl_biometria_id_bio),#Nao implementar esse banco sem que tenhamos colocado essas ligações em uma constraint
+  INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_biometria1_idx (tbl_biometria_id_bio ASC) ,
+  INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
+  ALTER TABLE pessoa_biometria ENGINE = InnoDB;
+  
+-- -----------------------------------------------------
+-- Table bd_cond.tbl_rfid
+-- -----------------------------------------------------
+CREATE TABLE tbl_rfid ( 
+  id_tag INT(11) NOT NULL AUTO_INCREMENT, #Id da mesma
+  reg_tag VARCHAR(15) NOT NULL, #Registro da Tag
+  data_hora_reg DATETIME NOT NULL, # Hora do registro da Entrada
+  status_tag BOOLEAN DEFAULT TRUE NOT NULL, # Verifica se está ativo ou não
+  PRIMARY KEY (id_tag));
+  ALTER TABLE tbl_rfid ENGINE = InnoDB;
