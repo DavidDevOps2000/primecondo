@@ -1,4 +1,4 @@
-#DROP DATABASE bd_cond;
+DROP DATABASE bd_cond;
 CREATE database bd_cond;
 USE bd_cond;
 
@@ -15,7 +15,6 @@ CREATE TABLE tbl_pessoa (      #desktop
   status_pess BOOLEAN DEFAULT TRUE NOT NULL,
   data_nascimento VARCHAR (10),#Aqui teria a data de nascimento 99/99/9999
   tipo_pessoa ENUM('Proprietário', 'Morador', 'Dependente') DEFAULT 'Proprietário' NOT NULL, #TIPOS DE 'MORADORES' se for proprietário ele pode entrar assim como o morador
-  tbl_rfid_id_tag INT(11) /*NOT NULL*/,			# Tiramos o funcionario, pois precisamo de mais detalhes
   PRIMARY KEY (id_pessoa));
   ALTER TABLE tbl_pessoa ENGINE = InnoDB;
 
@@ -39,6 +38,7 @@ CREATE TABLE tbl_moradia ( # Tabela moradia tem que ter dados inseridos APÓS da
   tbl_pessoa_id_pessoa1 INT(11) NOT NULL UNIQUE, #Como não pode existir id duplicada de morador, muito menos duplicada, coloquei unique pra evitar isso 
   num_vaga_vei INT(11) NOT NULL, #Numero da vaga do Carro, tem que ser o mesmo numero do apt, mas somente para apresentar no tcc
   PRIMARY KEY (id_moradia),
+  CONSTRAINT FOREIGN KEY (tbl_pessoa_id_pessoa1) REFERENCES tbl_pessoa (id_pessoa),
   INDEX fk_tbl_moradia_tbl_pessoa1_idx (tbl_pessoa_id_pessoa1 ASC));
   ALTER TABLE tbl_moradia ENGINE = InnoDB;
 
@@ -53,6 +53,7 @@ CREATE TABLE tbl_veiculo (
   cor_vei VARCHAR(20) NOT NULL,
   tbl_moradia_id_moradia INT(11) NOT NULL,
   PRIMARY KEY (id_veiculo),
+  CONSTRAINT FOREIGN KEY (tbl_moradia_id_moradia) REFERENCES tbl_moradia (id_moradia),
   INDEX fk_tbl_veiculo_tbl_moradia1_idx (tbl_moradia_id_moradia ASC));
   ALTER TABLE tbl_veiculo ENGINE = InnoDB;
 
@@ -74,7 +75,9 @@ CREATE TABLE visi_apt (							#WEB / DESKTOP
 CREATE TABLE contatos_pessoa (# Isso é para que uma pessoa tenha varios numeros e um numero dependendo da situação tenha varias pessoas #DESKTOP
   tbl_contato_id_contato INT(11) NOT NULL,
   tbl_pessoa_id_pessoa INT(11) NOT NULL,
-  PRIMARY KEY (tbl_contato_id_contato, tbl_pessoa_id_pessoa),#Nao implementar esse banco sem que tenhamos colocado essas ligações em uma constraint
+  PRIMARY KEY (tbl_contato_id_contato, tbl_pessoa_id_pessoa),
+  CONSTRAINT FOREIGN KEY (tbl_pessoa_id_pessoa) REFERENCES tbl_pessoa (id_pessoa),
+  CONSTRAINT FOREIGN KEY (tbl_contato_id_contato) REFERENCES tbl_contato (id_contato),
   INDEX fk_tbl_contato_has_tbl_pessoa_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC),
   INDEX fk_tbl_contato_has_tbl_pessoa_tbl_contato_idx (tbl_contato_id_contato ASC));
   ALTER TABLE contatos_pessoa ENGINE = InnoDB;
@@ -89,6 +92,8 @@ CREATE TABLE agen_visi (#WEB / DESKTOP
   data_fim_visi date,
   autorizado BOOLEAN DEFAULT TRUE,
   PRIMARY KEY (tbl_pessoa_id_pessoa, visi_apt_id_visi),#Nao implementar esse banco sem que tenhamos colocado essas ligações em uma constraint
+  CONSTRAINT FOREIGN KEY (tbl_pessoa_id_pessoa) REFERENCES tbl_pessoa (id_pessoa),
+  CONSTRAINT FOREIGN KEY (visi_apt_id_visi) REFERENCES visi_apt (id_visi),
   INDEX fk_tbl_pessoa_has_visi_apt_visi_apt1_idx (visi_apt_id_visi ASC),
   INDEX fk_tbl_pessoa_has_visi_apt_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
   ALTER TABLE agen_visi ENGINE = InnoDB;

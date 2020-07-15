@@ -79,14 +79,14 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 <?php //Cadastro convidado ?>
 <div>
     <form id="formCadasVisi">
-        <div class="panel panel-success">
+        <div class="panel panel-secondary">
             <div class="panel-heading text-center"><h4>Cadastro de Visitantes</h4></div>
                 <div class="">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-4" style="background-color: rgba(251, 251, 251, 0.891);">
                         <label for="textNome" class="control-label">Nome Visitante:</label>
                         <input name="valorNomeVisitante" id="valorNomeVisitante" class="form-control" placeholder="Digite o nome do convidado" type="text"  maxlength="90" required>
                     </div>
-                        <div class="form-group col-lg-2" >
+                        <div class="form-group col-lg-2"  style="background-color: rgba(251, 251, 251, 0.891);">
                         <label for="textUsuario" class="control-label">Quantos dias de acesso ?</label>
                         <select name="valorDuracaoDias" id="valorDuracaoDias" class="form-control" data-container="body" data-width="100%">
                                 <option>Sem limite</option>
@@ -98,19 +98,17 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                                 <option>6</option>
                         </select>    
                         </div>
-                        <div><div class="form-group col-lg-2">
+                        <div><div class="form-group col-lg-2"  style="background-color: rgba(251, 251, 251, 0.891);">
                         <label for="textNome" class="control-label">Nº RG (opcional)</label>
-                        <input name="valorRgVisi"  id="valorRgVisi" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
+                        <input name="valorRgVisi" id="valorRgVisi" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
                     </div>
-                        </div>
-                    <div class="panel-footer clearfix">
+                    <div class="panel-footer panel-secondary clearfix"  style="background-color: rgba(251, 251, 251, 0.891);">
+
                         <div class="btn-group pull-left">      
-                                    <button type="reset" class="btn btn-lg btn-primary" id="btnlimpar">Apagar Campo</button>
+                                <button type="reset" class="btn btn-lg btn-warning btn_arendondado btn_arendondado_Limpar" id="btnlimpar">Apagar Campo</button>
                         </div>
                         <div class="btn-group pull-right">      
-                                    <button type="submit" class="btn btn-lg btn-success">Confirmar</button>
-                        </div>
-                            
+                                <button type="submit" class="btn btn-lg btn-success btn_arendondado btn_arendondado_Confirmar" id="btnConfirmar">Confirmar</button>
                         </div>
                     </div>
     </form>

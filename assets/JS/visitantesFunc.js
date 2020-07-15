@@ -65,8 +65,8 @@ $(document).ready(function () {
 
 
 function btnEditOpcoes(nomeVisiConsultar) {
-    var opcoesEdit = "<input class='btn btn-sm btn-info' type='button' data-toggle='modal' onClick='consulAlterVisi(" + '"' + nomeVisiConsultar + '"' + ");' data-target='#ModalEditar' value='Editar Visitante'>\
-                    <input class='btn btn-sm btn-warning' type='button' onClick='deletarVisi("+ '"' + nomeVisiConsultar + '"' + ");' value='Deletar'>";
+    var opcoesEdit = "<input class='btn btn-sm btn-info btn_arendondado btn_arendondado_edit' type='button' data-toggle='modal' onClick='consulAlterVisi(" + '"' + nomeVisiConsultar + '"' + ");' data-target='#ModalEditar' value='Editar Visitante'>\
+                    <input class='btn btn-sm btn-danger btn_arendondado btn_arendondado_del' type='button' onClick='deletarVisi("+ '"' + nomeVisiConsultar + '"' + ");' value='Deletar'>";
     return opcoesEdit;
 }
 

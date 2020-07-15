@@ -1,14 +1,33 @@
 use bd_cond;
 select * from agen_visi;
 select * from visi_apt;
+
 SELECT * FROM tbl_pessoa;   			
 SELECT * FROM tbl_veiculo;
 
-USE bd_cond;
-SELECT num_ap, bloco_ap, CASE status_pess WHEN TRUE THEN 'ATIVO' ELSE 'DESATIVADO' END status_pess, nome_pessoa, num_vaga_vei FROM tbl_pessoa p LEFT JOIN tbl_moradia m ON p.id_pessoa = m.tbl_pessoa_id_pessoa1 LEFT JOIN contatos_pessoa cp ON p.id_pessoa = cp.tbl_pessoa_id_pessoa LEFT JOIN tbl_contato c ON cp.tbl_contato_id_contato = c.id_contato WHERE nome_pessoa ='' OR cpf_pessoa='111.111.111-11';
+SHOW TABLES;
+
+
+SELECT id_pessoa, id_moradia FROM tbl_pessoa LEFT JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE nome_pessoa='' AND cpf_pessoa='111.111.111-11';
+
 ################################################################################################################################
 
 /*
+UPDATE tbl_pessoa p LEFT JOIN tbl_moradia m ON p.id_pessoa = m.tbl_pessoa_id_pessoa1 LEFT JOIN tbl_veiculo v ON m.id_moradia = v.tbl_moradia_id_moradia LEFT JOIN contatos_pessoa cp ON p.id_pessoa = cp.tbl_pessoa_id_pessoa LEFT JOIN tbl_contato c ON cp.tbl_contato_id_contato = c.id_contato SET data_nascimento ='26/04/1990', num_ap =12, bloco_ap ='A', tipo_pessoa ='Proprietário', tel ='(123) 13454-5464', email ='Brehme.Firmino@gmail.com', nomeApelido ='brehme123', senha ='1', num_vaga_vei= 12, status_pess = True, tipo_vei ='Carro', modelo_vei ='45', cor_vei ='Outros', placa_vei ='4564', nome_pessoa ='Brehme firmino' WHERE nome_pessoa ='Brehme firmino' OR cpf_pessoa='..-';
+
+UPDATE tbl_pessoa p LEFT JOIN tbl_moradia m ON p.id_pessoa = m.tbl_pessoa_id_pessoa1 
+LEFT JOIN tbl_veiculo v ON m.id_moradia = v.tbl_moradia_id_moradia 
+LEFT JOIN contatos_pessoa cp ON p.id_pessoa = cp.tbl_pessoa_id_pessoa 
+LEFT JOIN tbl_contato c ON cp.tbl_contato_id_contato = c.id_contato 
+SET data_nascimento ='23/07/1990', num_ap =111, bloco_ap ='A',
+ tipo_pessoa ='Proprietário', tel ='(11) 98450-0618', email ='brehme.silva@gmail.com', nomeApelido ='brehme123', senha ='123', num_vaga_vei= 122, 
+ status_pess = True, tipo_vei ='Moto', modelo_vei ='honda', cor_vei ='Prata', placa_vei ='fza7789', nome_pessoa ='brehme firmino da silva ' WHERE nome_pessoa ='brehme firmino da silva ' OR cpf_pessoa='123.456.789-01';
+
+SELECT nome_visi, CASE autorizado WHEN FALSE THEN 'NÃO' ELSE 'SIM' END autorizado,num_ap, bloco_ap, 
+CASE WHEN data_fim_visi IS NULL THEN 'Sem limite' ELSE data_fim_visi END data_fim_visi, rg_visi, dt_registro_visi 
+FROM visi_apt LEFT JOIN agen_visi ON visi_apt.id_visi= agen_visi.visi_apt_id_visi LEFT JOIN tbl_pessoa 
+ON agen_visi.tbl_pessoa_id_pessoa = tbl_pessoa.id_pessoa 
+LEFT JOIN tbl_moradia ON tbl_pessoa.id_pessoa = tbl_moradia.tbl_pessoa_id_pessoa1 WHERE nome_visi = 'gabriel';
 SELECT * FROM tbl_veiculo WHERE  placa_vei = '1';
 DELETE tbl_pessoa.*, tbl_moradia.*, tbl_veiculo.*, contatos_pessoa.*, tbl_contato.*,
 agen_visi.*, visi_apt.* FROM tbl_pessoa, tbl_moradia, tbl_veiculo, contatos_pessoa, tbl_contato,
