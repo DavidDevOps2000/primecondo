@@ -235,3 +235,8 @@ function deletarVisi(nomeVisiConsultar) {
     return false;
 }
 
+   //Criando um objeto
+jQuery(function($){
+    $("#valorRgVisi").mask("99.999.999-99");
+    $("#vlrRgVisi").mask("99.999.999-99");
+});

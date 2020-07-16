@@ -1,43 +1,23 @@
 .home-fundo {                                   /*Usando*/
     background-image: url("../img/fun.jpg");
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Arial';
-
-    align-items: center;
-    text-align: center;
 }
-
-
-.menuPrinc {/*Antigo navBar*/
-    background-color:#e3e5e8;
-    margin: 0 auto;
-    border-radius:13px; 
-    display: block; 
-    float: none !important;
-    width:80%;
-    box-sizing: content-box;
-    justify-content: center;
-    align-items: center;
-     }
 
 
 .menuSanduiche {/* antigo navbar-toggler*/
     position: absolute;
     top: 23px;
-  
     border-radius: 40px;
 }
 
-.linksMenu {/*Link imagem centro*/
-    background-color: tomato;}
 
 .fundoMenuSanduiche{/*dropright*/ /*Usando*/
     font-size: 22px;
     text-align: center;
-    align-items: center;
+    align-items: flex-end;
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
@@ -62,7 +42,16 @@
 
 .divMsgCentro{/*Usando*/
 position: relative;
-margin-top: 150px;
+display: inline-block;
+justify-content: center;
+align-items: center;
+text-align:center;
+transform:translate(50%);
+-webkit-filter: blur(0px);
+-moz-filter: blur(0px);
+-o-filter: blur(0px);
+-ms-filter: blur(13px);
+filter: blur(0px);
 }
 
 .msgCentro {/*container-fluid*/    /*Usando*/

@@ -1,23 +1,5 @@
 <body>
 
-<script>
-
-function soNumero(e){//Evento
-
-var seuTeclado = (window.event)?event.keyCode:e.which;   //Criando um objeto
-
-if((seuTeclado > 47 && seuTeclado <58)) {
-
-    return true;
-
-}else{
-        if(seuTeclado == 8 || seuTeclado == 0) { return true;}
-    
-        else{  return false; }
-}
-}
-</script>
-
 <?php //-- atualização de Convidado ?>
 <div class ="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="ModCenter" aria-hidden="true">
 	<div class="modal-dialog modal-dialig-centered" role="document">
@@ -31,10 +13,9 @@ if((seuTeclado > 47 && seuTeclado <58)) {
 						<input class="form-control" type="text" name="vlrNomeVisi" id="vlrNomeVisi" placeholder="Escreva novo nome do visitante" maxlength="90"><br>
 
                         <label for="textNome">Nº RG (opcional)</label>
-                        <input class="form-control" text="text" onkeypress='return soNumero(event)' id="vlrRgVisi" name="vlrRgVisi" placeholder="Digite somente números" maxlength="9">
+                        <input class="form-control" text="text" id="vlrRgVisi" name="vlrRgVisi" placeholder="Ex:99.999.999-9" maxlength="9">
                         
 					</div>  
-                        
                             <label class="control-label">Entrada Autorizado(a) ?</label><br>
                             <label class="control-label" name="vlrAutoriza" id="vlrAutoriza">SIM</label>
                             <input type="button" class="btn btn-primary pull-right" onClick="mudarStatus()" value="Alterar">
@@ -100,9 +81,9 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                         </div>
                         <div><div class="form-group col-lg-2"  style="background-color: rgba(251, 251, 251, 0.891);">
                         <label for="textNome" class="control-label">Nº RG (opcional)</label>
-                        <input name="valorRgVisi" id="valorRgVisi" text="text" onkeypress='return soNumero(event)' class="form-control" placeholder="Digite somente números" maxlength="9">
+                        <input name="valorRgVisi" id="valorRgVisi" text="text" class="form-control" placeholder="Ex:99.999.999-9" maxlength="9">
                     </div>
-                    <div class="panel-footer panel-secondary clearfix"  style="background-color: rgba(251, 251, 251, 0.891);">
+                    <div class="panel-footer panel-secondary clearfix" style="background-color: rgba(251, 251, 251, 0.891);">
 
                         <div class="btn-group pull-left">      
                                 <button type="reset" class="btn btn-lg btn-warning btn_arendondado btn_arendondado_Limpar" id="btnlimpar">Apagar Campo</button>
@@ -158,3 +139,8 @@ if((seuTeclado > 47 && seuTeclado <58)) {
                 </footer>
         </div>
 </body>
+<script>
+
+
+
+</script>

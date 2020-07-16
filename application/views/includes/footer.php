@@ -37,13 +37,23 @@
 <script type="text/javascript" src="<?= base_url('assets/js/fileinput.min.js')?>"></script>
 
 <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.3.1.min.js')?>"></script>
-
-
-
+<script type="text/javascript" src="<?= base_url('assets/js/jquery.mask.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/all.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/all.min.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/pmd-select2.js')?>"></script>
-
 <script type="text/javascript" src="<?= base_url('assets/js/select2.full.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/menu.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/visitantesFunc.js')?>"></script> <?php //FUNÇÃO VISITANTES?>
+<script type="text/javascript" src="<?= base_url('assets/js/brands.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/fontawesome.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/jquery.mask.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/regular.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/regular.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/solid.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/solid.min.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/v4-shims.js')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/v4-shims.min.js')?>"></script>
+
+
 
 </html>
