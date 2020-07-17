@@ -1,5 +1,7 @@
 $(document).ready(function () {
     $("#formCadasVisi").submit(function (event) {
+        var nomeVisiValor = $('#valorNomeVisitante').val();
+        nomeVisiValor = nomeVisiValor.trim();
 
         swal({
             title: "Atenção",
@@ -17,7 +19,7 @@ $(document).ready(function () {
                     type: "POST",
                     url: "visitantes/cadastrarVisitantes",  //Cadastrar Visitantes
                     data: {
-                        'valorNomeVisi': $('#valorNomeVisitante').val(),
+                        'valorNomeVisi': nomeVisiValor,
                         'valorDuracaoDias': $('#valorDuracaoDias').val(),
                         'valorRg': $('#valorRgVisi').val()
                     }, success: (data) => {
@@ -143,6 +145,10 @@ function alterVisita() {
     } else {
         vlrStatus = true;
     }
+
+
+    vlrNomeVisi = $('#vlrNomeVisi').val();
+    vlrNomeVisi = vlrNomeVisi.trim();
 
     $.ajax({
         type: "POST",
