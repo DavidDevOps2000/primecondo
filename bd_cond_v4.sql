@@ -2,6 +2,17 @@ DROP DATABASE bd_cond;
 CREATE database bd_cond;
 USE bd_cond;
 
+##################################################### USUARIO DESKTOP
+DROP USER "porteiro"@"localhost";
+CREATE USER "porteiro"@"localhost" IDENTIFIED BY "";
+GRANT SELECT, DELETE, INSERT, UPDATE, EXECUTE, TRIGGER ON bd_cond.* to "porteiro"@"localhost";
+SHOW GRANTS FOR "porteiro"@"localhost";
+
+##################################################### USUARIO WEB
+DROP USER "morador"@"localhost";
+CREATE USER "morador"@"localhost" IDENTIFIED BY "";
+GRANT SELECT, DELETE, INSERT, UPDATE, EXECUTE, TRIGGER ON bd_cond.* to "morador"@"localhost";
+SHOW GRANTS FOR "morador"@"localhost";
 -- -----------------------------------------------------
 -- Table bd_cond.tbl_pessoa
 -- -----------------------------------------------------
@@ -97,6 +108,83 @@ CREATE TABLE agen_visi (#WEB / DESKTOP
   INDEX fk_tbl_pessoa_has_visi_apt_visi_apt1_idx (visi_apt_id_visi ASC),
   INDEX fk_tbl_pessoa_has_visi_apt_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
   ALTER TABLE agen_visi ENGINE = InnoDB;
+  -- ------------------------------------------------------- -----------------------------------------------------
+  
+CREATE TABLE tbl_logs_condo(/* Essa tabela servirá pra guardamos as informações de alterações de dados na portaria*/
+	id_log int not null auto_increment primary key,
+    usuario_log varchar(50) not null,
+    acao_log varchar(30) not null,
+    tabela varchar(10) not null,
+    dt_log date not null,
+    hora_log time not null);
+    
+################################################################# TRIGGERS ###########
+
+delimiter $
+CREATE TRIGGER trg_portaria_log_up BEFORE UPDATE on tbl_pessoa /*Para Moradores*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'ATUALIZACÃO DE MORADOR', 'morador', curdate(), curtime());
+ END $
+delimiter ;
+
+
+############################## Moradores
+delimiter $
+CREATE TRIGGER trg_portaria_log_insert BEFORE INSERT on tbl_pessoa /*Para Moradores*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'INSERÇÃO DE MORADOR', 'morador', curdate(), curtime());
+ END $
+delimiter ;
+
+delimiter $
+CREATE TRIGGER trg_portaria_log_vei_inser BEFORE INSERT on tbl_veiculo /*Para Moradores*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'INSERÇÃO DE VEICULO', 'veiculo', curdate(), curtime());
+ END $
+delimiter ;
+
+delimiter $
+CREATE TRIGGER trg_portaria_log_vei_up BEFORE UPDATE on tbl_veiculo /*Para Moradores*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'ATUALIZAÇÃO DE VEICULO', 'veiculo', curdate(), curtime());
+ END $
+delimiter ;
+-- ------------------------------------------------------- -----------------------------------------------------
+ ############################## VISITANTES
+delimiter $
+CREATE TRIGGER trg_portaria_morador_log BEFORE INSERT on visi_apt /*Inserção de Visitantes*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'INSERÇÃO DE VISITA', 'visita', curdate(), curtime());
+ END $
+delimiter ;
+
+delimiter $
+CREATE TRIGGER trg_morador_log_up BEFORE UPDATE on visi_apt /*Para Visitantes, só o morador pode atualizar*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'ATUALIZAÇÃO DE VISITA', 'visita', curdate(), curtime());
+ END $
+delimiter ;
+
+delimiter $
+CREATE TRIGGER trg_morador_log_del BEFORE DELETE on visi_apt /*Para Visitantes, só o morador porde atualizar*/
+FOR EACH ROW 
+BEGIN
+	INSERT INTO tbl_logs_condo(usuario_log, acao_log, tabela, dt_log, hora_log)
+	VALUES(user(), 'VISITA DELETADA', 'visita', curdate(), curtime());
+ END $
+delimiter ;
 
 -- -----------------------------------------------------
 -- Table bd_cond.tbl_biometria
@@ -116,7 +204,7 @@ CREATE TABLE tbl_biometria (
 CREATE TABLE pessoa_biometria ( #DESKTOP
   tbl_pessoa_id_pessoa INT(11) NOT NULL,
   tbl_biometria_id_bio INT(11) NOT NULL,
-  PRIMARY KEY (tbl_pessoa_id_pessoa, tbl_biometria_id_bio),#Nao implementar esse banco sem que tenhamos colocado essas ligações em uma constraint
+  PRIMARY KEY (tbl_pessoa_id_pessoa, tbl_biometria_id_bio),
   INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_biometria1_idx (tbl_biometria_id_bio ASC) ,
   INDEX fk_tbl_pessoa_has_tbl_biometria_tbl_pessoa1_idx (tbl_pessoa_id_pessoa ASC));
   ALTER TABLE pessoa_biometria ENGINE = InnoDB;
@@ -131,3 +219,5 @@ CREATE TABLE tbl_rfid (
   status_tag BOOLEAN DEFAULT TRUE NOT NULL, # Verifica se está ativo ou não
   PRIMARY KEY (id_tag));
   ALTER TABLE tbl_rfid ENGINE = InnoDB;
+  
+  
