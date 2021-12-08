@@ -1,15 +1,15 @@
-DROP DATABASE bd_cond;
+DROP DATABASE IF EXISTS bd_cond;
 CREATE database bd_cond;
 USE bd_cond;
 
 ##################################################### USUARIO DESKTOP
-DROP USER "porteiro"@"localhost";
+DROP USER IF EXISTS "porteiro"@"localhost";
 CREATE USER "porteiro"@"localhost" IDENTIFIED BY "";
 GRANT SELECT, DELETE, INSERT, UPDATE, EXECUTE, TRIGGER ON bd_cond.* to "porteiro"@"localhost";
 SHOW GRANTS FOR "porteiro"@"localhost";
 
 ##################################################### USUARIO WEB
-DROP USER "morador"@"localhost";
+DROP USER IF EXISTS  "morador"@"localhost";
 CREATE USER "morador"@"localhost" IDENTIFIED BY "";
 GRANT SELECT, DELETE, INSERT, UPDATE, EXECUTE, TRIGGER ON bd_cond.* to "morador"@"localhost";
 SHOW GRANTS FOR "morador"@"localhost";
